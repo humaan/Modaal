@@ -83,7 +83,7 @@ confirm_content|`string`|`<p>This is the default confirm dialog content. Replace
 loading_content|`string`|`Loading &hellip;`||HTML content for loading message.
 loading_class|`string`|`is_loading`||Class name to be applied while content is loaded via ajax.
 ajax_error_class|`string`|`modaal-error`||Class name to be applied when content has failed to load. Default is ''
-instagram_id|`string`|`null`||Unique photo ID for an instagram photo.
+instagram_id|`string`|`null`||Unique photo ID for an Instagram photo.
 
 #### 2.3. Inline Attribute Configuration
 Modaal has been developed to support common jQuery configuration options, but in an effort to extend functionality and widen it's usage we've developed support for inline `data-option-name` attribute support.
@@ -100,15 +100,15 @@ It's important to note, that configuration options that contain an underscore (`
 #### 2.4. Configuration Events
 event | params | notes
 ------|--------|-------
-before_open||Executed before the modaal has revealed
-after_open||Executed once the duration for Option `after_callback_delay` has expired after the open method is called.
-before_close||Executed once the Modaal has been instructed to close.
+before_open|`event`|Executed before the modaal has revealed
+after_open|`modal_wrapper`|Executed once the duration for Option `after_callback_delay` has expired after the open method is called.
+before_close|`modal_wrapper`|Executed once the Modaal has been instructed to close.
 after_close||Executed once the the duration for `after_callback_delay` has expired after the close method is called.
 before_image_change|`current_item`<br /> `incoming_item`|Executed before the image changes in a gallery Modaal.
 after_image_change|`current_item`| Executed after the image has changed in a gallery Modaal.
-confirm_callback||Executed when the confirm button is pressed as opposed to cancel
-source||Callback function executed on the default source, it is intended to transform the source (href in an ajax modal or iframe). The function passes in the triggering element as well as the default source depending of the modal type. The default output of the function is an untransformed default source.
-ajax_success||Callback for when AJAX content is loaded in
+confirm_callback|`lastFocus`|Executed when the confirm button is pressed as opposed to cancel
+source||Callback function executed on the default source, it is intended to transform the source (href in an AJAX modal or iframe). The function passes in the triggering element as well as the default source depending of the modal type. The default output of the function is an untransformed default source.
+ajax_success|`target`|Callback for when AJAX content is loaded in
 
 
 ###### 2.4.1 Working With Events
@@ -191,5 +191,5 @@ Thanks for your contribution! Please refer to the guidelines below.
 
 
 ## License
-Copyright © [Humaan](http://www.humaan.com)
+Copyright © [Humaan](http://humaan.com)
 Licensed under the MIT license.

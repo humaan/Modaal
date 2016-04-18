@@ -33,7 +33,6 @@
 	width (integer)							: 	Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
 	height (integer)						: 	Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
 	
-	
 
 	=== Events ===
 	before_open (function) 					: 	Callback function executed before modal is opened
@@ -44,6 +43,7 @@
 												source (href in an AJAX modal or iframe). The function passes in the triggering element
 												as well as the default source depending of the modal type. The default output of the
 												function is an untransformed default source.
+
 
 	=== Confirm Options & Events ===
 	confirm_button_text (string)			: 	Text on the confirm button. Defaults to 'Confirm'
@@ -61,13 +61,13 @@
 
 	=== AJAX Options & Events ===
 	loading_content (string)				: 	HTML content for loading message. Default 'Loading &hellip;'
-	loading_class (string)					: 	Class name to be applied while content is loaded via ajax. Default 'is_loading'
+	loading_class (string)					: 	Class name to be applied while content is loaded via AJAX. Default 'is_loading'
 	ajax_error_class (string)				:	Class name to be applied when content has failed to load. Default is 'modaal-error'
 	ajax_success (function)         		:   Callback for when AJAX content is loaded in
 	
 	
 	=== SOCIAL CONTENT ===
-	instagram_id (string)					:	Unique photo ID for an instagram photo.
+	instagram_id (string)					:	Unique photo ID for an Instagram photo.
 
 */
 ( function( $ ) {
@@ -796,7 +796,7 @@
 			var modal_wrapper = $( '#' + self.scope.id );
 			
 			// CB: before_close
-			self.options.before_close.call(self);
+			self.options.before_close.call(self, modal_wrapper);
 
 			if (self.xhr !== null){
 				self.xhr.abort();
