@@ -62,10 +62,10 @@
 		
 		<div class="overview-copy" id="overview-copy">
 			<div class="container">
-				<p><span>Modaal</span> is a modal window plugin with key emphasis on accessibility to meet a WCAG 2.0 Level AA standard.</p>
+				<p>Modaal is a WCAG 2.0 Level AA accessible modal window plugin.</p>
 				
 				<h2 class="highlight">Why another modal plugin?</h2>
-				<p>Through regular day-to-day projects, the team at <a href="http://www.humaan.com" target="_blank">Humaan</a> have noticed a lack of quality and flexible modal solutions available that also tick the <em>right</em> accessibility boxes. We wanted to develop a tool that we were confident in and that had flexibility for varied projects, as well as a tool that we would be proud to be using in our own projects. Additionally we wanted to produce something that we could give back to the community to further the cause for emphasis on accessibility.</p>
+				<p>It's hard to find a plugin with the right mix of quality, flexibility and accessibility. We thought it would be interesting to develop something that would work in a variety of projects, furthering the cause for an accessible web.</p>
 			</div>
 		</div>
 		<div class="container">
@@ -76,13 +76,14 @@
 					<li>WCAG 2.0 Level AA Support</li>
 					<li>Saving page focusing state on modal open</li>
 					<li>Switching focus state to new content on modal open</li>
-					<li>On modal close, switch focus back to original focus state (button clicked for example)</li>
+					<li>Switch focus back to original focus state on modal close (eg. button clicked)</li>
 					<li>Maintained tab scope to modal content</li>
 					<li>ARIA support and customisation for modal title</li>
-					<li>Keyboard control for closing an open modal, as well as gallery next and previous</li>
-					<li>Default color contrast support optimised for readability with default color contrast support</li>
+					<li>Keyboard control for closing an open modal</li>
+					<li>Keyboard control for gallery next and previous</li>
+					<li>Default color contrast support optimised for readability</li>
 					<li>Accessible <span class="inline-code">&lt;button></span> close element with ARIA attribute</li>
-					<li>Optimised for assisted technologies and screen readers</li>
+					<li>Optimised for assistive technologies and screen readers</li>
 				</ul>
 					
 				<h2 class="highlight">Other Features</h2>
@@ -91,9 +92,10 @@
 					<li>Modal types include inline content, ajax, image and image gallery, iframe, confirmation and Instagram photo.</li>
 					<li>Customisable CSS with SASS options</li>
 					<li>Inline attribute configuration support</li>
-					<li>Full screen/viewport mode</li>
+					<li>Full-screen/viewport mode</li>
 					<li>Flexible close options and methods</li>
-					<li>Callback events for before and after open and close, as well as before and after image change in gallery.</li>
+					<li>Callback events for before and after open and close</li>
+					<li>Callback events for before and after image change in gallery.</li>
 				</ul>
 					
 				<div class="clearboth"></div>

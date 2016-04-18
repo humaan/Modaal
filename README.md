@@ -8,7 +8,7 @@
 ***
 
 # Modaal
-A modal window plugin with key emphasis on accessibility to meet a WCAG 2.0 Level AA standard.
+Modaal is a WCAG 2.0 Level AA accessible modal window plugin.
 
 
 ## Demos
@@ -16,7 +16,7 @@ A modal window plugin with key emphasis on accessibility to meet a WCAG 2.0 Leve
 
 
 # Another modal plugin? why?
-Through regular day-to-day projects the team at [Humaan](http://www.humaan.com) have noticed a lack of quality, and flexible modal solutions available that also tick the _right_ accessibility boxes. We wanted to develop a tool that we were confident in and that had flexibility for varied projects, as well as a tool that we would be proud to be using in our own projects. Additionally we wanted to produce something that we could give back to the community to further the cause for emphasis on accessibility.
+It's hard to find a plugin with the right mix of quality, flexibility and accessibility. We thought it would be interesting to develop something that would work in a variety of projects, furthering the cause for an accessible web.
 
 ***
 
