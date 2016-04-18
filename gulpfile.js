@@ -24,14 +24,15 @@ gulp.task('styles', function() {
 		}));
 });
 
+// For demo website only, can be removed
 gulp.task('demo-styles', function() {
-	gulp.src('website-assets/css/demo.scss')
+	gulp.src('demo/css/demo.scss')
 		.pipe(sass({
             style: 'expanded',
             sourcemap: false
         })
         	.on('error', sass.logError))
-		.pipe(gulp.dest('website-assets/css'))
+		.pipe(gulp.dest('demo/css'))
 		.pipe(notify({
 			message: 'Demo styles task complete'
 		}));
@@ -39,7 +40,8 @@ gulp.task('demo-styles', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('source/css/*.scss', ['styles']);
-	gulp.watch('website-assets/css/*.scss', ['demo-styles']);
+	// for demo site only, can be removed
+	gulp.watch('demo/css/*.scss', ['demo-styles']);
 });
 
 

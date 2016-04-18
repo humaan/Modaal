@@ -19,8 +19,8 @@
 	
 	<!-- Made by Humaan http://humaan.com @wearehumaan -->
 	
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="demo/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="demo/favicon.ico" type="image/x-icon">
 	
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
@@ -74,19 +74,26 @@
 				<h2 class="highlight">Accessibility Features</h2>
 				<ul>
 					<li>WCAG 2.0 Level AA Support</li>
-					<li>Focus state shift to Modaal on open</li>
-					<li>Focus state shift to original link/click on Modaal close</li>
-					<li>Maintained tab scope to Modaal content</li>
-					<li>ARIA Support and customisation for Modaal title</li>
-					<li>Keyboard control for close and gallery next and previous</li>
-					<li>Optimised for maximum readability with default color contrast support</li>
+					<li>Saving page focusing state on modal open</li>
+					<li>Switching focus state to new content on modal open</li>
+					<li>On modal close, switch focus back to original focus state (button clicked for example)</li>
+					<li>Maintained tab scope to modal content</li>
+					<li>ARIA support and customisation for modal title</li>
+					<li>Keyboard control for closing an open modal, as well as gallery next and previous</li>
+					<li>Default color contrast support optimised for readability with default color contrast support</li>
+					<li>Accessible <span class="inline-code">&lt;button></span> close element with ARIA attribute</li>
+					<li>Optimised for assisted technologies and screen readers</li>
 				</ul>
 					
 				<h2 class="highlight">Other Features</h2>
 				<ul>
 					<li>Fully responsive, scaling with browser width.</li>
-					<li>Modal types include inline content, ajax, image and image gallery, iframe and confirmation.</li>
-					<li>Supports <span class="inline-code">data-modaal-option-name</span> attribute support using a default <span class="inline-code">.modaal</span> class.</li>
+					<li>Modal types include inline content, ajax, image and image gallery, iframe, confirmation and Instagram photo.</li>
+					<li>Customisable CSS with SASS options</li>
+					<li>Inline attribute configuration support</li>
+					<li>Full screen/viewport mode</li>
+					<li>Flexible close options and methods</li>
+					<li>Callback events for before and after open and close, as well as before and after image change in gallery.</li>
 				</ul>
 					
 				<div class="clearboth"></div>
@@ -136,6 +143,18 @@
 						</form>
 						<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. <a href="http://www.nytimes.com/" target="_blank">Phasellus consectetuer vestibulum elit.</a> Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat augue.</p>
 					</div>
+				</div><!-- .modaal-example -->
+				
+				<div class="modaal-example">
+					<h2>Fullscreen Mode</h2>
+					<p>Fullscreen mode will open the Modaal window to fill the entire viewport. If the content exceeds the height of the window, the dialog will scroll vertically to allow access to all content.</p>
+					<p>Fullscreen mode works best with inline and ajax based modals only. Currently no support for fullscreen images.</p>
+					
+					<pre><strong>JS</strong>$('.fullscreen').modaal({
+    fullscreen: true
+});</pre>
+					
+					<a href="#inline-content" class="btn fullscreen">Show <span class="ui-hidden">Fullscreen</span> Modaal</a>
 				</div><!-- .modaal-example -->
 				
 				<div class="modaal-example">
@@ -331,6 +350,11 @@
 		$('.modaal-video').modaal({
 			type: 'video',
 			accessible_title: 'Video modal title'
+		});
+		
+		// Video Modal
+		$('.fullscreen').modaal({
+			fullscreen: true
 		});
 		
 		
