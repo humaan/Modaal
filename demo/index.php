@@ -27,12 +27,12 @@
 	<meta property="og:title" content="Modaal &ndash; An accessible dialog window library for all humans by @wearehumaan" />
 	<meta property="og:url" content="http://www.humaan.com/modaal/" />
 	<meta property="og:site_name" content="Modaal: Accessible Dialog Window" />
-	<meta property="og:image" content="http://www.humaan.com/modaal/demo/social-share-img2.png" />
+	<meta property="og:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png" />
 	
 	<meta name="twitter:card" content="summary"/>
 	<meta name="twitter:title" content="Modaal &ndash; An accessible dialog window library for all humans by @wearehumaan"/>
 	<meta name="twitter:site" content="@wearehumaan"/>
-	<meta name="twitter:image" content="http://www.humaan.com/modaal/demo/social-share-img2.png"/>
+	<meta name="twitter:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png"/>
 	<meta name="twitter:creator" content="@wearehumaan"/>
 	
 </head>
