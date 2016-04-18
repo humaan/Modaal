@@ -27,10 +27,9 @@ Through regular day-to-day projects the team at [Humaan](http://www.humaan.com) 
 - [Download ZIP](https://github.com/humaan/Modaal/archive/master.zip)
 - First, copy and paste `js/modaal.min.js` in your project, and link to it before the closing `</body>` element.
 - Next, you'll need to copy and paste the library's css into your project. We include both a SASS file and CSS file for flexibility.
-- From the contents, copy and paste the `css/fonts` folder into your project in the same location where your CSS will be loaded from.
 - Lastly, link to your new `modaal.css` file before the closing `</head>` element.
 
-Note: This plugin requires your website or application already runs a copy of jQuery, version 1.11.2 or higher. Currently versions 2+ are not tested. If you don't have a copy of this, we include one in the download, found under `js/lib/`.
+Note: This plugin requires your website or application already runs a copy of jQuery, version 1.11.2 or higher. Currently versions 2 and above are not tested. If you don't have a copy of this, we include one in the download, found under `js/lib/`.
 
 
 #### 1.1. The Basics
