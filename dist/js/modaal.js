@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.2.7
+	Modaal - accessible modals - v0.2.8
 	by Humaan, for all humans.
 	http://humaan.com
  */
