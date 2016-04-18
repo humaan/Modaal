@@ -1,0 +1,598 @@
+// Variables
+$modaal-main: #ea5a3d;
+$modaal-grey: #697072;
+$modaal-purple: #6d4d9a;
+$modaal-grey-light: #eee;
+$modaal-grey-light2: #f5f5f5;
+
+// Reset
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: '';content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+
+// Page Styles
+body {
+	font-size: 15px;
+	color: $modaal-grey;
+	background: #fff;
+	font-family: 'Lato', Arial, Helvetica, sans-serif;
+	line-height: 1.4;
+	padding: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+strong {
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 25px;
+	color: #425863;
+	margin: 30px 0 5px;
+	&.highlight {
+		font-size: 14px;
+		text-transform: uppercase;
+		margin: 0 0 80px;
+		color: $modaal-main;
+		font-weight: 800;
+		letter-spacing: 2px;
+		text-align: center;
+	}
+}
+h3.highlight {
+	font-size: 14px;
+	text-transform: uppercase;
+	margin: 60px 0 20px;
+	color: $modaal-main;
+	font-weight: 800;
+	letter-spacing: 2px;
+}
+a {
+	color: $modaal-main;
+	text-decoration: none;
+	&:hover {
+		color: darken($modaal-main, 15%);
+	}
+}
+
+p {
+	margin: 0 0 10px;
+	& + p {
+		margin: 20px 0 0;
+	}
+}
+
+hr {
+	border: none;
+	height: 1px;
+	width: 100%;
+	margin: 40px 0;
+	background: #e0e7ea;
+}
+.clearboth {
+	clear: both;
+}
+
+
+//
+// For hidden content
+.hidden { display: none; }
+.ui-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+
+.container {
+	width: 100%;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 40px;
+	box-sizing: border-box;
+}
+
+
+// Buttons
+.btn {
+	display: inline-block;
+	background: $modaal-main;
+	border: 3px solid $modaal-main;
+	color: #fff;
+	font-weight: 800;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 10px 25px;
+	line-height: 20px;
+	&:hover {
+		border-color: $modaal-purple;
+		background: $modaal-purple;
+		color: #fff;
+		span { color: $modaal-purple; }
+	}
+	&.btn-small {
+		font-size: 11px;
+		padding: 5px 15px;
+	}
+	&.btn-download {
+		padding: 10px 20px 10px 25px;
+		margin-right: 20px;
+		span {
+			position: relative;
+			right: -20px;
+			padding: 0 15px;
+			margin: -10px 0;
+			background: #fff;
+			color: $modaal-main;
+			&:before {
+				display: block;
+				content: " ";
+				position: absolute;
+				left: 0;
+				top: -12px;
+				bottom: -12px;
+				background: #fff;
+				width: 100%;
+			}
+			strong {
+				position: relative;
+				z-index: 1;
+			}
+		}
+	}
+}
+
+.share {
+	margin: 60px 0 0;
+}
+.social-share {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin: 0 10px;
+	background: url(../social-share.png) no-repeat 0 0;
+	background-size: 90px 30px;
+	border-radius: 100%;
+	position: relative;
+	&:before {
+		content: " ";
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		border: 2px solid $modaal-grey-light;
+		transform: translate(-50%, -50%);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		opacity: 0;
+		transition: opacity 0.3s;
+		border-radius: 100%;
+	}
+	&:hover:before {
+		opacity: 1;
+	}
+	
+	
+	&.share-fb {
+		background-position: 0 0;
+	}
+	&.share-tw {
+		background-position: -30px 0;
+	}
+	&.share-other {
+		background-position: -60px 0;
+	}
+}
+
+
+// Header
+.modaal-header {
+	text-align: center;
+	font-size: 20px;
+	display: block;
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	h1 {
+		position: relative;
+		display: block;
+		margin: 0 0 70px;
+		width: 100%;
+		height: 60%;
+		&:before {
+			display: block;
+			content: " ";
+			position: absolute;
+			top: 0;
+			left: 50%;
+			height: 100%;
+			width: 206px;
+			margin: 0 0 0 -103px;
+			background: url(../shape-rpt.png) repeat bottom left;
+		}
+	}
+	p {
+		margin: 0 0 30px;
+	}
+	.modaal-logo {
+		z-index: 1;
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 590px;
+		height: 176px;
+		margin: -88px 0 0 -295px;
+		fill: $modaal-main;
+	}
+}
+.version {
+	position: absolute;
+	bottom: 30px;
+	right: 25px;
+	font-size: 11px;
+	font-weight: 800;
+	color: $modaal-grey;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	opacity: 0.5;
+}
+
+.scroll-trigger {
+	display: block;
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	width: 30px;
+	height: 60px;
+	margin: 0 0 0 -15px;
+	transition: transform 0.3s;
+	transform: translateY(0);
+	&:hover {
+		transform: translateY(15px);
+		.scroll-arrow {
+			background: $modaal-main;
+			&:before,
+			&:after { background: $modaal-main; }
+		}
+	}
+}
+.scroll-arrow {
+	display: block;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+	width: 4px;
+	border-radius: 4px;
+	background: $modaal-grey-light;
+	transition: background-color 0.3s;
+	&:before,
+	&:after {
+		position: absolute;
+		display: block;
+		content: " ";
+		width: 20px;
+		height: 4px;
+		border-radius: 4px;
+		background: $modaal-grey-light;
+		bottom: 3px;
+		transition: background-color 0.3s;
+	}
+	&:before {
+		transform: rotate(45deg);
+		margin: 0 0 0 -14px;
+	}
+	&:after {
+		transform: rotate(-45deg);
+		margin: 0 0 0 -1px;
+	}
+}
+
+.modaal-fixed-header {
+	position: fixed;
+	top: -70px;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	box-shadow: 0 0 5px rgba(0,0,0, 0);
+	background: $modaal-main;
+	transform: translateY(0);
+	
+	-webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	-moz-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	
+	&.reveal {
+		box-shadow: 0 0 5px rgba(0,0,0, 0.2);
+		transform: translateY(70px);
+	}
+	
+	.modaal-logo {
+		display: block;
+		float: left;
+		width: 102px;
+		height: 30px;
+		margin: 20px 0 0 30px;
+		fill: #fff;
+	}
+	.btn {
+		float: right;
+		margin: 13px 30px 0 0;
+		border-color: #fff;
+		background: #fff;
+		padding: 6px 16px;
+		font-size: 11px;
+		color: $modaal-main;
+		&:hover {
+			background: transparent;
+			color: #fff;
+		}
+	}
+}
+
+#page-nav {
+	margin: 0 300px;
+	text-align: center;
+	li {
+		display: inline-block;
+		padding: 21px 0 0;
+	}
+	a {
+		color: #fff;
+		padding: 10px 20px;
+		font-weight: 800;
+		font-size: 13px;
+		text-transform: uppercase;
+		&:hover {
+			background: #fff;
+			color: $modaal-main;
+		}
+	}
+}
+
+.overview-copy {
+	text-align: center;
+	background: $modaal-grey-light2;
+	font-size: 17px;
+	line-height: 1.9;
+	padding: 120px 0;
+	margin: 0 0 120px;
+	h2 {
+		margin: 70px 0 40px;
+	}
+	p:first-child {
+		font-size: 24px;
+	}
+}
+
+
+.overview {
+	text-align: left;
+	margin: 0 0 120px;
+	h2 {
+		margin: 70px 0 40px;
+	}
+	ul {
+		margin: 0;
+		li {
+			text-align: center;
+			box-sizing: border-box;
+			margin: 20px 0 0;
+			padding: 0 20px;
+		}
+	}
+}
+
+.examples-wrap {
+	border-top: 2px solid $modaal-grey-light;
+	padding: 130px 0 0;
+	background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 320px);
+	background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 320px);
+	background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 320px);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+// example cols
+.modaal-example {
+	display: block;
+	margin: 0;
+	border-top: 1px solid $modaal-grey-light;
+	padding: 60px 0;
+	box-sizing: border-box;
+	&:nth-child(2n+1) {
+		clear: both;
+	}
+	h2 {
+		margin: 0 0 10px;
+		font-size: 25px;
+	}
+	p + .btn {
+		margin: 30px 0 0;
+	}
+	.btn + p {
+		margin-top: 40px;
+	}
+	pre {
+		position: relative;
+		display: block;
+		padding: 10px 15px;
+		margin: 20px 0 40px;
+		background: $modaal-grey-light;
+		width: 100%;
+		text-align: left;
+		font-family: 'Inconsolata', sans-serif;
+		box-sizing: border-box;
+		overflow: auto;
+		span {
+			color: $modaal-main;
+		}
+		strong {
+			display: block;
+			position: absolute;
+			top: 9px;
+			right: 10px;
+			line-height: 1;
+			font-size: 10px;
+			text-transform: uppercase;
+			color: $modaal-main;
+			font-family: 'Lato', Arial, Helvetica, sans-serif;
+			letter-spacing: 1px;
+		}
+		& + pre {
+			margin-top: -20px;
+		}
+	}
+	&.example-no-brdr {
+		border: none;
+	}
+}
+
+.gallery-thumb img {
+	width: 75px;
+}
+
+.inline-code {
+	background: $modaal-grey-light;
+	font-family: 'Inconsolata', sans-serif;
+	margin: 0 3px;
+	padding: 3px 5px;
+	span {
+		color: $modaal-main;
+	}
+	&.start-row {
+		margin-left: 0;
+	}
+}
+
+.page-wrap {
+	margin: 80px auto 0;
+	padding: 80px 0;
+	border-top: 1px solid $modaal-grey-light;
+	text-align: center;
+}
+
+.demo-form {
+	margin: 30px 0;
+	input {
+		margin: 0 10px 0 0;
+	}
+}
+
+.modaal-container h2 {
+	margin: 0 0 20px;
+	padding: 0;
+}
+
+
+// Reponsive: Height
+@media only screen and (max-height: 1000px) {
+	.modaal-header h1 {
+		height: 50%;
+	}
+	.scroll-trigger {
+		height: 30px;
+	}
+}
+@media only screen and (max-height: 768px) {
+	.modaal-header h1 {
+		height: 50%;
+	}
+	.scroll-trigger {
+		display: none !important;
+	}
+}
+@media only screen and (max-height: 700px) {
+	.modaal-header {
+		font-size: 15px;
+		h1 {
+			height: 40%;
+			margin: 0 0 40px;
+		}
+	}
+	.share {
+		margin: 40px 0 0;
+	}
+}
+
+
+// Reponsive: Width
+@media only screen and (max-width: 768px) {
+	.modaal-header {
+		.modaal-logo {
+			width: 430px;
+			height: 176px;
+			margin: -88px 0 0 -215px;
+		}
+		.btn {
+			display: block;
+			margin: 0 auto;
+			max-width: 254px;
+			padding: 10px 0;
+			font-size: 11px;
+			&.btn-download {
+				margin: 0 auto 15px;
+			}
+			span {
+				display: none;
+			}
+		}
+	}
+	.scroll-trigger {
+		display: none !important;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.overview-copy {
+		padding: 90px 0;
+		p:first-child {
+			font-size: 20px;
+		}
+	}
+	.modaal-header {
+		.modaal-logo {
+			width: 280px;
+			height: 83px;
+			margin: -41px 0 0 -140px;
+		}
+	}
+	.examples-wrap {
+		padding: 90px 0 0;
+	}
+	h2.highlight {
+		margin-bottom: 40px;
+	}
+	.modaal-example pre {
+		strong {
+			position: relative;
+			margin: 0 0 5px;
+			right: auto;
+			top: auto;
+		}
+	}
+}

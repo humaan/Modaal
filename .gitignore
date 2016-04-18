@@ -1,0 +1,37 @@
+# osx noise
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# xcode noise
+build/*
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata
+
+# svn & cvs
+.svn
+CVS
+
+# sass
+*.scssc
+*.css.map
+
+# bower
+bower_components
+
+# general
+*.log
+
+# node_modules
+node_modules/*
+
+# ides
+.idea
