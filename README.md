@@ -12,7 +12,7 @@ A modal window plugin with key emphasis on accessibility to meet a WCAG 2.0 Leve
 
 
 ## Demos
-[Browse Demos](http://modaal.humaan.com)
+[View Modaal Demos](http://humaan.com/modaal)
 
 
 # Another modal plugin? why?
