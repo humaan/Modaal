@@ -24,7 +24,7 @@ Through regular day-to-day projects the team at [Humaan](http://www.humaan.com) 
 
 #### 1.1. Installation
 
-- [Download ZIP](https://github.com/path_to_project_files/archive/master.zip)
+- [Download ZIP](https://github.com/humaan/Modaal/archive/master.zip)
 - First, copy and paste `js/modaal.min.js` in your project, and link to it before the closing `</body>` element.
 - Next, you'll need to copy and paste the library's css into your project. We include both a SASS file and CSS file for flexibility.
 - From the contents, copy and paste the `css/fonts` folder into your project in the same location where your CSS will be loaded from.
