@@ -12,10 +12,10 @@
 	<!-- Demo Styles -->
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/demo.css" media="screen">
+	<link rel="stylesheet" href="demo/css/demo.css" media="screen">
 	
 	<!-- Modaal Styles -->
-	<link rel="stylesheet" href="../source/css/modaal.css" media="screen">
+	<link rel="stylesheet" href="source/css/modaal.css" media="screen">
 	
 	<!-- Made by Humaan http://humaan.com @wearehumaan -->
 	
@@ -40,7 +40,7 @@
 	
 	<header class="modaal-header">
 		
-		<h1><?php include 'modaal-logo.php' ?><span class="ui-hidden">Modaal</span></h1>
+		<h1><?php include 'demo/modaal-logo.php' ?><span class="ui-hidden">Modaal</span></h1>
 		<p>An accessible dialog window library for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php/* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
@@ -85,7 +85,7 @@
 				<h2 class="highlight">Other Features</h2>
 				<ul>
 					<li>Fully responsive, scaling with browser width.</li>
-					<li>Modal types inslude inline content, ajax, image and image gallery, iframe and confirmation.</li>
+					<li>Modal types include inline content, ajax, image and image gallery, iframe and confirmation.</li>
 					<li>Supports <span class="inline-code">data-modaal-option-name</span> attribute support using a default <span class="inline-code">.modaal</span> class.</li>
 				</ul>
 					
@@ -147,7 +147,7 @@
     type: 'ajax'
 });</pre>
 					
-					<a href="ajax-content.php" class="btn modaal-ajax">Show <span class="ui-hidden">Ajax</span> Modaal</a>
+					<a href="demo/ajax-content.php" class="btn modaal-ajax">Show <span class="ui-hidden">Ajax</span> Modaal</a>
 				</div><!-- .modaal-example -->
 				
 				
@@ -160,7 +160,7 @@
     type: 'image'
 });</pre>
 					
-					<a href="img/temp/gallery-1.jpg" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Single Image</span><img src="img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
+					<a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
 				</div><!-- .modaal-example -->
 				
 				<div class="modaal-example">
@@ -174,9 +174,9 @@
     type: 'image'
 });</pre>
 	
-					<a href="img/temp/gallery-1.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
-					<a href="img/temp/gallery-2.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
-					<a href="img/temp/gallery-3.jpg" rel="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
+					<a href="demo/img/temp/gallery-1.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
+					<a href="demo/img/temp/gallery-2.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
+					<a href="demo/img/temp/gallery-3.jpg" rel="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
 				</div><!-- .modaal-example -->
 				
 				
@@ -257,7 +257,7 @@
 	
 	<!-- Fixed Header - Revealed on Scroll -->
 	<div class="modaal-fixed-header">
-		<div class="fixed-logo"><?php include 'modaal-logo.php' ?><span class="ui-hidden">Logo for Modaal</span></div>
+		<div class="fixed-logo"><?php include 'demo/modaal-logo.php' ?><span class="ui-hidden">Logo for Modaal</span></div>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn">Download from Github</a>
 	</div>
 	
@@ -266,10 +266,10 @@
 	<!-- jQuery CDN -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
-	<script src="js/demo.js"></script>
+	<script src="demo/js/demo.js"></script>
 	
 	<!-- Modaal -->
-	<script src="../source/js/modaal.js" type="text/javascript"></script>
+	<script src="source/js/modaal.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		
 		// Standard Modal
