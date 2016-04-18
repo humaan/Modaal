@@ -151,7 +151,7 @@ We wanted to provide users the chance to really extend on Modaal's base through 
 
 Provided in the distribution files are both un-minified css and SASS files to best integrate with your workflow. Within the SASS file you'll find a number of variables located at the top of the document for which you can tweak as desired.
 
-It's our recommendation, should you wish to change any styling, that you minify your final output so as to save on overall page weight. One option to do this can be found at [cssminifier.com](http://cssminifier.com/).
+It's our recommendation, should you wish to change any styling, that you minify your final output so as to save on overall page weight. The primary recommendation would be to run the `gulp dist` task which will minify the CSS (and JS if changes have been made), with another alternative to be found at [cssminifier.com](http://cssminifier.com/).
 
 #### 4.3. Video file URLs
 The Modaal video type has been tested thoroughly using both Vimeo and Youtube. For best outcome, please ensure the url format looks like the one of the following below. We transplant this URL into an iframe which then each service provider controls all the necessary play back from there.
