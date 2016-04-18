@@ -3,7 +3,7 @@
 ***
 
 - Requires jQuery 1.11.2. v2+ not tested
-- Build by [Humaan](http://www.humaan.com)
+- Built by [Humaan](http://www.humaan.com)
 
 ***
 
