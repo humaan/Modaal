@@ -1,9 +1,8 @@
-<img src="http://www.humaan.com/modaal/website-assets/social-share-img2.png" />
+<img src="http://www.humaan.com/modaal/website-assets/social-share-modaal.png" />
 
 ***
 
-- 19KB minified
-- Requires jQuery 1.11.2. v2+ not supported
+- Requires jQuery 1.11.2. v2+ not tested
 - Build by [Humaan](http://www.humaan.com)
 
 ***
