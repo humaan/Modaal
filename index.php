@@ -91,7 +91,7 @@
 					<li>Keyboard control for closing an open modal</li>
 					<li>Keyboard control for gallery next and previous</li>
 					<li>Default color contrast support optimised for readability</li>
-					<li>Accessible <span class="inline-code">&lt;button></span> close element with ARIA attribute</li>
+					<li>Accessible <span class="inline-code">&lt;button&gt;</span> close element with ARIA attribute</li>
 					<li>Optimised for assistive technologies and screen readers</li>
 				</ul>
 					
@@ -135,9 +135,9 @@
 					<p>Fetches content from an existing element (using an ID) in the page and loads it into the content.</p>
 					
 					<pre><strong>HTML</strong>&lt;a href="#inline" class="inline"&gt;Show&lt;/a&gt;
-&lt;div id="inline">
+&lt;div id="inline"&gt;
     Inline content goes here...
-&lt;/div></pre>
+&lt;/div&gt;</pre>
 					<pre><strong>JS</strong>$(".inline").modaal();</pre>
 					
 					<a href="#inline-content" class="btn modaal-inline-content">Show <span class="ui-hidden">Inline</span> Modaal</a>
@@ -151,6 +151,7 @@
 							<p><input type="checkbox" name="fieldInput1" id="fieldInput1"><label for="fieldInput1">Label</label></p>
 							<p><input type="checkbox" name="fieldInput2" id="fieldInput2"><label for="fieldInput2">Label 2</label></p>
 							<p><input type="checkbox" name="fieldInput3" id="fieldInput3"><label for="fieldInput3">Label 3</label></p>
+							<span style="display:none;"><button type="submit">Submit</button></span>
 						</form>
 						<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. <a href="http://www.nytimes.com/" target="_blank">Phasellus consectetuer vestibulum elit.</a> Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat augue.</p>
 					</div>
@@ -214,7 +215,7 @@
 					<h2>Video</h2>
 					<p>Loads in an embedded video as defined in the link href attribute, into an iframe. Currently tested formats include Youtube and Vimeo. Other that support iframe embedding should also work.</p>
 					
-					<pre><strong>HTML</strong>&lt;a href="https://player.vimeo.com/video/142216434" class="video">Show&lt;/a></pre>
+					<pre><strong>HTML</strong>&lt;a href="https://player.vimeo.com/video/142216434" class="video"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.video').modaal({
     type: 'video'
 });</pre>
@@ -252,7 +253,7 @@
     confirm_button_text: 'Confirm',
     confirm_cancel_button_text: 'Cancel',
     confirm_title: 'Confirm Action XYZ',
-    confirm_content: '&lt;p>Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p>',
+    confirm_content: '&lt;p&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p&gt;',
     confirm_callback: function() {
 	        alert('you have confirmed this action');
         }
@@ -265,9 +266,9 @@
 					<h2>Instagram</h2>
 					<p>Loads an embedded Instagram photo into a Modaal window. In the example below we're using inline <span class="inline-code">data-modaal-</span> attributes to set the type and unique photo ID.</p>
 					
-					<pre><strong>HTML</strong>&lt;a href="#ig" class="modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6">Show&lt;/a></pre>
+					<pre><strong>HTML</strong>&lt;a href="#ig" class="modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6"&gt;Show&lt;/a&gt;</pre>
 					
-					<a href="#ig-content" class="btn modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6">Show <span class="ui-hidden">Instagram</span> Modaal</a>
+					<a href="javascript:void 0" class="btn modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6">Show <span class="ui-hidden">Instagram</span> Modaal</a>
 					
 				</div><!-- .modaal-example -->
 				
