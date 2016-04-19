@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
-	<title>Modaal - Accessible dialog window library for all humans</title>
+	<title>Modaal - Accessible dialog window plugin for all humans</title>
 	
 	<!-- Demo Styles -->
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -24,13 +24,13 @@
 	
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Modaal &ndash; An accessible dialog window library for all humans by @wearehumaan" />
+	<meta property="og:title" content="Modaal &ndash; An accessible dialog window plugin for all humans by @wearehumaan" />
 	<meta property="og:url" content="http://www.humaan.com/modaal/" />
 	<meta property="og:site_name" content="Modaal: Accessible Dialog Window" />
 	<meta property="og:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png" />
 	
 	<meta name="twitter:card" content="summary"/>
-	<meta name="twitter:title" content="Modaal &ndash; An accessible dialog window library for all humans by @wearehumaan"/>
+	<meta name="twitter:title" content="Modaal &ndash; An accessible dialog window plugin for all humans by @wearehumaan"/>
 	<meta name="twitter:site" content="@wearehumaan"/>
 	<meta name="twitter:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png"/>
 	<meta name="twitter:creator" content="@wearehumaan"/>
@@ -41,7 +41,7 @@
 	<header class="modaal-header">
 		
 		<h1><?php include 'demo/modaal-logo.php' ?><span class="ui-hidden">Modaal</span></h1>
-		<p>An accessible dialog window library for all humans.</p>
+		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php/* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
 		<div class="version" aria-label="Version 0.2.7">v0.2.7</div>
