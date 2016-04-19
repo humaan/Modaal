@@ -1,8 +1,9 @@
 {
   "name": "modaal",
-  "description": "Accessible modals for all.",
-  "version": "0.2.5",
-  "repository": "https://bitbucket.org/humaanco/modaal",
+  "description": "An accessible dialog window library for all humans.",
+  "version": "0.2.8",
+  "repository": "https://github.com/humaan/Modaal",
+  "license": "MIT",
   "devDependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
@@ -12,7 +13,6 @@
 	"gulp-autoprefixer": "^2.1.0",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-ruby-sass": "^2.0.5",
 	"gulp-sass": "^2.1.0",
     "gulp-uglify": "^1.4.2"
   }
