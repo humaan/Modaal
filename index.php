@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	
 	<meta charset="utf-8">
@@ -21,6 +21,14 @@
 	
 	<link rel="shortcut icon" href="demo/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="demo/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="demo/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="demo/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="demo/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="demo/apple-touch-icon-144x144.png">
+	
+	<meta name="description" content="Modaal - An accessible dialog window plugin for all humans by @wearehumaan"/>
+	<meta name="robots" content="noodp"/>
+	<link rel="canonical" href="http://www.humaan.com/modaal" />
 	
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
@@ -45,6 +53,7 @@
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php/* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
 		<div class="version" aria-label="Version 0.2.7">v0.2.7</div>
+		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 		
 		<div class="share">
 			<a href="javascript:void 0" class="social-share share-fb" onclick="return addthis_sendto('facebook');"><span class="ui-hidden">Share on Facebook</span></a>
@@ -136,7 +145,7 @@
 						<h2>Inline Modal Content</h2>
 						<p>Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, <a href="http://google.com" target="_blank">porttitor eu</a>, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
 						<p>Quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. <a href="http://humaan.com" target="_blank">Cras ultricies mi eu turpis</a> hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing.</p>
-						<form action="" class="demo-form">
+						<form action="/" class="demo-form">
 							<p><label for="name">Input Label</label><br />
 								<input name="name" id="name" autocomplete="on"></p>
 							<p><input type="checkbox" name="fieldInput1" id="fieldInput1"><label for="fieldInput1">Label</label></p>
@@ -274,14 +283,11 @@
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github</a>
 	</section>
 	
-	
-	
 	<!-- Fixed Header - Revealed on Scroll -->
 	<div class="modaal-fixed-header">
 		<div class="fixed-logo"><?php include 'demo/modaal-logo.php' ?><span class="ui-hidden">Logo for Modaal</span></div>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn">Download from Github</a>
 	</div>
-	
 	
 	
 	<!-- jQuery CDN -->
