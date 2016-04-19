@@ -61,7 +61,7 @@ h2 {
     font-size: 14px;
     text-transform: uppercase;
     margin: 0 0 80px;
-    color: #ea5a3d;
+    color: #6d4d9a;
     font-weight: 800;
     letter-spacing: 2px;
     text-align: center; }
@@ -70,15 +70,15 @@ h3.highlight {
   font-size: 14px;
   text-transform: uppercase;
   margin: 60px 0 20px;
-  color: #ea5a3d;
+  color: #6d4d9a;
   font-weight: 800;
   letter-spacing: 2px; }
 
 a {
-  color: #ea5a3d;
+  color: #6d4d9a;
   text-decoration: none; }
   a:hover {
-    color: #c53315; }
+    color: #493467; }
 
 p {
   margin: 0 0 10px; }
@@ -117,8 +117,8 @@ hr {
 
 .btn {
   display: inline-block;
-  background: #ea5a3d;
-  border: 3px solid #ea5a3d;
+  background: #6d4d9a;
+  border: 3px solid #6d4d9a;
   color: #fff;
   font-weight: 800;
   font-size: 13px;
@@ -127,11 +127,11 @@ hr {
   padding: 10px 25px;
   line-height: 20px; }
   .btn:hover {
-    border-color: #6d4d9a;
-    background: #6d4d9a;
+    border-color: #d95200;
+    background: #d95200;
     color: #fff; }
     .btn:hover span {
-      color: #6d4d9a; }
+      color: #d95200; }
   .btn.btn-small {
     font-size: 11px;
     padding: 5px 15px; }
@@ -144,7 +144,7 @@ hr {
       padding: 0 15px;
       margin: -10px 0;
       background: #fff;
-      color: #ea5a3d; }
+      color: #6d4d9a; }
       .btn.btn-download span:before {
         display: block;
         content: " ";
@@ -226,7 +226,7 @@ hr {
     width: 590px;
     height: 176px;
     margin: -88px 0 0 -295px;
-    fill: #ea5a3d; }
+    fill: #6d4d9a; }
 
 .version {
   position: absolute;
@@ -252,9 +252,9 @@ hr {
   .scroll-trigger:hover {
     transform: translateY(15px); }
     .scroll-trigger:hover .scroll-arrow {
-      background: #ea5a3d; }
+      background: #6d4d9a; }
       .scroll-trigger:hover .scroll-arrow:before, .scroll-trigger:hover .scroll-arrow:after {
-        background: #ea5a3d; }
+        background: #6d4d9a; }
 
 .scroll-arrow {
   display: block;
@@ -289,7 +289,7 @@ hr {
   width: 100%;
   height: 70px;
   box-shadow: 0 0 5px transparent;
-  background: #ea5a3d;
+  background: #6d4d9a;
   transform: translateY(0);
   -webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   -moz-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -311,7 +311,7 @@ hr {
     background: #fff;
     padding: 6px 16px;
     font-size: 11px;
-    color: #ea5a3d; }
+    color: #6d4d9a; }
     .modaal-fixed-header .btn:hover {
       background: transparent;
       color: #fff; }
@@ -330,7 +330,7 @@ hr {
     text-transform: uppercase; }
     #page-nav a:hover {
       background: #fff;
-      color: #ea5a3d; }
+      color: #6d4d9a; }
 
 .overview-copy {
   text-align: center;
@@ -392,7 +392,7 @@ hr {
     box-sizing: border-box;
     overflow: auto; }
     .modaal-example pre span {
-      color: #ea5a3d; }
+      color: #6d4d9a; }
     .modaal-example pre strong {
       display: block;
       position: absolute;
@@ -401,7 +401,7 @@ hr {
       line-height: 1;
       font-size: 10px;
       text-transform: uppercase;
-      color: #ea5a3d;
+      color: #6d4d9a;
       font-family: 'Lato', Arial, Helvetica, sans-serif;
       letter-spacing: 1px; }
     .modaal-example pre + pre {
@@ -418,7 +418,7 @@ hr {
   margin: 0 3px;
   padding: 3px 5px; }
   .inline-code span {
-    color: #ea5a3d; }
+    color: #6d4d9a; }
   .inline-code.start-row {
     margin-left: 0; }
 
