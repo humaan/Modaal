@@ -1,4 +1,4 @@
-<img src="http://www.humaan.com/modaal/website-assets/social-share-modaal.png" />
+<img src="http://www.humaan.com/modaal/demo/social-share-modaal.png" />
 
 ***
 
