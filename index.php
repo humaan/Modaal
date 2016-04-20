@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	
-	<title>Modaal - Accessible dialog window plugin for all humans</title>
+	<title>Modaal is a WCAG 2.0 Level AA accessible modal plugin</title>
 	
 	<!-- Demo Styles -->
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -32,16 +32,26 @@
 	
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Modaal &ndash; An accessible dialog window plugin for all humans by @wearehumaan" />
+	<meta property="og:title" content="Modaal - A WCAG 2.0 Level AA accessible modal plugin by @wearehumaan" />
 	<meta property="og:url" content="http://www.humaan.com/modaal/" />
-	<meta property="og:site_name" content="Modaal: Accessible Dialog Window" />
+	<meta property="og:site_name" content="Modaal: WCAG 2.0 Level AA accessible modal plugin" />
 	<meta property="og:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png" />
 	
 	<meta name="twitter:card" content="summary"/>
-	<meta name="twitter:title" content="Modaal &ndash; An accessible dialog window plugin for all humans by @wearehumaan"/>
+	<meta name="twitter:title" content="Modaal - A WCAG 2.0 Level AA accessible modal plugin by @wearehumaan"/>
 	<meta name="twitter:site" content="@wearehumaan"/>
 	<meta name="twitter:image" content="http://www.humaan.com/modaal/demo/social-share-modaal.png"/>
 	<meta name="twitter:creator" content="@wearehumaan"/>
+	
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-22985555-46', 'humaan.com');
+		ga('send', 'pageview');
+	</script>
 	
 </head>
 <body>
