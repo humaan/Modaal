@@ -269,7 +269,7 @@
         }
 });</pre>
 					
-					<a href="javascript:void(0);" class="btn modaal-confirm">Show <span class="ui-hidden">Confirm</span> Modal</a>
+					<a href="javascript:void(0);" class="btn modaal-confirm">Show <span class="ui-hidden">Confirm</span> Modaal</a>
 				</div><!-- .modaal-example -->
 				
 				<div class="modaal-example">
