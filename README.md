@@ -2,6 +2,7 @@
 
 ***
 
+- Version 0.2.9
 - Requires jQuery 1.11.2. v2+ not tested
 - Built by [Humaan](http://www.humaan.com)
 
@@ -73,6 +74,7 @@ accessible_title|`string`|`Dialog Window`||Set the `aria-label` attribute value 
 start_open|`boolean`|`false`|`true`<br /> `false`|Set this to `true` if you want the Modaal window to launch immediately on load.
 fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to true to make the modaal fill the entire screen, false will default to own width/height attributes.
 custom_class|`string`|`''`||Fill in this string with a custom class that will be applied to the outer most modal wrapper.
+background_scroll|`boolean`|`false`|`true`<br /> `false`|Set this to true to enable the page to scroll behind the open modaal
 width|`integer`|null||Set the desired width of the modal.
 height|`integer`|null||Set the desired height of the modal.
 gallery_active_class|`string`|`gallery_active_item`|| Active class applied to the currently active image or image slide in a gallery
