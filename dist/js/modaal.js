@@ -39,7 +39,7 @@
 	after_open (function)					: 	Callback function executed after modal is opened
 	before_close (function)					: 	Callback function executed before modal is closed
 	after_close (function)					: 	Callback function executed after modal is closed
-	source (function(element, src))		    : 	Callback function executed on the default source, it is intended to transform the
+	source (function(element, src))			: 	Callback function executed on the default source, it is intended to transform the
 												source (href in an AJAX modal or iframe). The function passes in the triggering element
 												as well as the default source depending of the modal type. The default output of the
 												function is an untransformed default source.
@@ -63,7 +63,7 @@
 	loading_content (string)				: 	HTML content for loading message. Default 'Loading &hellip;'
 	loading_class (string)					: 	Class name to be applied while content is loaded via AJAX. Default 'is_loading'
 	ajax_error_class (string)				:	Class name to be applied when content has failed to load. Default is 'modaal-error'
-	ajax_success (function)         		:   Callback for when AJAX content is loaded in
+	ajax_success (function)		 			:   Callback for when AJAX content is loaded in
 	
 	
 	=== SOCIAL CONTENT ===
@@ -117,7 +117,7 @@
 			$(elem).on('click.Modaal', function(e) {
 				e.preventDefault();
 
-                var source;
+				var source;
 				
 				// Save last active state before modal
 				self.lastFocus = document.activeElement;
@@ -177,19 +177,19 @@
 			
 			dom.off('click.Modaal keyup.Modaal keydown.Modaal');
 
-            // Body keydown
-            dom.bind('keydown.Modaal', function(e) {
-                var key = e.keyCode;
-                var target = e.target;
+			// Body keydown
+			dom.bind('keydown.Modaal', function(e) {
+				var key = e.keyCode;
+				var target = e.target;
 
-                // look for tab change and reset focus to modal window
-                // done in keydown so the check fires repeatedly when you hold the tab key down
-                if (key == 9 && self.scope.is_open) {
-                    if (!$.contains(document.getElementById(self.scope.id), target) ) {
-                        $('#' + self.scope.id).find('*[tabindex="0"]').focus();
-                    }
-                }
-            });
+				// look for tab change and reset focus to modal window
+				// done in keydown so the check fires repeatedly when you hold the tab key down
+				if (key == 9 && self.scope.is_open) {
+					if (!$.contains(document.getElementById(self.scope.id), target) ) {
+						$('#' + self.scope.id).find('*[tabindex="0"]').focus();
+					}
+				}
+			});
 
 			// Body keyup
 			dom.bind('keyup.Modaal', function(e) {
@@ -314,19 +314,19 @@
 						build_markup += '<div class="modaal-container">';
 					}
 					
-                    // add the guts of the content
-                    build_markup +=	'<div class="' + wrap_class + '" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
+					// add the guts of the content
+					build_markup +=	'<div class="' + wrap_class + '" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
 
-                            // If it's inline type, we want to clone content instead of dropping it straight in
-                            if (self.options.type == 'inline') {
-                                build_markup += '<div class="modaal-content-container"></div>';
-                            } else {
-                                // Drop in the content if it's not inline
-                                build_markup +=	content;
-                            }
+							// If it's inline type, we want to clone content instead of dropping it straight in
+							if (self.options.type == 'inline') {
+								build_markup += '<div class="modaal-content-container"></div>';
+							} else {
+								// Drop in the content if it's not inline
+								build_markup +=	content;
+							}
 
-                    // close wrap_class
-                    build_markup += '</div>' + self.scope.close_btn;
+					// close wrap_class
+					build_markup += '</div>' + self.scope.close_btn;
 
 					// hide if video
 					if (self.options.type != 'video') {
@@ -782,20 +782,20 @@
 			// Switch focusTarget tabindex (switch from other modal if exists)
 			$('.modaal-wrapper *[tabindex=0]').removeAttr('tabindex');
 
-            if ( self.options.type == 'image' ) {
-                focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class);
-            } else if ( modal_wrapper.find('.modaal-iframe-elem').length ) {
-                focusTarget = modal_wrapper.find('.modaal-iframe-elem');
+			if ( self.options.type == 'image' ) {
+				focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class);
+			} else if ( modal_wrapper.find('.modaal-iframe-elem').length ) {
+				focusTarget = modal_wrapper.find('.modaal-iframe-elem');
 
-            } else if ( modal_wrapper.find('.modaal-video-wrap').length ) {
-                focusTarget = modal_wrapper.find('.modaal-video-wrap');
+			} else if ( modal_wrapper.find('.modaal-video-wrap').length ) {
+				focusTarget = modal_wrapper.find('.modaal-video-wrap');
 
-            } else if ( modal_wrapper.find('.modaal-content-container').length ) {
-                focusTarget = modal_wrapper.find('.modaal-content-container');
+			} else if ( modal_wrapper.find('.modaal-content-container').length ) {
+				focusTarget = modal_wrapper.find('.modaal-content-container');
 
-            } else if ( modal_wrapper.find('.modaal-content').length ) {
-                focusTarget = modal_wrapper.find('.modaal-content');
-            }
+			} else if ( modal_wrapper.find('.modaal-content').length ) {
+				focusTarget = modal_wrapper.find('.modaal-content');
+			}
 
 			// now set the focus
 			focusTarget.attr('tabindex', '0').focus();
@@ -804,8 +804,8 @@
 			if (animation_type !== 'none') {
 				// CB: after_open
 				setTimeout(function() {
-                    self.options.after_open.call(self, modal_wrapper)
-                }, self.options.after_callback_delay);
+					self.options.after_open.call(self, modal_wrapper)
+				}, self.options.after_callback_delay);
 			}
 		},
 
@@ -906,7 +906,7 @@
 
 	// on page load check if single '.modaal' exists
 	$(function(){
-        var single_modaal = $('.modaal');
+		var single_modaal = $('.modaal');
 
 		if ( single_modaal.length ) {
 			single_modaal.each(function() {
@@ -1068,8 +1068,8 @@
 				
 				// now set it up for the trigger, but only if inline_options is true
 				if ( inline_options ) {
-                    self.modaal(options);
-                }
+					self.modaal(options);
+				}
 			});
 		}
 	});
