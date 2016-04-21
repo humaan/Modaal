@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.2.9
+	Modaal - accessible modals - v0.2.10
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -158,7 +158,7 @@
 						break;
 				}
 				
-				// call events to be watched (click, tab, keyup etc.)
+				// call events to be watched (click, tab, keyup, keydown etc.)
 				self.watch_events();
 				
 			});
@@ -175,8 +175,22 @@
 		watch_events : function() {
 			var self = this;
 			
-			dom.off('click.Modaal keyup.Modaal');
-			
+			dom.off('click.Modaal keyup.Modaal keydown.Modaal');
+
+            // Body keydown
+            dom.bind('keydown.Modaal', function(e) {
+                var key = e.keyCode;
+                var target = e.target;
+
+                // look for tab change and reset focus to modal window
+                // done in keydown so the check fires repeatedly when you hold the tab key down
+                if (key == 9 && self.scope.is_open) {
+                    if (!$.contains(document.getElementById(self.scope.id), target) ) {
+                        $('#' + self.scope.id).find('*[tabindex="0"]').focus();
+                    }
+                }
+            });
+
 			// Body keyup
 			dom.bind('keyup.Modaal', function(e) {
 				var key = e.keyCode;
@@ -205,13 +219,6 @@
 						self.gallery_update('next');
 					}
 					return;
-				}
-
-				// look for tab change and reset focus to modal window
-				if (key == 9 && self.scope.is_open) {
-					if (!$.contains(document.getElementById(self.scope.id), target) ) {
-						$('#' + self.scope.id).find('*[tabindex="0"]').focus();
-					}
 				}
 			});
 

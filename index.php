@@ -62,7 +62,7 @@
 		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php /* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
-		<div class="version" aria-label="Version 0.2.9">v0.2.9</div>
+		<div class="version" aria-label="Version 0.2.10">v0.2.10</div>
 		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 		
 		<div class="share">
