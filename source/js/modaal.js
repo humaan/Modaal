@@ -783,7 +783,7 @@
 			$('.modaal-wrapper *[tabindex=0]').removeAttr('tabindex');
 
             if ( self.options.type == 'image' ) {
-                focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class + ' .modaal-gallery-label');
+                focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class);
             } else if ( modal_wrapper.find('.modaal-iframe-elem').length ) {
                 focusTarget = modal_wrapper.find('.modaal-iframe-elem');
 
