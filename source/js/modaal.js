@@ -613,6 +613,11 @@
 			var this_gallery_item = this_gallery.find('.modaal-gallery-item');
 			var this_gallery_total = this_gallery_item.length - 1;
 			
+			// if single item, don't proceed
+			if ( this_gallery_total == 0 ) {
+				return false;
+			}
+			
 			var prev_btn = this_gallery.find('.modaal-gallery-prev'),
 				next_btn = this_gallery.find('.modaal-gallery-next');
 			
@@ -625,6 +630,14 @@
 			var current_item = this_gallery.find( '.modaal-gallery-item.' + self.private_options.active_class ),
 				incoming_item = ( direction == 'next' ? current_item.next( '.modaal-gallery-item' ) : current_item.prev( '.modaal-gallery-item' ) );
 			self.options.before_image_change.call(self, current_item, incoming_item);
+						
+			// stop change if at start of end
+			if ( direction == 'prev' && this_gallery.find('.gallery-item-0').hasClass('is_active') ) {
+				return false;
+			} else if ( direction == 'next' && this_gallery.find('.gallery-item-' + this_gallery_total).hasClass('is_active') ) {
+				return false;
+			}
+			
 			
 			// lock dimensions
 			current_item.stop().animate({
