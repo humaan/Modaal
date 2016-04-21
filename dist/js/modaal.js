@@ -864,10 +864,14 @@
 				// Modal is open so update scope
 				self.scope.is_open = true;
 				
-				// add the markup then animate it in
-				dom.css({
-					'overflow': 'hidden'
-				});
+				// set body to overflow hidden if background_scroll is false
+				if (! self.options.background_scroll) {
+					dom.css({
+						'overflow': 'hidden'
+					});
+				}
+				
+				// append modaal overlay
 				dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
 				
 				// now show
@@ -936,9 +940,9 @@
 				}
 
 				// option: hide_close
-				if ( self.attr('data-modaal-locked') ) {
+				if ( self.attr('data-modaal-hide-close') ) {
 					inline_options = true;
-					options.hide_close = (self.attr('data-modaal-locked') == 'true' || true ? true : false);
+					options.hide_close = (self.attr('data-modaal-hide-close') == 'true' || true ? true : false);
 				}
 
 				// option: background
@@ -956,7 +960,7 @@
 				// option: overlay_close
 				if ( self.attr('data-modaal-overlay-close') ) {
 					inline_options = true;
-					options.overlay_close = self.attr('data-modaal-modaal-overlay-close');
+					options.overlay_close = (self.attr('data-modaal-overlay-close') == 'false' || false ? false : true);
 				}
 				
 				// option: accessible_title
@@ -968,19 +972,25 @@
 				// option: start_open
 				if ( self.attr('data-modaal-start-open') ) {
 					inline_options = true;
-					options.start_open = self.attr('data-modaal-start-open');
+					options.start_open = (self.attr('data-modaal-start-open') == 'true' || true ? true : false);
 				}
 
 				// option: fullscreen
 				if ( self.attr('data-modaal-fullscreen') ) {
 					inline_options = true;
-					options.fullscreen = self.attr('data-modaal-fullscreen');
+					options.fullscreen = (self.attr('data-modaal-fullscreen') == 'true' || true ? true : false);
 				}
 
 				// option: fullscreen
 				if ( self.attr('data-modaal-custom-class') ) {
 					inline_options = true;
 					options.custom_class = self.attr('data-modaal-custom-class');
+				}
+
+				// option: fullscreen
+				if ( self.attr('data-modaal-background-scroll') ) {
+					inline_options = true;
+					options.custom_class = (self.attr('data-modaal-background-scroll') == 'true' || true ? true : false);
 				}
 				
 				// option: width
@@ -1097,6 +1107,7 @@
 		start_open: false,
 		fullscreen: false,
 		custom_class: '',
+		background_scroll: false,
 		
 		width: null,
 		height: null,
