@@ -61,8 +61,8 @@ $('.my-link').modaal({
 #### 2.2. Configuration Options
 key | type | default | values | notes
 ----|------|---------|--------|-------
-type|`sting`|`inline`|`ajax`<br /> `inline`<br /> `image`<br /> `iframe`<br /> `confirm`<br /> `video`<br /> `instagram`|
-animation|`sting`|`fade`|`fade`, `none`|
+type|`string`|`inline`|`ajax`<br /> `inline`<br /> `image`<br /> `iframe`<br /> `confirm`<br /> `video`<br /> `instagram`|
+animation|`string`|`fade`|`fade`, `none`|
 animation_speed|`integer`|`300`||Animation speed is the duration it takes to reveal the Modaal window once triggered. It's important to note, that if you change this, you must also change the `after_callback_delay` below so that callback events sync up. This will be overwritten and set to `0` if `type` is `none`.
 after_callback_delay|`integer`|`350`||Specify a delay value for the after open callbacks. This is necessary because with the bundled animations have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none', after open callbacks are dispatched immediately
 is_locked|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to disable closing the modal via keypress or by clicking the close or background. Beware that if `type` is `confirm` there will be no interface to dismiss the modal. If `is_locked` is `true`, you'd have to programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option.
