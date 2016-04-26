@@ -376,12 +376,6 @@
 			fullscreen: true
 		});
 		
-		
-		$(".alert").on('click', function(e){
-			e.preventDefault();
-			alert('yep');
-		})
-		
 	</script>
 	
 	
