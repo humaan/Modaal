@@ -18,6 +18,7 @@ gulp.task('styles', function() {
             sourcemap: false
         })
         	.on('error', sass.logError))
+    .pipe(autoprefixer())
 		.pipe(gulp.dest('source/css'))
 		.pipe(notify({
 			message: 'Modaal styles task complete'
@@ -32,6 +33,7 @@ gulp.task('demo-styles', function() {
             sourcemap: false
         })
         	.on('error', sass.logError))
+    .pipe(autoprefixer())
 		.pipe(gulp.dest('demo/css'))
 		.pipe(notify({
 			message: 'Demo styles task complete'
@@ -63,7 +65,7 @@ gulp.task('min-modaal', function() {
 		.pipe(notify({
 			message: 'Successfully uglified Modaal.'
 		}));
-	
+
 	gulp.src('source/css/modaal.css')
         .pipe(csso())
         .pipe(rename('modaal.min.css'))
@@ -77,10 +79,10 @@ gulp.task('copy-to-dist', function() {
 	// copy other files to dist folder
 	gulp.src('source/js/modaal.js')
 		.pipe(gulp.dest('dist/js/'));
-		
+
 	gulp.src('source/css/modaal.scss')
 		.pipe(gulp.dest('dist/css/'));
-	
+
 	gulp.src('source/css/modaal.css')
 		.pipe(gulp.dest('dist/css/'))
 		.pipe(notify({
