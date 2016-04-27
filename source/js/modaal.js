@@ -7,67 +7,68 @@
 	Modaal jQuery Plugin : Accessible Modals
 
 	==== General Options ===
-	type (string) 							: 	ajax, inline, image, iframe, confirm. Defaults to 'inline'
-	animation (string) 						: 	Fade, expand, down, up. Defaults to 'fade'
-	after_callback_delay (integer)			: 	Specify a delay value for the after open callbacks. This is necessary because with the bundled animations
-												have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so
-												more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none',
-												after open callbacks are dispatched immediately
+	type (string) 							    :	ajax, inline, image, iframe, confirm. Defaults to 'inline'
+	animation (string) 						  :	Fade, expand, down, up. Defaults to 'fade'
+	after_callback_delay (integer)	:	Specify a delay value for the after open callbacks. This is necessary because with the bundled animations
+																		have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so
+																		more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none',
+																		after open callbacks are dispatched immediately
 
-	is_locked (boolean)						: 	Set this to true to disable closing the modal via keypress or clicking the background. Beware that if
-												type != 'confirm' there will be no interface to dismiss the modal if is_locked = true, you'd have to
-												programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option
-												Defaults to false
-	hide_close (boolean)					:	Set this to true to hide the close modal button. Key press and overlay click will still close the modal.
-												This method is best used when you want to put a custom close button inside the modal container space.
+	is_locked (boolean)						  :	Set this to true to disable closing the modal via keypress or clicking the background. Beware that if
+																		type != 'confirm' there will be no interface to dismiss the modal if is_locked = true, you'd have to
+																		programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option
+																		Defaults to false
 
-	background (string)						: 	Background overlay style. Defaults to '#000'
-	overlay_opacity (float) 				: 	Background overlay transparency. Defaults to 0.8
+	hide_close (boolean)					  :	Set this to true to hide the close modal button. Key press and overlay click will still close the modal.
+																		This method is best used when you want to put a custom close button inside the modal container space.
+
+	background (string)						  : Background overlay style. Defaults to '#000'
+	overlay_opacity (float) 				: Background overlay transparency. Defaults to 0.8
 	overlay_close (boolean)					:	Set this to false if you want to disable click to close on overlay background.
 
-	accessible_title (string)				: 	Accessible title. Default 'Dialog Window'
-	start_open (boolean)					:	Set this to true to launch the Modaal window immediately on page open
-	fullscreen (boolean)					:	Set this to true to make the modaal fill the entire screen, false will default to own width/height attributes.
-	custom_class (string)					:	Fill in this string with a custom class that will be applied to the outer most modal wrapper.
+	accessible_title (string)				: Accessible title. Default 'Dialog Window'
+	start_open (boolean)					  :	Set this to true to launch the Modaal window immediately on page open
+	fullscreen (boolean)					  :	Set this to true to make the modaal fill the entire screen, false will default to own width/height attributes.
+	custom_class (string)					  :	Fill in this string with a custom class that will be applied to the outer most modal wrapper.
 
-	width (integer)							: 	Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
-	height (integer)						: 	Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
+	width (integer)							    : Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
+	height (integer)						    : Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
 
 
 	=== Events ===
-	before_open (function) 					: 	Callback function executed before modal is opened
-	after_open (function)					: 	Callback function executed after modal is opened
-	before_close (function)					: 	Callback function executed before modal is closed
-	after_close (function)					: 	Callback function executed after modal is closed
-	source (function(element, src))			: 	Callback function executed on the default source, it is intended to transform the
-												source (href in an AJAX modal or iframe). The function passes in the triggering element
-												as well as the default source depending of the modal type. The default output of the
-												function is an untransformed default source.
+	before_open (function) 					: Callback function executed before modal is opened
+	after_open (function)					  : Callback function executed after modal is opened
+	before_close (function)					: Callback function executed before modal is closed
+	after_close (function)					: Callback function executed after modal is closed
+	source (function(element, src))	: Callback function executed on the default source, it is intended to transform the
+																		source (href in an AJAX modal or iframe). The function passes in the triggering element
+																		as well as the default source depending of the modal type. The default output of the
+																		function is an untransformed default source.
 
 
 	=== Confirm Options & Events ===
-	confirm_button_text (string)			: 	Text on the confirm button. Defaults to 'Confirm'
-	confirm_cancel_button_text (string)		: 	Text on the confirm modal cancel button. Defaults to 'Cancel'
-	confirm_title (string)					: 	Title for confirm modal. Default 'Confirm Title'
-	confirm_content (string)				: 	HTML content for confirm message
-	confirm_callback (function)				: 	Callback function for when the confirm button is pressed as opposed to cancel
+	confirm_button_text (string)		: Text on the confirm button. Defaults to 'Confirm'
+	confirm_cancel_button_text (string):  Text on the confirm modal cancel button. Defaults to 'Cancel'
+	confirm_title (string)					: Title for confirm modal. Default 'Confirm Title'
+	confirm_content (string)				: HTML content for confirm message
+	confirm_callback (function)			: Callback function for when the confirm button is pressed as opposed to cancel
 
 
 	=== Gallery Options & Events ===
-	gallery_active_class (string)			: 	Active class applied to the currently active image or image slide in a gallery 'gallery_active_item'
-	before_image_change (function)			: 	Callback function executed before the image slide changes in a gallery modal. Default function( current_item, incoming_item )
-	after_image_change (function)			: 	Callback function executed after the image slide changes in a gallery modal. Default function ( current_item )
+	gallery_active_class (string)		:	Active class applied to the currently active image or image slide in a gallery 'gallery_active_item'
+	before_image_change (function)	:	Callback function executed before the image slide changes in a gallery modal. Default function( current_item, incoming_item )
+	after_image_change (function)		:	Callback function executed after the image slide changes in a gallery modal. Default function ( current_item )
 
 
 	=== AJAX Options & Events ===
-	loading_content (string)				: 	HTML content for loading message. Default 'Loading &hellip;'
-	loading_class (string)					: 	Class name to be applied while content is loaded via AJAX. Default 'is_loading'
+	loading_content (string)				:	HTML content for loading message. Default 'Loading &hellip;'
+	loading_class (string)					:	Class name to be applied while content is loaded via AJAX. Default 'is_loading'
 	ajax_error_class (string)				:	Class name to be applied when content has failed to load. Default is 'modaal-error'
-	ajax_success (function)		 			:   Callback for when AJAX content is loaded in
+	ajax_success (function)		 			: Callback for when AJAX content is loaded in
 
 
 	=== SOCIAL CONTENT ===
-	instagram_id (string)					:	Unique photo ID for an Instagram photo.
+	instagram_id (string)					  :	Unique photo ID for an Instagram photo.
 
 */
 ( function( $ ) {
