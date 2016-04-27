@@ -178,7 +178,7 @@
 			dom.off('click.Modaal keyup.Modaal keydown.Modaal');
 
 			// Body keydown
-			dom.bind('keydown.Modaal', function(e) {
+			dom.on('keydown.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -192,7 +192,7 @@
 			});
 
 			// Body keyup
-			dom.bind('keyup.Modaal', function(e) {
+			dom.on('keyup.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
