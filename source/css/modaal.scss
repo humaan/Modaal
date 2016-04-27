@@ -1,7 +1,7 @@
 /*!
-    Modaal - accessible modals - v0.2.9
-    by Humaan, for all humans.
-    http://humaan.com
+	Modaal - accessible modals - v0.2.9
+	by Humaan, for all humans.
+	http://humaan.com
  */
 
 // Modaal Variables
@@ -33,13 +33,13 @@ $modaal-grey: #afb7bc;
 }
 @mixin modaal-hidetext() {
 	position: absolute !important;
-    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    padding:0 !important;
-    border:0 !important;
-    height: 1px !important;
-    width: 1px !important;
-    overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding:0 !important;
+	border:0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
 }
 
 
@@ -85,7 +85,7 @@ $modaal-grey: #afb7bc;
 		padding: 0;
 		-webkit-appearance: none;
 	}
-	
+
 	&.modaal-start_none {
 		display: none;
 		opacity: 1;
@@ -93,11 +93,11 @@ $modaal-grey: #afb7bc;
 	&.modaal-start_fade {
 		opacity: 0;
 	}
-	
+
 	& *[tabindex="0"] {
 		outline: none !important;
 	}
-	
+
 	// is fullscreen
 	&.modaal-fullscreen {
 		overflow: hidden;
@@ -120,7 +120,7 @@ $modaal-grey: #afb7bc;
 	vertical-align: middle;
 	text-align: center;
 	padding: 80px 25px;
-	
+
 	// when is fullscreen
 	.modaal-fullscreen & {
 		padding: 0;
@@ -141,7 +141,7 @@ $modaal-grey: #afb7bc;
 	box-shadow: $modaal-shadow;
 	cursor: auto;
 	//transform: translateX(-50%) translateY(-50%);
-	
+
 	// while loading
 	&.is_loading {
 		height: 100px;
@@ -225,7 +225,7 @@ $modaal-grey: #afb7bc;
 	cursor: pointer;
 	border: none;
 	background: transparent;
-	
+
 	// Ok Button
 	&.modaal-ok {
 		padding: 10px 15px;
@@ -273,7 +273,7 @@ $modaal-grey: #afb7bc;
 		width: 1000px !important;
 		max-width: 800px !important;
 		box-shadow: none !important;
-		
+
 		animation-name: instaReveal;
 		animation-duration: 1s;
 		animation-fill-mode: forwards;
@@ -281,8 +281,8 @@ $modaal-grey: #afb7bc;
 }
 
 @keyframes instaReveal {
-    0%	{ opacity: 0; }
-    100% { opacity: 1; }
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
 }
 
 
@@ -349,7 +349,7 @@ $modaal-grey: #afb7bc;
 	span {
 		@include modaal-hidetext;
 	}
-	
+
 	&:before,
 	&:after {
 		display: block;
@@ -379,7 +379,7 @@ $modaal-grey: #afb7bc;
 .modaal-gallery-prev {
 	right: 100%;
 	margin-right: 40px;
-	
+
 	&:before,
 	&:after { left: 22px; }
 	&:before {
@@ -446,7 +446,7 @@ $modaal-grey: #afb7bc;
 	.modaal-gallery-item img {
 		width: 100%;
 	}
-	
+
 	.modaal-gallery-control {
 		top: auto;
 		bottom: 20px;
@@ -523,8 +523,8 @@ $modaal-grey: #afb7bc;
 	width: 200px;
 	height: 200px;
 	top: 50%;
-    left: 50%;
-    margin: -100px 0 0 -100px;
+	left: 50%;
+	margin: -100px 0 0 -100px;
 	-webkit-transform: scale(0.25);
 	-moz-transform: scale(0.25);
 	-ms-transform: scale(0.25);
