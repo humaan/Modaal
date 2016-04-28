@@ -14,10 +14,13 @@ var gulp = require('gulp'),
 gulp.task('styles', function() {
 	gulp.src('source/css/modaal.scss')
 		.pipe(sass({
-						style: 'expanded',
-						sourcemap: false
-				})
-					.on('error', sass.logError))
+			style: 'expanded',
+			sourcemap: false
+		})
+			.on('error', sass.logError))
+		.pipe(autoprefixer({
+			browsers: ['last 2 version', 'ie 8', 'ie 9']
+		}))
 		.pipe(gulp.dest('source/css'))
 		.pipe(notify({
 			message: 'Modaal styles task complete'
@@ -28,10 +31,13 @@ gulp.task('styles', function() {
 gulp.task('demo-styles', function() {
 	gulp.src('demo/css/demo.scss')
 		.pipe(sass({
-						style: 'expanded',
-						sourcemap: false
-				})
-					.on('error', sass.logError))
+			style: 'expanded',
+			sourcemap: false
+		})
+			.on('error', sass.logError))
+		.pipe(autoprefixer({
+			browsers: ['last 2 version', 'ie 8', 'ie 9']
+		}))
 		.pipe(gulp.dest('demo/css'))
 		.pipe(notify({
 			message: 'Demo styles task complete'
@@ -65,8 +71,8 @@ gulp.task('min-modaal', function() {
 		}));
 
 	gulp.src('source/css/modaal.css')
-				.pipe(csso())
-				.pipe(rename('modaal.min.css'))
+		.pipe(csso())
+		.pipe(rename('modaal.min.css'))
 		.pipe(gulp.dest('dist/css/'))
 		.pipe(notify({
 			message: 'Min copy created.'
