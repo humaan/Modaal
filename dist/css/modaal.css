@@ -1,7 +1,7 @@
 /*!
-    Modaal - accessible modals - v0.2.9
-    by Humaan, for all humans.
-    http://humaan.com
+	Modaal - accessible modals - v0.2.9
+	by Humaan, for all humans.
+	http://humaan.com
  */
 .modaal-accessible-hide {
   position: absolute !important;
@@ -332,7 +332,9 @@
   max-width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   background: #000;
-  max-width: 1300px; }
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto; }
   .modaal-video-container iframe,
   .modaal-video-container object,
   .modaal-video-container embed {
