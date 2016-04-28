@@ -179,10 +179,11 @@ The Modaal video type has been tested thoroughly using both Vimeo and Youtube. F
 Thanks for your contribution! Please refer to the guidelines below.
 
 1. Please ensure the issue you're reporting is reproducible in a standalone environment, and not a result of something in your own build.
-2. Please ensure the problem you're resolving has an open issue ticket.
-2. Adhere to the current style and formatting of the plugin files, including CSS, SASS and JS.
-3. Please ensure any changes are tested thoroughly in multiple browsers. We will do this, but if we locate bugs in new code will not proceed further. 
-4. Outline all changes in your commit message and also reference the issue ticket. For example "Contribution: Fix for issue #17 - Update to XYZ file to do make it do ABC"
+2. Please ensure your pull request has a base branch of `develop` selected. pull request's with base `master` will not be accepted.
+3. Please ensure the problem you're resolving has an open issue ticket.
+4. Adhere to the current style and formatting of the plugin files, including CSS, SASS and JS.
+5. Please ensure any changes are tested thoroughly in multiple browsers. We will do this, but if we locate bugs in the new code, the pull request will not be accepted.
+6. Outline all changes in your commit message and also reference the issue ticket. For example "Contribution: Fix for issue #17 - Update to XYZ file to do make it do ABC"
 
 #### 5.3. Development Setup
 1. Ensure you're running [NodeJS](http://nodejs.org/)
