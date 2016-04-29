@@ -2,7 +2,7 @@
 
 ***
 
-- Version 0.2.10
+- Version 0.2.11
 - Requires jQuery 1.11.2. v2+ not tested
 - Built by [Humaan](http://www.humaan.com)
 
