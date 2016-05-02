@@ -12,7 +12,7 @@
 	<!-- Demo Styles -->
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="demo/css/demo.css" media="screen">
+	<link rel="stylesheet" href="demo/css/demo.css?t=1462179764" media="screen">
 
 	<!-- Modaal Styles -->
 	<link rel="stylesheet" href="source/css/modaal.css" media="screen">
