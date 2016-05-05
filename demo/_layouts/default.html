@@ -138,23 +138,7 @@
 
 				{% include example-image-gallery.html %}
 
-				<div class="modaal-example">
-					<h2>Video</h2>
-					<p>Loads in an embedded video as defined in the link href attribute, into an iframe. Currently tested formats include Youtube and Vimeo. Other that support iframe embedding should also work.</p>
-
-					<pre><strong>HTML</strong>&lt;a href="https://player.vimeo.com/video/142216434" class="video"&gt;Show&lt;/a&gt;</pre>
-					<pre><strong>JS</strong>$('.video').modaal({
-		type: 'video'
-});</pre>
-					<a href="https://player.vimeo.com/video/142216434?color=ffffff&amp;title=0&amp;byline=0&amp;portrait=0" class="btn modaal-video">Show <span class="ui-hidden">Video</span> Modaal</a>
-
-
-					<h3 class="highlight">Video Modaal Tips</h3>
-					<p>The Modaal video type has been tested thoroughly using both Vimeo and Youtube. For best outcome, please ensure the url format looks like the one of the following below. We transplant this URL into an iframe which then each service provider controls all the necessary play back from there.</p>
-					<p><span class="inline-code start-row">https://www.youtube.com/embed/cBJyo0tgLnw</span> where the ID at the end is your unique video id. This can be found by selecting 'Share' on a youtube video, then clicking on 'Embed'. You'll find this URL within the content presented.</p>
-					<p><span class="inline-code start-row">https://player.vimeo.com/video/109626219</span> where the ID at the end is your unique video id. This can be found by selecting 'Share' on a vimeo video (commonly seen on the right hand side), and by selecting the content within 'Embed'. You'll find the URL necessary towards the very beginning of that embed code inside <span class="inline-code">src=""</span>.</p>
-
-				</div><!-- .modaal-example -->
+				{% include example-video.html %}
 
 				<div class="modaal-example">
 					<h2>iFrame</h2>
