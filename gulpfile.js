@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	notify = require('gulp-notify'),
 	del = require('del'),
+	exec = require('child_process').exec,
 	csso = require('gulp-csso');
 
 
@@ -105,6 +106,15 @@ gulp.task('copy-to-demo', function() {
 			message: 'Moved to demo.'
 		}));
 });
+
+gulp.task('deploy-to-gh-pages', function (cb) {
+	var gh_pages_push = 'git subtree push --prefix demo origin gh-pages';
+	exec(gh_pages_push, function (err, stdout, stderr) {
+		console.log(stdout);
+		console.log(stderr);
+		cb(err);
+	});
+})
 
 // Now run in order
 gulp.task('dist', ['min-modaal', 'copy-to-dist', 'copy-to-demo']);
