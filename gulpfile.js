@@ -14,10 +14,13 @@ var gulp = require('gulp'),
 gulp.task('styles', function() {
 	gulp.src('source/css/modaal.scss')
 		.pipe(sass({
-            style: 'expanded',
-            sourcemap: false
-        })
-        	.on('error', sass.logError))
+			style: 'expanded',
+			sourcemap: false
+		})
+			.on('error', sass.logError))
+		.pipe(autoprefixer({
+			browsers: ['last 2 version', 'ie 8', 'ie 9']
+		}))
 		.pipe(gulp.dest('source/css'))
 		.pipe(notify({
 			message: 'Modaal styles task complete'
@@ -28,10 +31,13 @@ gulp.task('styles', function() {
 gulp.task('demo-styles', function() {
 	gulp.src('demo/css/demo.scss')
 		.pipe(sass({
-            style: 'expanded',
-            sourcemap: false
-        })
-        	.on('error', sass.logError))
+			style: 'expanded',
+			sourcemap: false
+		})
+			.on('error', sass.logError))
+		.pipe(autoprefixer({
+			browsers: ['last 2 version', 'ie 8', 'ie 9']
+		}))
 		.pipe(gulp.dest('demo/css'))
 		.pipe(notify({
 			message: 'Demo styles task complete'
@@ -63,10 +69,10 @@ gulp.task('min-modaal', function() {
 		.pipe(notify({
 			message: 'Successfully uglified Modaal.'
 		}));
-	
+
 	gulp.src('source/css/modaal.css')
-        .pipe(csso())
-        .pipe(rename('modaal.min.css'))
+		.pipe(csso())
+		.pipe(rename('modaal.min.css'))
 		.pipe(gulp.dest('dist/css/'))
 		.pipe(notify({
 			message: 'Min copy created.'
@@ -77,10 +83,10 @@ gulp.task('copy-to-dist', function() {
 	// copy other files to dist folder
 	gulp.src('source/js/modaal.js')
 		.pipe(gulp.dest('dist/js/'));
-		
+
 	gulp.src('source/css/modaal.scss')
 		.pipe(gulp.dest('dist/css/'));
-	
+
 	gulp.src('source/css/modaal.css')
 		.pipe(gulp.dest('dist/css/'))
 		.pipe(notify({

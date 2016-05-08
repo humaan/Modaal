@@ -2,7 +2,7 @@
 
 ***
 
-- Version 0.2.10
+- Version 0.2.11
 - Requires jQuery 1.11.2. v2+ not tested
 - Built by [Humaan](http://www.humaan.com)
 
@@ -61,15 +61,15 @@ $('.my-link').modaal({
 #### 2.2. Configuration Options
 key | type | default | values | notes
 ----|------|---------|--------|-------
-type|`sting`|`inline`|`ajax`<br /> `inline`<br /> `image`<br /> `iframe`<br /> `confirm`<br /> `video`<br /> `instagram`|
-animation|`sting`|`fade`|`fade`, `none`|
+type|`string`|`inline`|`ajax`<br /> `inline`<br /> `image`<br /> `iframe`<br /> `confirm`<br /> `video`<br /> `instagram`|
+animation|`string`|`fade`|`fade`, `none`|
 animation_speed|`integer`|`300`||Animation speed is the duration it takes to reveal the Modaal window once triggered. It's important to note, that if you change this, you must also change the `after_callback_delay` below so that callback events sync up. This will be overwritten and set to `0` if `type` is `none`.
 after_callback_delay|`integer`|`350`||Specify a delay value for the after open callbacks. This is necessary because with the bundled animations have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none', after open callbacks are dispatched immediately
 is_locked|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to disable closing the modal via keypress or by clicking the close or background. Beware that if `type` is `confirm` there will be no interface to dismiss the modal. If `is_locked` is `true`, you'd have to programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option.
-hide_close|`boolean`|`false`|`true`<br /> `fasle`|Set this to true to hide the close modal button. Key press and overlay click will still close the modal. This method is best used when you want to put a custom close button inside the modal container space.
+hide_close|`boolean`|`false`|`true`<br /> `false`|Set this to true to hide the close modal button. Key press and overlay click will still close the modal. This method is best used when you want to put a custom close button inside the modal container space.
 background|`string`|`#000`||Sets the background overlay color
 overlay_opacity|`float`|`0.8`||Sets the background overlay transparency
-overlay_close|`boolean`|`true`|`true`<br /> `fasle`|Controls whether the overlay background can be clicked to close.
+overlay_close|`boolean`|`true`|`true`<br /> `false`|Controls whether the overlay background can be clicked to close.
 accessible_title|`string`|`Dialog Window`||Set the `aria-label` attribute value used for Accessibility purposes.
 start_open|`boolean`|`false`|`true`<br /> `false`|Set this to `true` if you want the Modaal window to launch immediately on load.
 fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to true to make the modaal fill the entire screen, false will default to own width/height attributes.
@@ -179,10 +179,11 @@ The Modaal video type has been tested thoroughly using both Vimeo and Youtube. F
 Thanks for your contribution! Please refer to the guidelines below.
 
 1. Please ensure the issue you're reporting is reproducible in a standalone environment, and not a result of something in your own build.
-2. Please ensure the problem you're resolving has an open issue ticket.
-2. Adhere to the current style and formatting of the plugin files, including CSS, SASS and JS.
-3. Please ensure any changes are tested thoroughly in multiple browsers. We will do this, but if we locate bugs in new code will not proceed further. 
-4. Outline all changes in your commit message and also reference the issue ticket. For example "Contribution: Fix for issue #17 - Update to XYZ file to do make it do ABC"
+2. Please ensure your pull request has a base branch of `develop` selected. pull request's with base `master` will not be accepted.
+3. Please ensure the problem you're resolving has an open issue ticket.
+4. Adhere to the current style and formatting of the plugin files, including CSS, SASS and JS.
+5. Please ensure any changes are tested thoroughly in multiple browsers. We will do this, but if we locate bugs in the new code, the pull request will not be accepted.
+6. Outline all changes in your commit message and also reference the issue ticket. For example "Contribution: Fix for issue #17 - Update to XYZ file to do make it do ABC"
 
 #### 5.3. Development Setup
 1. Ensure you're running [NodeJS](http://nodejs.org/)

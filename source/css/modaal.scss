@@ -1,7 +1,7 @@
 /*!
-		Modaal - accessible modals - v0.2.9
-		by Humaan, for all humans.
-		http://humaan.com
+	Modaal - accessible modals - v0.2.9
+	by Humaan, for all humans.
+	http://humaan.com
  */
 
 // Modaal Variables
@@ -25,10 +25,6 @@ $modaal-grey: #afb7bc;
 // Modaal Mixins
 // --------------------------------------------------------
 @mixin modaal-transition($type, $speed: .2s, $ease: ease-in-out) {
-	-webkit-transition: $type #{$speed} #{$ease};
-	-moz-transition: $type #{$speed} #{$ease};
-	-ms-transition: $type #{$speed} #{$ease};
-	-o-transition: $type #{$speed} #{$ease};
 	transition: $type #{$speed} #{$ease};
 }
 @mixin modaal-hidetext() {
@@ -253,6 +249,27 @@ $modaal-grey: #afb7bc;
 
 
 
+@keyframes instaReveal {
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
+}
+@-o-keyframes instaReveal {
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
+}
+@-moz-keyframes instaReveal {
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
+}
+@-webkit-keyframes instaReveal {
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
+}
+@-ms-keyframes instaReveal {
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
+}
+
 // Instagram Photo
 // --------------------------------------------------------
 
@@ -285,8 +302,8 @@ $modaal-grey: #afb7bc;
 }
 
 @keyframes instaReveal {
-		0%	{ opacity: 0; }
-		100% { opacity: 1; }
+	0%	{ opacity: 0; }
+	100% { opacity: 1; }
 }
 
 
@@ -410,11 +427,14 @@ $modaal-grey: #afb7bc;
 	background: #000;
 	box-shadow: 0 0 10px rgba(0,0,0, 0.3);
 	height: 0;
+	margin-left: auto;
+	margin-right: auto;
 	max-width: 100%;
 	max-width: 1300px;
 	overflow: hidden;
 	padding-bottom: 56.25%;
 	position: relative;
+
 	iframe,
 	object,
 	embed {
