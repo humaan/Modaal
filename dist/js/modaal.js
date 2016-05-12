@@ -229,7 +229,7 @@
 
 				// General Controls: If it's not locked allow greedy close
 				if ( !self.options.is_locked ){
-					if ( (self.options.overlay_close && trigger.is('.modaal-inner-wrapper')) || trigger.is('.modaal-close') ) {
+					if ( (self.options.overlay_close && trigger.is('.modaal-inner-wrapper')) || trigger.is('.modaal-close') || trigger.closest('.modaal-close').length ) {
 						self.modaal_close();
 						return;
 					}
