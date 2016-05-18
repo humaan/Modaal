@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.2.11
+	Modaal - accessible modals - v0.3.00
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -306,13 +306,30 @@
 				self.options.custom_class = ' ' + self.options.custom_class;
 			}
 
+			// if width and heights exists and is typeof number
+			var dimensionsStyle = '';
+			if ( self.options.width && self.options.height && typeof self.options.width == 'number' && typeof self.options.height == 'number' ) {
+				// if width and height exist, and they are both numbers
+				dimensionsStyle = ' style="max-width:' + self.options.width + 'px;height:' + self.options.height + 'px;overflow:auto;"';
+			} else if ( self.options.width && typeof self.options.width == 'number' ) {
+				// if only width
+				dimensionsStyle = ' style="max-width:' + self.options.width + 'px;"';
+			} else if ( self.options.height && typeof self.options.height == 'number' ) {
+				// if only height
+				dimensionsStyle = ' style="height:' + self.options.height + 'px;overflow:auto;"';
+			}
+
+			// Reset dimensions style (width and height) for certain types
+			if ( self.options.type == 'image' || self.options.type == 'video' || self.options.type == 'instagram' || self.options.fullscreen ) {
+				dimensionsStyle = '';
+			}
 
 			//var build_markup = '<div class="modaal-wrapper modaal-start_fade' + igClass + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
 			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
 
 					// hide if video
 					if (self.options.type != 'video') {
-						build_markup += '<div class="modaal-container">';
+						build_markup += '<div class="modaal-container"' + dimensionsStyle + '>';
 					}
 
 					// add the guts of the content
