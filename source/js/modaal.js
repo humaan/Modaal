@@ -761,9 +761,7 @@
 
 			if ( self.options.width !== null || self.options.width !== undefined || self.options.height !== null || self.options.height !== undefined ) {
 				// video markup
-				content = '<div class="modaal-content" aria-hidden="false" aria-labelledby="' + self.options.accessible_title + '" role="dialog">' +
-					'<iframe src="' + url + '" class="modaal-iframe-elem" style="width: ' + self.options.width + 'px;height: ' + self.options.height + 'px" frameborder="0" allowfullscreen></iframe>' +
-				'</div>';
+				content = '<iframe src="' + url + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>';
 			} else {
 				content = '<div class="modaal-content-container">Please specify a width and height for your iframe</div>';
 			}

@@ -431,12 +431,13 @@ $modaal-grey: #afb7bc;
 
 // Modaal iFrame
 // --------------------------------------------------------
-.modaal-iframe .modaal-container {
-	width: auto;
-	max-width: none;
+.modaal-iframe .modaal-content {
+	width: 100%;
+	height: 100%;
 }
 .modaal-iframe-elem {
 	width: 100%;
+	height: 100%;
 	display: block;
 }
 
