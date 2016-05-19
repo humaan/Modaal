@@ -889,9 +889,7 @@
 
 				// set body to overflow hidden if background_scroll is false
 				if (! self.options.background_scroll) {
-					dom.css({
-						'overflow': 'hidden'
-					});
+					dom.addClass('modaal-noscroll');
 				}
 
 				// append modaal overlay
@@ -907,7 +905,7 @@
 
 			} else if (action == 'hide') {
 				// remove body overflow lock
-				dom.css('overflow', '');
+				dom.removeClass('modaal-noscroll');
 
 				// now hide the overlay
 				$('#' + self.scope.id + '_overlay').stop().animate({

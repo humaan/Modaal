@@ -3,6 +3,9 @@
 	by Humaan, for all humans.
 	http://humaan.com
  */
+.modaal-noscroll {
+  overflow: hidden; }
+
 .modaal-accessible-hide {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
@@ -34,6 +37,7 @@
   overflow: auto;
   opacity: 1;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
   transition: all 0.3s ease-in-out; }
   .modaal-wrapper * {
     box-sizing: border-box;
