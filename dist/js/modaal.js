@@ -955,9 +955,9 @@
 				}
 
 				// option: after_callback_delay
-				if ( self.attr('data-modaal-locked') ) {
+				if ( self.attr('data-modaal-is-locked') ) {
 					inline_options = true;
-					options.is_locked = (self.attr('data-modaal-locked') === 'true' ? true : false);
+					options.is_locked = (self.attr('data-modaal-is-locked') === 'true' ? true : false);
 				}
 
 				// option: hide_close
