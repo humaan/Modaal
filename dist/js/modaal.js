@@ -918,7 +918,88 @@
 		}
 	};
 
-	// on page load check if single '.modaal' exists
+	// Declare the modaal jQuery method
+	// ------------------------------------------------------------
+	$.fn.modaal = function(options) {
+		return this.each(function () {
+			var existing_modaal = $(this).data('modaal');
+
+			if ( existing_modaal ){
+				// Checking for string value, used for methods
+				if (typeof(options) == 'string'){
+					switch (options) {
+						case 'close':
+							existing_modaal.modaal_close();
+							break;
+					}
+				}
+			} else {
+				// Not a string, so let's setup the modal ready to use
+				var modaal = Object.create(Modaal);
+				modaal.init(options, this);
+				$.data(this, "modaal", modaal);
+			}
+		});
+	};
+
+	// Default options
+	// ------------------------------------------------------------
+	$.fn.modaal.options = {
+
+		//General
+		type : 'inline',
+		animation : 'fade',
+		animation_speed : 300,
+		after_callback_delay : 350,
+		is_locked : false,
+		hide_close: false,
+		background: '#000',
+		overlay_opacity: '0.8',
+		overlay_close: true,
+		accessible_title: 'Dialog Window',
+		start_open: false,
+		fullscreen: false,
+		custom_class: '',
+		background_scroll: false, // TODO: this property isn't described in the header
+
+		width: null,
+		height: null,
+
+		//Events
+		before_open : function(){},
+		after_open : function(){},
+		before_close : function(){},
+		after_close : function(){},
+		source : function( element, src ){
+			return src;
+		},
+
+		//Confirm Modal
+		confirm_button_text: 'Confirm', // text on confirm button
+		confirm_cancel_button_text: 'Cancel',
+		confirm_title: 'Confirm Title', // title for confirm modal
+		confirm_content: '<p>This is the default confirm dialog content. Replace me through the options</p>', // html for confirm message
+		confirm_callback: function() {},
+
+
+		//Gallery Modal
+		gallery_active_class: 'gallery_active_item',
+		before_image_change: function( current_item, incoming_item ) {},
+		after_image_change: function( current_item ) {},
+
+		//Ajax Modal
+		loading_content : modaal_loading_spinner,
+		loading_class : 'is_loading',
+		ajax_error_class : 'modaal-error',
+		ajax_success : function(){},
+
+		//Instagram
+		instagram_id : null
+	};
+
+	// On body load (or now, if already loaded), init any modaals defined inline
+	// Ensure this is done after $.fn.modaal and default options are declared
+	// ----------------------------------------------------------------
 	$(function(){
 		var single_modaal = $('.modaal');
 
@@ -1087,83 +1168,5 @@
 			});
 		}
 	});
-
-	$.fn.modaal = function(options) {
-		return this.each(function () {
-			var existing_modaal = $(this).data('modaal');
-
-			if ( existing_modaal ){
-				// Checking for string value, used for methods
-				if (typeof(options) == 'string'){
-					switch (options) {
-						case 'close':
-							existing_modaal.modaal_close();
-							break;
-					}
-				}
-			} else {
-				// Not a string, so let's setup the modal ready to use
-				var modaal = Object.create(Modaal);
-				modaal.init(options, this);
-				$.data(this, "modaal", modaal);
-			}
-		});
-	};
-
-	// Defaults
-	// ------------------------------------------------------------
-	$.fn.modaal.options = {
-
-		//General
-		type : 'inline',
-		animation : 'fade',
-		animation_speed : 300,
-		after_callback_delay : 350,
-		is_locked : false,
-		hide_close: false,
-		background: '#000',
-		overlay_opacity: '0.8',
-		overlay_close: true,
-		accessible_title: 'Dialog Window',
-		start_open: false,
-		fullscreen: false,
-		custom_class: '',
-		background_scroll: false, // TODO: this property isn't described in the header
-
-		width: null,
-		height: null,
-
-		//Events
-		before_open : function(){},
-		after_open : function(){},
-		before_close : function(){},
-		after_close : function(){},
-		source : function( element, src ){
-			return src;
-		},
-
-		//Confirm Modal
-		confirm_button_text: 'Confirm', // text on confirm button
-		confirm_cancel_button_text: 'Cancel',
-		confirm_title: 'Confirm Title', // title for confirm modal
-		confirm_content: '<p>This is the default confirm dialog content. Replace me through the options</p>', // html for confirm message
-		confirm_callback: function() {},
-
-
-		//Gallery Modal
-		gallery_active_class: 'gallery_active_item',
-		before_image_change: function( current_item, incoming_item ) {},
-		after_image_change: function( current_item ) {},
-
-		//Ajax Modal
-		loading_content : modaal_loading_spinner,
-		loading_class : 'is_loading',
-		ajax_error_class : 'modaal-error',
-		ajax_success : function(){},
-
-		//Instagram
-		instagram_id : null
-
-	};
 
 } ( jQuery, window, document ) );
