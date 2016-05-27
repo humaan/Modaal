@@ -72,14 +72,15 @@
 
 */
 ( function( $ ) {
-
-	var dom = $('body');
+	
 	var modaal_close = '<button type="button" class="modaal-close" id="modaal-close" aria-label="Close (Press escape to close)"><span>Close</span></button>';
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
 
 	var Modaal = {
 		init : function(options, elem) {
 			var self = this;
+
+			self.dom = $('body');
 
 			self.$elem = $(elem);
 			self.options = $.extend({}, $.fn.modaal.options, self.$elem.data(), options);
@@ -176,10 +177,10 @@
 		watch_events : function() {
 			var self = this;
 
-			dom.off('click.Modaal keyup.Modaal keydown.Modaal');
+			self.dom.off('click.Modaal keyup.Modaal keydown.Modaal');
 
 			// Body keydown
-			dom.on('keydown.Modaal', function(e) {
+			self.dom.on('keydown.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -193,7 +194,7 @@
 			});
 
 			// Body keyup
-			dom.on('keyup.Modaal', function(e) {
+			self.dom.on('keyup.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -224,7 +225,7 @@
 			});
 
 			// Body click
-			dom.on('click.Modaal', function(e) {
+			self.dom.on('click.Modaal', function(e) {
 				var trigger = $(e.target);
 
 				// General Controls: If it's not locked allow greedy close
@@ -355,7 +356,7 @@
 			build_markup +=	'</div></div></div>';
 
 			// append ajax modal markup to dom
-			dom.append(build_markup);
+			self.dom.append(build_markup);
 
 			// if inline, clone content into space
 			if (self.options.type == 'inline') {
@@ -889,11 +890,11 @@
 
 				// set body to overflow hidden if background_scroll is false
 				if (! self.options.background_scroll) {
-					dom.addClass('modaal-noscroll');
+					self.dom.addClass('modaal-noscroll');
 				}
 
 				// append modaal overlay
-				dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
+				self.dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
 
 				// now show
 				$('#' + self.scope.id + '_overlay').css('background', self.options.background).stop().animate({
@@ -905,7 +906,7 @@
 
 			} else if (action == 'hide') {
 				// remove body overflow lock
-				dom.removeClass('modaal-noscroll');
+				self.dom.removeClass('modaal-noscroll');
 
 				// now hide the overlay
 				$('#' + self.scope.id + '_overlay').stop().animate({
