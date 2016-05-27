@@ -318,6 +318,12 @@ $modaal-grey: #afb7bc;
 		display: block;
 	}
 }
+.modaal-gallery-item img {
+  width: auto;
+  height: auto;
+  max-width: 85vw;
+  max-height: 85vh;
+}
 .modaal-gallery-label {
 	position: absolute;
 	left: 0;
@@ -455,10 +461,6 @@ $modaal-grey: #afb7bc;
 }
 
 @media only screen and (max-width: 1140px) {
-	.modaal-gallery-item img {
-		width: 100%;
-	}
-
 	.modaal-gallery-control {
 		top: auto;
 		bottom: 20px;
@@ -511,12 +513,6 @@ $modaal-grey: #afb7bc;
 @media only screen and (max-width: 600px) {
 	.modaal-instagram iframe {
 		width: 280px !important;
-	}
-}
-@media only screen and (max-height: 1024px) {
-	.modaal-gallery-item img {
-		width: auto !important;
-		max-height: 85vh;
 	}
 }
 @media only screen and (max-height: 820px) {
