@@ -376,7 +376,7 @@
 			var content = '';
 
 			if (target.length) {
-				content = target.children().clone(true,true);
+				content = target.contents().clone(true,true);
 				target.empty();
 			} else {
 				content = 'Content could not be loaded. Please check the source and try again.';
@@ -863,7 +863,7 @@
 			setTimeout(function() {
 				// clone inline content back to origin place
 				if (self.options.type == 'inline') {
-					$('#' + self.scope.id + ' .modaal-content-container').children().clone(true,true).appendTo( self.$elem.attr('href') )
+					$('#' + self.scope.id + ' .modaal-content-container').contents().clone(true,true).appendTo( self.$elem.attr('href') )
 				}
 				// remove markup from dom
 				modal_wrapper.remove();
