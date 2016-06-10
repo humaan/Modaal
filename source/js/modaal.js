@@ -72,7 +72,7 @@
 
 */
 ( function( $ ) {
-	
+
 	var modaal_close = '<button type="button" class="modaal-close" id="modaal-close" aria-label="Close (Press escape to close)"><span>Close</span></button>';
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
 
@@ -334,7 +334,7 @@
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + '" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
@@ -570,6 +570,7 @@
 					var gallery_item = {
 						'url': img_src,
 						'alt': img_alt,
+						'rawdesc': data_modaal_desc,
 						'desc': img_description,
 						'active': img_active
 					};
@@ -582,13 +583,14 @@
 				for (var i = 0; i < gallery.length; i++) {
 					// Set default active class, then check if array item active is true and update string for class
 					var is_active = '';
+					var aria_label = gallery[i].rawdesc ? 'Image: ' + gallery[i].rawdesc : 'Image ' + i + ' no description';
 
 					if ( gallery[i].active ) {
 						is_active = ' ' + self.private_options.active_class;
 					}
 
 					// for each item build up the markup
-					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '">' +
+					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
 						'<img src="' + gallery[i].url + '" alt=" ">' +
 						gallery[i].desc +
 					'</div>';
@@ -603,14 +605,18 @@
 				var this_img_src = self.$elem.attr('href');
 				var this_img_alt_txt = '';
 				var this_img_alt = '';
+				var aria_label = '';
 
 				if ( self.$elem.attr('data-modaal-desc') ) {
+					aria_label = self.$elem.attr('data-modaal-desc');
 					this_img_alt_txt = self.$elem.attr('data-modaal-desc');
 					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image - </span>' + this_img_alt_txt + '</div>';
+				} else {
+					aria_label = "Image with no description";
 				}
 
 				// build up the html
-				modaal_image_markup = '<div class="modaal-gallery-item is_active">' +
+				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
 					'<img src="' + this_img_src + '" alt="' + this_img_alt_txt + '">' +
 					this_img_alt +
 				'</div>';
@@ -705,8 +711,8 @@
 					});
 
 					// Focus on the new gallery item
-					this_gallery.find('.modaal-gallery-item .modaal-gallery-label').removeAttr('tabindex');
-					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + ' .modaal-gallery-label').attr('tabindex', '0').focus();
+					this_gallery.find('.modaal-gallery-item').removeAttr('tabindex');
+					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + '').attr('tabindex', '0').focus();
 
 					// hide/show next/prev
 					if ( this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-0') ) {
@@ -793,7 +799,6 @@
 				modal_wrapper.removeClass('modaal-start_slide_down');
 			}
 
-			// set default focusTarget (used for tabindex)
 			var focusTarget = modal_wrapper;
 
 			// Switch focusTarget tabindex (switch from other modal if exists)
@@ -801,17 +806,16 @@
 
 			if ( self.options.type == 'image' ) {
 				focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class);
+
 			} else if ( modal_wrapper.find('.modaal-iframe-elem').length ) {
 				focusTarget = modal_wrapper.find('.modaal-iframe-elem');
 
 			} else if ( modal_wrapper.find('.modaal-video-wrap').length ) {
 				focusTarget = modal_wrapper.find('.modaal-video-wrap');
 
-			} else if ( modal_wrapper.find('.modaal-content-container').length ) {
-				focusTarget = modal_wrapper.find('.modaal-content-container');
+			} else {
+				focusTarget = modal_wrapper.find('.modaal-focus');
 
-			} else if ( modal_wrapper.find('.modaal-content').length ) {
-				focusTarget = modal_wrapper.find('.modaal-content');
 			}
 
 			// now set the focus
