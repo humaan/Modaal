@@ -198,6 +198,13 @@
 				var key = e.keyCode;
 				var target = e.target;
 
+				if ( (e.shiftKey && e.keyCode == 9) && self.scope.is_open) {
+					// Watch for shift + tab key press. if open shift focus to close button.
+					if (!$.contains(document.getElementById(self.scope.id), target) ) {
+						$('#' + self.scope.id).find('.modaal-close').focus();
+					}
+				}
+
 				if ( !self.options.is_locked ){
 					// On escape key press close modal
 					if (key == 27 && self.scope.is_open ) {
