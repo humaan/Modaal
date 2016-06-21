@@ -201,7 +201,7 @@
 				if ( !self.options.is_locked ){
 					// On escape key press close modal
 					if (key == 27 && self.scope.is_open ) {
-						if ( $(document.activeElement).is('input') ) {
+						if ( $(document.activeElement).is('input:not(:checkbox):not(:radio)') ) {
 							return false;
 						}
 
