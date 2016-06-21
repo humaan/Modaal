@@ -34,6 +34,8 @@
 	width (integer)					: Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
 	height (integer)				: Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
 
+	background_scroll (boolean)		: Set this to true to enable the page to scroll behind the open modaal
+
 
 	=== Events ===
 	before_open (function) 			: Callback function executed before modal is opened
@@ -972,7 +974,7 @@
 		start_open: false,
 		fullscreen: false,
 		custom_class: '',
-		background_scroll: false, // TODO: this property isn't described in the header
+		background_scroll: false,
 
 		width: null,
 		height: null,
