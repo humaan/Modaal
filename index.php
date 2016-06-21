@@ -12,7 +12,7 @@
 	<!-- Demo Styles -->
 	<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="demo/css/demo.css" media="screen">
+	<link rel="stylesheet" href="demo/css/demo.css?t=1462179764" media="screen">
 
 	<!-- Modaal Styles -->
 	<link rel="stylesheet" href="source/css/modaal.css" media="screen">
@@ -62,7 +62,7 @@
 		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php /* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
-		<div class="version" aria-label="Version 0.2.11">v0.2.11</div>
+		<div class="version" aria-label="Version 0.2.11">v0.3.0</div>
 		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 
 		<div class="share">

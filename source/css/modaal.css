@@ -1,8 +1,11 @@
 /*!
-	Modaal - accessible modals - v0.2.9
+	Modaal - accessible modals - v0.3.0
 	by Humaan, for all humans.
 	http://humaan.com
  */
+.modaal-noscroll {
+  overflow: hidden; }
+
 .modaal-accessible-hide {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
@@ -34,6 +37,7 @@
   overflow: auto;
   opacity: 1;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
   transition: all 0.3s ease-in-out; }
   .modaal-wrapper * {
     box-sizing: border-box;
@@ -339,12 +343,13 @@
     width: 100%;
     height: 100%; }
 
-.modaal-iframe .modaal-container {
-  width: auto;
-  max-width: none; }
+.modaal-iframe .modaal-content {
+  width: 100%;
+  height: 100%; }
 
 .modaal-iframe-elem {
   width: 100%;
+  height: 100%;
   display: block; }
 
 @media only screen and (min-width: 1400px) {
