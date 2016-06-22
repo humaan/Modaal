@@ -62,7 +62,7 @@
 		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php /* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
-		<div class="version" aria-label="Version 0.2.11">v0.3.0</div>
+		<div class="version" aria-label="Version 0.3.0">v0.3.0</div>
 		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 
 		<div class="share">
@@ -173,7 +173,7 @@
 					<p>Fullscreen mode works best with inline and ajax based modals only. Currently no support for fullscreen images.</p>
 
 					<pre><strong>JS</strong>$('.fullscreen').modaal({
-		fullscreen: true
+    fullscreen: true
 });</pre>
 
 					<a href="#inline-content" class="btn fullscreen">Show <span class="ui-hidden">Fullscreen</span> Modaal</a>
@@ -185,7 +185,7 @@
 
 					<pre><strong>HTML</strong>&lt;a href="content.php" class="modaal-ajax"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.modaal-ajax').modaal({
-		type: 'ajax'
+    type: 'ajax'
 });</pre>
 
 					<a href="demo/ajax-content.php" class="btn modaal-ajax">Show <span class="ui-hidden">Ajax</span> Modaal</a>
@@ -198,7 +198,7 @@
 
 					<pre><strong>HTML</strong>&lt;a href="path/to/image.jpg" class="image"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.image').modaal({
-		type: 'image'
+    type: 'image'
 });</pre>
 
 					<a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
@@ -212,7 +212,7 @@
 &lt;a href="path/to/image-2.jpg" rel="gallery" class="gallery"&gt;Show&lt;/a&gt;
 &lt;a href="path/to/image-3.jpg" rel="gallery" class="gallery"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.gallery').modaal({
-		type: 'image'
+    type: 'image'
 });</pre>
 
 					<a href="demo/img/temp/gallery-1.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
@@ -227,7 +227,7 @@
 
 					<pre><strong>HTML</strong>&lt;a href="https://player.vimeo.com/video/142216434" class="video"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.video').modaal({
-		type: 'video'
+    type: 'video'
 });</pre>
 					<a href="https://player.vimeo.com/video/142216434?color=ffffff&title=0&byline=0&portrait=0" class="btn modaal-video">Show <span class="ui-hidden">Video</span> Modaal</a>
 
@@ -245,9 +245,9 @@
 
 					<pre><strong>HTML</strong>&lt;a href="http://humaan.com" class="iframe"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.iframe').modaal({
-		type: 'iframe',
-		width: 700,
-		height: 500
+    type: 'iframe',
+    width: 700,
+    height: 500
 });</pre>
 					<a href="http://humaan.com" class="btn modaal-iframe">Show <span class="ui-hidden">iFrame</span> Modaal</a>
 				</div><!-- .modaal-example -->
@@ -259,14 +259,14 @@
 
 					<pre><strong>HTML</strong>&lt;a href="javascript:void(0);" class="confirm"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.confirm').modaal({
-		type: 'confirm',
-		confirm_button_text: 'Confirm',
-		confirm_cancel_button_text: 'Cancel',
-		confirm_title: 'Confirm Action XYZ',
-		confirm_content: '&lt;p&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p&gt;',
-		confirm_callback: function() {
-					alert('you have confirmed this action');
-				}
+    type: 'confirm',
+    confirm_button_text: 'Confirm',
+    confirm_cancel_button_text: 'Cancel',
+    confirm_title: 'Confirm Action XYZ',
+    confirm_content: '&lt;p&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p&gt;',
+    confirm_callback: function() {
+        alert('you have confirmed this action');
+    }
 });</pre>
 
 					<a href="javascript:void(0);" class="btn modaal-confirm">Show <span class="ui-hidden">Confirm</span> Modaal</a>
@@ -315,16 +315,16 @@
 			type: 'inline',
 			accessible_title: 'Modal title',
 			before_open: function() {
-				console.log('log before open');
+				//console.log('log before open');
 			},
 			before_close: function() {
-				console.log('log before close');
+				//console.log('log before close');
 			},
 			after_open: function() {
-				console.log('log after open');
+				//console.log('log after open');
 			},
 			after_close: function() {
-				console.log('log after close');
+				//console.log('log after close');
 			}
 		});
 
@@ -342,7 +342,7 @@
 			confirm_title: 'Confirm Title',
 			confirm_content: '<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>',
 			confirm_callback: function() {
-				console.log('log callback once confirmed');
+				//console.log('log callback once confirmed');
 			}
 		});
 
@@ -350,10 +350,10 @@
 		$('.modaal-image').modaal({
 			type: 'image',
 			before_image_change: function( current, incoming ) {
-				console.log('change image from', current, incoming );
+				//console.log('change image from', current, incoming );
 			},
 			after_image_change: function( current ) {
-				console.log('image has changed to', current );
+				//console.log('image has changed to', current );
 			}
 		});
 
