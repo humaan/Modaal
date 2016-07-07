@@ -146,7 +146,7 @@
 
 					<pre><strong>HTML</strong>&lt;a href="#inline" class="inline"&gt;Show&lt;/a&gt;
 &lt;div id="inline"&gt;
-		Inline content goes here...
+	Inline content goes here...
 &lt;/div&gt;</pre>
 					<pre><strong>JS</strong>$(".inline").modaal();</pre>
 
@@ -180,8 +180,8 @@
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
-					<h2>Ajax</h2>
-					<p>Loads content via ajax into the Modaal window based on the link href attribute.</p>
+					<h2>AJAX</h2>
+					<p>Loads content via AJAX into the Modaal window based on the link href attribute.</p>
 
 					<pre><strong>HTML</strong>&lt;a href="content.php" class="modaal-ajax"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.modaal-ajax').modaal({
@@ -240,7 +240,7 @@
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
-					<h2>iFrame</h2>
+					<h2>iframe</h2>
 					<p>Loads a url as defined in the link href attribute, into an iframe. This requires a set width and height for the Modaal to also be defined.</p>
 
 					<pre><strong>HTML</strong>&lt;a href="http://humaan.com" class="iframe"&gt;Show&lt;/a&gt;</pre>
@@ -266,7 +266,10 @@
     confirm_content: '&lt;p&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/p&gt;',
     confirm_callback: function() {
         alert('you have confirmed this action');
-    }
+	},
+	confirm_cancel_callback: function() {
+		alert('you have cancelled this action');
+	}
 });</pre>
 
 					<a href="javascript:void(0);" class="btn modaal-confirm">Show <span class="ui-hidden">Confirm</span> Modaal</a>
@@ -325,6 +328,10 @@
 			},
 			after_close: function() {
 				//console.log('log after close');
+			},
+			should_open: function () {
+				//console.log('just checking to see if we should open');
+				return true;
 			}
 		});
 
@@ -343,6 +350,9 @@
 			confirm_content: '<p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>',
 			confirm_callback: function() {
 				//console.log('log callback once confirmed');
+			},
+			confirm_cancel_callback: function() {
+				console.log('cancel callback fired');
 			}
 		});
 
