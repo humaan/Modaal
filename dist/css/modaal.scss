@@ -16,6 +16,7 @@ $modaal-max-width: 1000px;
 $modaal-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 $modaal-padding: 30px;
 $modaal-hover-color: rgba(0,0,0, 0.7);
+$modaal-close-hover-color: #b93d0c;
 
 $modaal-light: #fff;
 $modaal-primary: #555;
@@ -169,7 +170,7 @@ $modaal-grey: #afb7bc;
 		outline: none;
 		background: #fff;
 		&:before,
-		&:after { background: #b93d0c; }
+		&:after { background: $modaal-close-hover-color; }
 	}
 	span {
 		@include modaal-hidetext;
