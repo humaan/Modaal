@@ -39,7 +39,7 @@ Out of the box Modaal is setup to work using inline content using as little cust
 
 ```html
 <a href="#inline" class="inline">Show</a>
-	<div id="inline" style="display:none;">
+<div id="inline" style="display:none;">
 	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 </div>
 ```
