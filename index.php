@@ -62,7 +62,7 @@
 		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github<?php /* <span><strong>19kb</strong></span>*/ ?></a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
-		<div class="version" aria-label="Version 0.3.0">v0.3.0</div>
+		<div class="version" aria-label="Version 0.3.1">v0.3.1</div>
 		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 
 		<div class="share">
@@ -216,6 +216,7 @@
 });</pre>
 
 					<a href="demo/img/temp/gallery-1.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
+					<a href="demo/img/temp/gallery-4.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 4</span><img src="demo/img/temp/gallery-thumb-4.jpg" alt="Thumbnail for Gallery Image 4"></a>
 					<a href="demo/img/temp/gallery-2.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
 					<a href="demo/img/temp/gallery-3.jpg" rel="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
 				</div><!-- .modaal-example -->

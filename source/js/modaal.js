@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.0
+	Modaal - accessible modals - v0.3.1
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -600,7 +600,7 @@
 
 					// for each item build up the markup
 					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
-						'<img src="' + gallery[i].url + '" alt=" ">' +
+						'<img src="' + gallery[i].url + '" alt=" " style="width:100%">' +
 						gallery[i].desc +
 					'</div>';
 				}
@@ -626,7 +626,7 @@
 
 				// build up the html
 				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
-					'<img src="' + this_img_src + '" alt="' + this_img_alt_txt + '">' +
+					'<img src="' + this_img_src + '" alt=" " style="width:100%">' +
 					this_img_alt +
 				'</div>';
 			}
@@ -691,9 +691,33 @@
 					'opacity': 0
 				});
 
+				// Collect doc width
+				var doc_width = $(document).width();
+				var width_threshold = doc_width > 1140 ? 280 : 50;
+
 				// start toggle to 'is_next'
 				new_img_w = this_gallery.find('.modaal-gallery-item.is_next').width();
 				new_img_h = this_gallery.find('.modaal-gallery-item.is_next').height();
+
+				var new_natural_w = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalWidth');
+				var new_natural_h = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalHeight');
+
+				// if new image is wider than doc width
+				if ( new_natural_w > (doc_width - width_threshold) ) {
+					// set new width just below doc width
+					new_img_w = doc_width - width_threshold;
+
+					// Set temp widths so we can calulate the correct height;
+					this_gallery.find('.modaal-gallery-item.is_next').css({ 'width': new_img_w });
+					this_gallery.find('.modaal-gallery-item.is_next img').css({ 'width': new_img_w });
+
+					// Set new height variable
+					new_img_h = this_gallery.find('.modaal-gallery-item.is_next').find('img').height();
+				} else {
+					// new img is not wider than screen, so let's set the new dimensions
+					new_img_w = new_natural_w;
+					new_img_h = new_natural_h;
+				}
 
 				// resize gallery region
 				this_gallery.find('.modaal-gallery-item-wrap').stop().animate({
@@ -702,6 +726,7 @@
 				}, duration, function() {
 					// hide old active image
 					current_item.removeClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeAttr('style');
+					current_item.find('img').removeAttr('style');
 
 					// show new image
 					incoming_item.addClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeClass('is_next').css('position','');
@@ -710,7 +735,10 @@
 					incoming_item.stop().animate({
 						opacity: 1
 					}, duration, function(){
-						$(this).removeAttr('style');
+						$(this).removeAttr('style').css({
+							'width': '100%'
+						});
+						$(this).find('img').css('width', '100%');
 
 						// remove dimension lock
 						this_gallery.find('.modaal-gallery-item-wrap').removeAttr('style');
