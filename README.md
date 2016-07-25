@@ -33,13 +33,24 @@ It's hard to find a plugin with the right mix of quality, flexibility and access
 Note: This plugin requires your website or application already runs a copy of jQuery, version 1.11.2 or higher. Currently versions 2 and above are not tested. If you don't have a copy of this, we include one in the download, found under `js/lib/`.
 
 
-#### 1.1. The Basics
+
+#### 1.2. Installation with Package Managers
+
+Modaal is now setup and ready to be used with [Bower](https://bower.io/) and [NPM](https://www.npmjs.com/package/modaal) and can be installed using the following commands.
+
+```bower install  modaal
+
+npm install  modaal
+```
+
+
+#### 1.3. The Basics
 
 Out of the box Modaal is setup to work using inline content using as little customisation as possible. The first thing you'll require is a link to trigger the modal window. It's recommended that your `href` attribute targets a unique ID for a hidden element on the page containing your modal content. Like so..
 
 ```html
 <a href="#inline" class="inline">Show</a>
-	<div id="inline" style="display:none;">
+<div id="inline" style="display:none;">
 	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
 </div>
 ```
