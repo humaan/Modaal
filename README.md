@@ -38,7 +38,8 @@ Note: This plugin requires your website or application already runs a copy of jQ
 
 Modaal is now setup and ready to be used with [Bower](https://bower.io/) and [NPM](https://www.npmjs.com/package/modaal) and can be installed using the following commands.
 
-```bower install  modaal
+```shell
+bower install  modaal
 
 npm install  modaal
 ```
