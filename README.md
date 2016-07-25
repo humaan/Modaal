@@ -1,8 +1,8 @@
-<img src="http://www.humaan.com/modaal/demo/social-share-modaal.png" />
+<img src="http://humaan.com/modaal/demo/social-share-modaal.png" />
 
 ***
 
-- Version 0.3.0
+- Version 0.3.1
 - Requires jQuery 1.11.2. v2+ not tested
 - Built by [Humaan](http://www.humaan.com)
 
@@ -66,15 +66,16 @@ animation|`string`|`fade`|`fade`, `none`|
 animation_speed|`integer`|`300`||Animation speed is the duration it takes to reveal the Modaal window once triggered. It's important to note, that if you change this, you must also change the `after_callback_delay` below so that callback events sync up. This will be overwritten and set to `0` if `type` is `none`.
 after_callback_delay|`integer`|`350`||Specify a delay value for the after open callbacks. This is necessary because with the bundled animations have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none', after open callbacks are dispatched immediately
 is_locked|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to disable closing the modal via keypress or by clicking the close or background. Beware that if `type` is `confirm` there will be no interface to dismiss the modal. If `is_locked` is `true`, you'd have to programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option.
-hide_close|`boolean`|`false`|`true`<br /> `false`|Set this to true to hide the close modal button. Key press and overlay click will still close the modal. This method is best used when you want to put a custom close button inside the modal container space.
+hide_close|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to hide the close modal button. Key press and overlay click will still close the modal. This method is best used when you want to put a custom close button inside the modal container space.
 background|`string`|`#000`||Sets the background overlay color
 overlay_opacity|`float`|`0.8`||Sets the background overlay transparency
 overlay_close|`boolean`|`true`|`true`<br /> `false`|Controls whether the overlay background can be clicked to close.
 accessible_title|`string`|`Dialog Window`||Set the `aria-label` attribute value used for Accessibility purposes.
 start_open|`boolean`|`false`|`true`<br /> `false`|Set this to `true` if you want the Modaal window to launch immediately on load.
-fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to true to make the modaal fill the entire screen, false will default to own width/height attributes.
+fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to make the modal fill the entire screen, false will default to own width/height attributes.
 custom_class|`string`|`''`||Fill in this string with a custom class that will be applied to the outer most modal wrapper.
-background_scroll|`boolean`|`false`|`true`<br /> `false`|Set this to true to enable the page to scroll behind the open modaal
+background_scroll|`boolean`|`false`|`true`<br /> `false`|Set this to` true` to enable the page to scroll behind the open modal
+should_open|`boolean`<br />`function`|`true`||Set to `false` or make the closure return `false` to prevent the modal from opening 
 width|`integer`|null||Set the desired width of the modal.
 height|`integer`|null||Set the desired height of the modal.
 gallery_active_class|`string`|`gallery_active_item`|| Active class applied to the currently active image or image slide in a gallery
@@ -83,12 +84,12 @@ confirm_cancel_button_text|`string`|`Cancel`||Text on the confirm modal cancel b
 confirm_title|`string`|`Confirm Title`||Title for confirm modal. Default
 confirm_content|`string`|`<p>This is the default confirm dialog content. Replace me through the options</p>`||HTML content for confirm message
 loading_content|`string`|`Loading &hellip;`||HTML content for loading message.
-loading_class|`string`|`is_loading`||Class name to be applied while content is loaded via ajax.
+loading_class|`string`|`is_loading`||Class name to be applied while content is loaded via AJAX.
 ajax_error_class|`string`|`modaal-error`||Class name to be applied when content has failed to load. Default is ''
 instagram_id|`string`|`null`||Unique photo ID for an Instagram photo.
 
 #### 2.3. Inline Attribute Configuration
-Modaal has been developed to support common jQuery configuration options, but in an effort to extend functionality and widen it's usage we've developed support for inline `data-option-name` attribute support.
+Modaal has been developed to support common jQuery configuration options, but in an effort to extend functionality and widen its usage we've developed support for inline `data-option-name` attribute support.
 
 To enable this, the Modaal trigger link must have a class of `modaal`, then you can add attributes to the link as needed like so:
 
@@ -108,7 +109,8 @@ before_close|`modal_wrapper`|Executed once the Modaal has been instructed to clo
 after_close||Executed once the the duration for `after_callback_delay` has expired after the close method is called.
 before_image_change|`current_item`<br /> `incoming_item`|Executed before the image changes in a gallery Modaal.
 after_image_change|`current_item`| Executed after the image has changed in a gallery Modaal.
-confirm_callback|`lastFocus`|Executed when the confirm button is pressed as opposed to cancel
+confirm_callback|`lastFocus`|Executed when the confirm button is pressed as opposed to cancel.
+confirm_cancel_callback|`lastFocus`|Executed when the cancel button is pressed as opposed to confirm.
 source||Callback function executed on the default source, it is intended to transform the source (href in an AJAX modal or iframe). The function passes in the triggering element as well as the default source depending of the modal type. The default output of the function is an untransformed default source.
 ajax_success|`target`|Callback for when AJAX content is loaded in
 
