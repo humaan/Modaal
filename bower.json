@@ -1,0 +1,25 @@
+{
+	"name": "modaal",
+	"description": "An accessible dialog window library for all humans.",
+	"authors": "Humaan - contact@humaan.com.au",
+	"license": "MIT",
+	"homepage": "https://github.com/humaan/Modaal",
+	"main": [
+	    "dist/css/modaal.css",
+	    "dist/css/modaal.min.css",
+	    "dist/css/modaal.scss",
+	    "dist/js/modaal.js",
+	    "dist/js/modaal.min.js"
+	],
+	"ignore": [
+		"demo",
+		"source",
+		".editorconfig",
+		".gitignore",
+		"LICENSE.txt",
+		"gulpfile.js",
+		"README.md",
+		"index.php",
+		"package.json"
+	]
+}
