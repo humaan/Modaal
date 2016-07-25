@@ -76,6 +76,8 @@ fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to make the
 custom_class|`string`|`''`||Fill in this string with a custom class that will be applied to the outer most modal wrapper.
 background_scroll|`boolean`|`false`|`true`<br /> `false`|Set this to` true` to enable the page to scroll behind the open modal
 should_open|`boolean`<br />`function`|`true`||Set to `false` or make the closure return `false` to prevent the modal from opening 
+close_text|`string`|`Close`||String for close button text. Available for localisation and alternative languages to be used.
+close_aria_label|`string`|`Close (Press escape to close)`||String for close button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
 width|`integer`|null||Set the desired width of the modal.
 height|`integer`|null||Set the desired height of the modal.
 gallery_active_class|`string`|`gallery_active_item`|| Active class applied to the currently active image or image slide in a gallery

@@ -93,17 +93,5 @@ gulp.task('copy-to-dist', function() {
 		}));
 });
 
-gulp.task('copy-to-demo', function() {
-	// copy minified files to demo folder
-	gulp.src('dist/js/modaal.min.js')
-		.pipe(gulp.dest('demo/js/'));
-
-	gulp.src('dist/css/modaal.min.css')
-		.pipe(gulp.dest('demo/css/'))
-		.pipe(notify({
-			message: 'Moved to demo.'
-		}));
-});
-
 // Now run in order
-gulp.task('dist', ['min-modaal', 'copy-to-dist', 'copy-to-demo']);
+gulp.task('dist', ['min-modaal', 'copy-to-dist']);

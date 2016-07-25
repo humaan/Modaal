@@ -38,6 +38,8 @@
 
     should_open (boolean|function)  : Boolean or closure that returns a boolean to determine whether to open the modal or not.
 
+	close_text						: String for close button text. Available for localisation and alternative languages to be used.
+	close_aria_label				: String for close button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
 
 	=== Events ===
 	before_open (function) 			: Callback function executed before modal is opened
@@ -78,7 +80,6 @@
 */
 ( function( $ ) {
 
-	var modaal_close = '<button type="button" class="modaal-close" id="modaal-close" aria-label="Close (Press escape to close)"><span>Close</span></button>';
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
 
 	var Modaal = {
@@ -111,7 +112,7 @@
 			if ( self.options.is_locked || self.options.type == 'confirm' || self.options.hide_close ) {
 				self.scope.close_btn = '';
 			} else {
-				self.scope.close_btn = modaal_close;
+				self.scope.close_btn = '<button type="button" class="modaal-close" id="modaal-close" aria-label="' + self.options.close_aria_label + '"><span>' + self.options.close_text + '</span></button>';
 			}
 
 			// reset animation_speed
@@ -1015,7 +1016,8 @@
 		custom_class: '',
 		background_scroll: false,
 		should_open: true,
-
+		close_text: 'Close',
+		close_aria_label: 'Close (Press escape to close)',
 		width: null,
 		height: null,
 
@@ -1142,6 +1144,18 @@
 				if ( self.attr('data-modaal-custom-class') ) {
 					inline_options = true;
 					options.custom_class = self.attr('data-modaal-custom-class');
+				}
+
+				// option: close_text
+				if ( self.attr('data-modaal-close-text') ) {
+					inline_options = true;
+					options.close_text = self.attr('data-modaal-close-text');
+				}
+
+				// option: close_aria_label
+				if ( self.attr('data-modaal-close-aria-label') ) {
+					inline_options = true;
+					options.close_aria_label = self.attr('data-modaal-close-aria-label');
 				}
 
 				// option: background_scroll
