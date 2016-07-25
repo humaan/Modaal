@@ -77,7 +77,7 @@ h3.highlight {
 a {
   color: #6d4d9a;
   text-decoration: none; }
-  a:hover {
+  a:focus, a:hover {
     color: #493467; }
 
 p {
@@ -126,11 +126,11 @@ hr {
   letter-spacing: 2px;
   padding: 10px 25px;
   line-height: 20px; }
-  .btn:hover {
+  .btn:focus, .btn:hover {
     border-color: #d95200;
     background: #d95200;
     color: #fff; }
-    .btn:hover span {
+    .btn:focus span, .btn:hover span {
       color: #d95200; }
   .btn.btn-small {
     font-size: 11px;
@@ -176,14 +176,16 @@ hr {
     width: 50px;
     height: 50px;
     border: 2px solid #eee;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;
     opacity: 0;
     transition: opacity 0.3s;
     border-radius: 100%; }
-  .social-share:hover:before {
+  .social-share:focus:before, .social-share:hover:before {
     opacity: 1; }
   .social-share.share-fb {
     background-position: 0 0; }
@@ -247,13 +249,18 @@ hr {
   width: 30px;
   height: 60px;
   margin: 0 0 0 -15px;
+  transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
-  transform: translateY(0); }
-  .scroll-trigger:hover {
-    transform: translateY(15px); }
-    .scroll-trigger:hover .scroll-arrow {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0); }
+  .scroll-trigger:focus, .scroll-trigger:hover {
+    -webkit-transform: translateY(15px);
+        -ms-transform: translateY(15px);
+            transform: translateY(15px); }
+    .scroll-trigger:focus .scroll-arrow, .scroll-trigger:hover .scroll-arrow {
       background: #6d4d9a; }
-      .scroll-trigger:hover .scroll-arrow:before, .scroll-trigger:hover .scroll-arrow:after {
+      .scroll-trigger:focus .scroll-arrow:before, .scroll-trigger:focus .scroll-arrow:after, .scroll-trigger:hover .scroll-arrow:before, .scroll-trigger:hover .scroll-arrow:after {
         background: #6d4d9a; }
 
 .scroll-arrow {
@@ -276,10 +283,14 @@ hr {
     bottom: 3px;
     transition: background-color 0.3s; }
   .scroll-arrow:before {
-    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
     margin: 0 0 0 -14px; }
   .scroll-arrow:after {
-    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
     margin: 0 0 0 -1px; }
 
 .modaal-fixed-header {
@@ -290,13 +301,15 @@ hr {
   height: 70px;
   box-shadow: 0 0 5px transparent;
   background: #6d4d9a;
-  transform: translateY(0);
-  -webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  -moz-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
   .modaal-fixed-header.reveal {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    transform: translateY(70px); }
+    -webkit-transform: translateY(70px);
+        -ms-transform: translateY(70px);
+            transform: translateY(70px); }
   .modaal-fixed-header .modaal-logo {
     display: block;
     float: left;
@@ -312,7 +325,7 @@ hr {
     padding: 6px 16px;
     font-size: 11px;
     color: #6d4d9a; }
-    .modaal-fixed-header .btn:hover {
+    .modaal-fixed-header .btn:focus, .modaal-fixed-header .btn:hover {
       background: transparent;
       color: #fff; }
 
@@ -328,7 +341,7 @@ hr {
     font-weight: 800;
     font-size: 13px;
     text-transform: uppercase; }
-    #page-nav a:hover {
+    #page-nav a:focus, #page-nav a:hover {
       background: #fff;
       color: #6d4d9a; }
 
@@ -360,8 +373,6 @@ hr {
 .examples-wrap {
   border-top: 2px solid #eee;
   padding: 130px 0 0;
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 320px);
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 320px);
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 320px);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); }
 
@@ -450,7 +461,7 @@ hr {
   padding: 2px 0 3px 30px;
   background: url(../humaan-head.png) no-repeat 0 0;
   background-size: 20px; }
-  .humaan-project:hover {
+  .humaan-project:focus, .humaan-project:hover {
     color: #697072;
     opacity: 0.7; }
 

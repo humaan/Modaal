@@ -46,7 +46,6 @@ gulp.task('demo-styles', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('source/css/*.scss', ['styles']);
-	// for demo site only, can be removed
 	gulp.watch('demo/css/*.scss', ['demo-styles']);
 });
 

@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.2.11
+	Modaal - accessible modals - v0.3.1
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -34,6 +34,12 @@
 	width (integer)					: Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
 	height (integer)				: Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
 
+	background_scroll (boolean)		: Set this to true to enable the page to scroll behind the open modal.
+
+    should_open (boolean|function)  : Boolean or closure that returns a boolean to determine whether to open the modal or not.
+
+	close_text						: String for close button text. Available for localisation and alternative languages to be used.
+	close_aria_label				: String for close button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
 
 	=== Events ===
 	before_open (function) 			: Callback function executed before modal is opened
@@ -52,6 +58,7 @@
 	confirm_title (string)			: Title for confirm modal. Default 'Confirm Title'
 	confirm_content (string)		: HTML content for confirm message
 	confirm_callback (function)		: Callback function for when the confirm button is pressed as opposed to cancel
+	confirm_cancel_callback (function) : Callback function for when the cancel button is pressed
 
 
 	=== Gallery Options & Events ===
@@ -73,13 +80,13 @@
 */
 ( function( $ ) {
 
-	var dom = $('body');
-	var modaal_close = '<button type="button" class="modaal-close" id="modaal-close" aria-label="Close (Press escape to close)"><span>Close</span></button>';
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
 
 	var Modaal = {
 		init : function(options, elem) {
 			var self = this;
+
+			self.dom = $('body');
 
 			self.$elem = $(elem);
 			self.options = $.extend({}, $.fn.modaal.options, self.$elem.data(), options);
@@ -105,7 +112,7 @@
 			if ( self.options.is_locked || self.options.type == 'confirm' || self.options.hide_close ) {
 				self.scope.close_btn = '';
 			} else {
-				self.scope.close_btn = modaal_close;
+				self.scope.close_btn = '<button type="button" class="modaal-close" id="modaal-close" aria-label="' + self.options.close_aria_label + '"><span>' + self.options.close_text + '</span></button>';
 			}
 
 			// reset animation_speed
@@ -122,6 +129,10 @@
 
 				// Save last active state before modal
 				self.lastFocus = document.activeElement;
+
+				if ( self.options.should_open === false || ( typeof self.options.should_open === 'function' && self.options.should_open() === false ) ) {
+					return;
+				}
 
 				// CB: before_open
 				self.options.before_open.call(self, e);
@@ -176,10 +187,10 @@
 		watch_events : function() {
 			var self = this;
 
-			dom.off('click.Modaal keyup.Modaal keydown.Modaal');
+			self.dom.off('click.Modaal keyup.Modaal keydown.Modaal');
 
 			// Body keydown
-			dom.on('keydown.Modaal', function(e) {
+			self.dom.on('keydown.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -193,14 +204,21 @@
 			});
 
 			// Body keyup
-			dom.on('keyup.Modaal', function(e) {
+			self.dom.on('keyup.Modaal', function(e) {
 				var key = e.keyCode;
 				var target = e.target;
+
+				if ( (e.shiftKey && e.keyCode == 9) && self.scope.is_open) {
+					// Watch for shift + tab key press. if open shift focus to close button.
+					if (!$.contains(document.getElementById(self.scope.id), target) ) {
+						$('#' + self.scope.id).find('.modaal-close').focus();
+					}
+				}
 
 				if ( !self.options.is_locked ){
 					// On escape key press close modal
 					if (key == 27 && self.scope.is_open ) {
-						if ( $(document.activeElement).is('input') ) {
+						if ( $(document.activeElement).is('input:not(:checkbox):not(:radio)') ) {
 							return false;
 						}
 
@@ -224,12 +242,12 @@
 			});
 
 			// Body click
-			dom.on('click.Modaal', function(e) {
+			self.dom.on('click.Modaal', function(e) {
 				var trigger = $(e.target);
 
 				// General Controls: If it's not locked allow greedy close
 				if ( !self.options.is_locked ){
-					if ( (self.options.overlay_close && trigger.is('.modaal-inner-wrapper')) || trigger.is('.modaal-close') ) {
+					if ( (self.options.overlay_close && trigger.is('.modaal-inner-wrapper')) || trigger.is('.modaal-close') || trigger.closest('.modaal-close').length ) {
 						self.modaal_close();
 						return;
 					}
@@ -240,6 +258,10 @@
 					// if 'OK' button is clicked, run confirm_callback()
 					if ( trigger.is('.modaal-ok') ) {
 						self.options.confirm_callback.call(self, self.lastFocus);
+					}
+
+					if ( trigger.is('.modaal-cancel') ) {
+						self.options.confirm_cancel_callback.call(self, self.lastFocus);
 					}
 					self.modaal_close();
 					return;
@@ -306,17 +328,34 @@
 				self.options.custom_class = ' ' + self.options.custom_class;
 			}
 
+			// if width and heights exists and is typeof number
+			var dimensionsStyle = '';
+			if ( self.options.width && self.options.height && typeof self.options.width == 'number' && typeof self.options.height == 'number' ) {
+				// if width and height exist, and they are both numbers
+				dimensionsStyle = ' style="max-width:' + self.options.width + 'px;height:' + self.options.height + 'px;overflow:auto;"';
+			} else if ( self.options.width && typeof self.options.width == 'number' ) {
+				// if only width
+				dimensionsStyle = ' style="max-width:' + self.options.width + 'px;"';
+			} else if ( self.options.height && typeof self.options.height == 'number' ) {
+				// if only height
+				dimensionsStyle = ' style="height:' + self.options.height + 'px;overflow:auto;"';
+			}
+
+			// Reset dimensions style (width and height) for certain types
+			if ( self.options.type == 'image' || self.options.type == 'video' || self.options.type == 'instagram' || self.options.fullscreen ) {
+				dimensionsStyle = '';
+			}
 
 			//var build_markup = '<div class="modaal-wrapper modaal-start_fade' + igClass + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
 			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
 
 					// hide if video
 					if (self.options.type != 'video') {
-						build_markup += '<div class="modaal-container">';
+						build_markup += '<div class="modaal-container"' + dimensionsStyle + '>';
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + '" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
@@ -338,7 +377,7 @@
 			build_markup +=	'</div></div></div>';
 
 			// append ajax modal markup to dom
-			dom.append(build_markup);
+			self.dom.append(build_markup);
 
 			// if inline, clone content into space
 			if (self.options.type == 'inline') {
@@ -358,7 +397,7 @@
 			var content = '';
 
 			if (target.length) {
-				content = target.children().clone(true,true);
+				content = target.contents().clone(true,true);
 				target.empty();
 			} else {
 				content = 'Content could not be loaded. Please check the source and try again.';
@@ -552,6 +591,7 @@
 					var gallery_item = {
 						'url': img_src,
 						'alt': img_alt,
+						'rawdesc': data_modaal_desc,
 						'desc': img_description,
 						'active': img_active
 					};
@@ -564,14 +604,15 @@
 				for (var i = 0; i < gallery.length; i++) {
 					// Set default active class, then check if array item active is true and update string for class
 					var is_active = '';
+					var aria_label = gallery[i].rawdesc ? 'Image: ' + gallery[i].rawdesc : 'Image ' + i + ' no description';
 
 					if ( gallery[i].active ) {
 						is_active = ' ' + self.private_options.active_class;
 					}
 
 					// for each item build up the markup
-					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '">' +
-						'<img src="' + gallery[i].url + '" alt=" ">' +
+					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
+						'<img src="' + gallery[i].url + '" alt=" " style="width:100%">' +
 						gallery[i].desc +
 					'</div>';
 				}
@@ -585,15 +626,19 @@
 				var this_img_src = self.$elem.attr('href');
 				var this_img_alt_txt = '';
 				var this_img_alt = '';
+				var aria_label = '';
 
 				if ( self.$elem.attr('data-modaal-desc') ) {
+					aria_label = self.$elem.attr('data-modaal-desc');
 					this_img_alt_txt = self.$elem.attr('data-modaal-desc');
 					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image - </span>' + this_img_alt_txt + '</div>';
+				} else {
+					aria_label = "Image with no description";
 				}
 
 				// build up the html
-				modaal_image_markup = '<div class="modaal-gallery-item is_active">' +
-					'<img src="' + this_img_src + '" alt="' + this_img_alt_txt + '">' +
+				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
+					'<img src="' + this_img_src + '" alt=" " style="width:100%">' +
 					this_img_alt +
 				'</div>';
 			}
@@ -658,9 +703,33 @@
 					'opacity': 0
 				});
 
+				// Collect doc width
+				var doc_width = $(document).width();
+				var width_threshold = doc_width > 1140 ? 280 : 50;
+
 				// start toggle to 'is_next'
 				new_img_w = this_gallery.find('.modaal-gallery-item.is_next').width();
 				new_img_h = this_gallery.find('.modaal-gallery-item.is_next').height();
+
+				var new_natural_w = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalWidth');
+				var new_natural_h = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalHeight');
+
+				// if new image is wider than doc width
+				if ( new_natural_w > (doc_width - width_threshold) ) {
+					// set new width just below doc width
+					new_img_w = doc_width - width_threshold;
+
+					// Set temp widths so we can calulate the correct height;
+					this_gallery.find('.modaal-gallery-item.is_next').css({ 'width': new_img_w });
+					this_gallery.find('.modaal-gallery-item.is_next img').css({ 'width': new_img_w });
+
+					// Set new height variable
+					new_img_h = this_gallery.find('.modaal-gallery-item.is_next').find('img').height();
+				} else {
+					// new img is not wider than screen, so let's set the new dimensions
+					new_img_w = new_natural_w;
+					new_img_h = new_natural_h;
+				}
 
 				// resize gallery region
 				this_gallery.find('.modaal-gallery-item-wrap').stop().animate({
@@ -669,6 +738,7 @@
 				}, duration, function() {
 					// hide old active image
 					current_item.removeClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeAttr('style');
+					current_item.find('img').removeAttr('style');
 
 					// show new image
 					incoming_item.addClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeClass('is_next').css('position','');
@@ -677,7 +747,10 @@
 					incoming_item.stop().animate({
 						opacity: 1
 					}, duration, function(){
-						$(this).removeAttr('style');
+						$(this).removeAttr('style').css({
+							'width': '100%'
+						});
+						$(this).find('img').css('width', '100%');
 
 						// remove dimension lock
 						this_gallery.find('.modaal-gallery-item-wrap').removeAttr('style');
@@ -687,8 +760,8 @@
 					});
 
 					// Focus on the new gallery item
-					this_gallery.find('.modaal-gallery-item .modaal-gallery-label').removeAttr('tabindex');
-					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + ' .modaal-gallery-label').attr('tabindex', '0').focus();
+					this_gallery.find('.modaal-gallery-item').removeAttr('tabindex');
+					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + '').attr('tabindex', '0').focus();
 
 					// hide/show next/prev
 					if ( this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-0') ) {
@@ -744,9 +817,7 @@
 
 			if ( self.options.width !== null || self.options.width !== undefined || self.options.height !== null || self.options.height !== undefined ) {
 				// video markup
-				content = '<div class="modaal-content" aria-hidden="false" aria-labelledby="' + self.options.accessible_title + '" role="dialog">' +
-					'<iframe src="' + url + '" class="modaal-iframe-elem" style="width: ' + self.options.width + 'px;height: ' + self.options.height + 'px" frameborder="0" allowfullscreen></iframe>' +
-				'</div>';
+				content = '<iframe src="' + url + '" class="modaal-iframe-elem" frameborder="0" allowfullscreen></iframe>';
 			} else {
 				content = '<div class="modaal-content-container">Please specify a width and height for your iframe</div>';
 			}
@@ -777,7 +848,6 @@
 				modal_wrapper.removeClass('modaal-start_slide_down');
 			}
 
-			// set default focusTarget (used for tabindex)
 			var focusTarget = modal_wrapper;
 
 			// Switch focusTarget tabindex (switch from other modal if exists)
@@ -785,17 +855,16 @@
 
 			if ( self.options.type == 'image' ) {
 				focusTarget = $('#' + self.scope.id).find('.modaal-gallery-item.' + self.private_options.active_class);
+
 			} else if ( modal_wrapper.find('.modaal-iframe-elem').length ) {
 				focusTarget = modal_wrapper.find('.modaal-iframe-elem');
 
 			} else if ( modal_wrapper.find('.modaal-video-wrap').length ) {
 				focusTarget = modal_wrapper.find('.modaal-video-wrap');
 
-			} else if ( modal_wrapper.find('.modaal-content-container').length ) {
-				focusTarget = modal_wrapper.find('.modaal-content-container');
+			} else {
+				focusTarget = modal_wrapper.find('.modaal-focus');
 
-			} else if ( modal_wrapper.find('.modaal-content').length ) {
-				focusTarget = modal_wrapper.find('.modaal-content');
 			}
 
 			// now set the focus
@@ -843,7 +912,7 @@
 			setTimeout(function() {
 				// clone inline content back to origin place
 				if (self.options.type == 'inline') {
-					$('#' + self.scope.id + ' .modaal-content-container').children().clone(true,true).appendTo( self.$elem.attr('href') )
+					$('#' + self.scope.id + ' .modaal-content-container').contents().clone(true,true).appendTo( self.$elem.attr('href') )
 				}
 				// remove markup from dom
 				modal_wrapper.remove();
@@ -874,13 +943,11 @@
 
 				// set body to overflow hidden if background_scroll is false
 				if (! self.options.background_scroll) {
-					dom.css({
-						'overflow': 'hidden'
-					});
+					self.dom.addClass('modaal-noscroll');
 				}
 
 				// append modaal overlay
-				dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
+				self.dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
 
 				// now show
 				$('#' + self.scope.id + '_overlay').css('background', self.options.background).stop().animate({
@@ -892,7 +959,7 @@
 
 			} else if (action == 'hide') {
 				// remove body overflow lock
-				dom.css('overflow', '');
+				self.dom.removeClass('modaal-noscroll');
 
 				// now hide the overlay
 				$('#' + self.scope.id + '_overlay').stop().animate({
@@ -905,7 +972,91 @@
 		}
 	};
 
-	// on page load check if single '.modaal' exists
+	// Declare the modaal jQuery method
+	// ------------------------------------------------------------
+	$.fn.modaal = function(options) {
+		return this.each(function () {
+			var existing_modaal = $(this).data('modaal');
+
+			if ( existing_modaal ){
+				// Checking for string value, used for methods
+				if (typeof(options) == 'string'){
+					switch (options) {
+						case 'close':
+							existing_modaal.modaal_close();
+							break;
+					}
+				}
+			} else {
+				// Not a string, so let's setup the modal ready to use
+				var modaal = Object.create(Modaal);
+				modaal.init(options, this);
+				$.data(this, "modaal", modaal);
+			}
+		});
+	};
+
+	// Default options
+	// ------------------------------------------------------------
+	$.fn.modaal.options = {
+
+		//General
+		type : 'inline',
+		animation : 'fade',
+		animation_speed : 300,
+		after_callback_delay : 350,
+		is_locked : false,
+		hide_close: false,
+		background: '#000',
+		overlay_opacity: '0.8',
+		overlay_close: true,
+		accessible_title: 'Dialog Window',
+		start_open: false,
+		fullscreen: false,
+		custom_class: '',
+		background_scroll: false,
+		should_open: true,
+		close_text: 'Close',
+		close_aria_label: 'Close (Press escape to close)',
+		width: null,
+		height: null,
+
+		//Events
+		before_open : function(){},
+		after_open : function(){},
+		before_close : function(){},
+		after_close : function(){},
+		source : function( element, src ){
+			return src;
+		},
+
+		//Confirm Modal
+		confirm_button_text: 'Confirm', // text on confirm button
+		confirm_cancel_button_text: 'Cancel',
+		confirm_title: 'Confirm Title', // title for confirm modal
+		confirm_content: '<p>This is the default confirm dialog content. Replace me through the options</p>', // html for confirm message
+		confirm_callback: function() {},
+		confirm_cancel_callback: function() {},
+
+
+		//Gallery Modal
+		gallery_active_class: 'gallery_active_item',
+		before_image_change: function( current_item, incoming_item ) {},
+		after_image_change: function( current_item ) {},
+
+		//Ajax Modal
+		loading_content : modaal_loading_spinner,
+		loading_class : 'is_loading',
+		ajax_error_class : 'modaal-error',
+		ajax_success : function(){},
+
+		//Instagram
+		instagram_id : null
+	};
+
+	// On body load (or now, if already loaded), init any modaals defined inline
+	// Ensure this is done after $.fn.modaal and default options are declared
+	// ----------------------------------------------------------------
 	$(function(){
 		var single_modaal = $('.modaal');
 
@@ -942,9 +1093,9 @@
 				}
 
 				// option: after_callback_delay
-				if ( self.attr('data-modaal-locked') ) {
+				if ( self.attr('data-modaal-is-locked') ) {
 					inline_options = true;
-					options.is_locked = (self.attr('data-modaal-locked') === 'true' ? true : false);
+					options.is_locked = (self.attr('data-modaal-is-locked') === 'true' ? true : false);
 				}
 
 				// option: hide_close
@@ -993,6 +1144,18 @@
 				if ( self.attr('data-modaal-custom-class') ) {
 					inline_options = true;
 					options.custom_class = self.attr('data-modaal-custom-class');
+				}
+
+				// option: close_text
+				if ( self.attr('data-modaal-close-text') ) {
+					inline_options = true;
+					options.close_text = self.attr('data-modaal-close-text');
+				}
+
+				// option: close_aria_label
+				if ( self.attr('data-modaal-close-aria-label') ) {
+					inline_options = true;
+					options.close_aria_label = self.attr('data-modaal-close-aria-label');
 				}
 
 				// option: background_scroll
@@ -1074,83 +1237,5 @@
 			});
 		}
 	});
-
-	$.fn.modaal = function(options) {
-		return this.each(function () {
-			var existing_modaal = $(this).data('modaal');
-
-			if ( existing_modaal ){
-				// Checking for string value, used for methods
-				if (typeof(options) == 'string'){
-					switch (options) {
-						case 'close':
-							existing_modaal.modaal_close();
-							break;
-					}
-				}
-			} else {
-				// Not a string, so let's setup the modal ready to use
-				var modaal = Object.create(Modaal);
-				modaal.init(options, this);
-				$.data(this, "modaal", modaal);
-			}
-		});
-	};
-
-	// Defaults
-	// ------------------------------------------------------------
-	$.fn.modaal.options = {
-
-		//General
-		type : 'inline',
-		animation : 'fade',
-		animation_speed : 300,
-		after_callback_delay : 350,
-		is_locked : false,
-		hide_close: false,
-		background: '#000',
-		overlay_opacity: '0.8',
-		overlay_close: true,
-		accessible_title: 'Dialog Window',
-		start_open: false,
-		fullscreen: false,
-		custom_class: '',
-		background_scroll: false, // TODO: this property isn't described in the header
-
-		width: null,
-		height: null,
-
-		//Events
-		before_open : function(){},
-		after_open : function(){},
-		before_close : function(){},
-		after_close : function(){},
-		source : function( element, src ){
-			return src;
-		},
-
-		//Confirm Modal
-		confirm_button_text: 'Confirm', // text on confirm button
-		confirm_cancel_button_text: 'Cancel',
-		confirm_title: 'Confirm Title', // title for confirm modal
-		confirm_content: '<p>This is the default confirm dialog content. Replace me through the options</p>', // html for confirm message
-		confirm_callback: function() {},
-
-
-		//Gallery Modal
-		gallery_active_class: 'gallery_active_item',
-		before_image_change: function( current_item, incoming_item ) {},
-		after_image_change: function( current_item ) {},
-
-		//Ajax Modal
-		loading_content : modaal_loading_spinner,
-		loading_class : 'is_loading',
-		ajax_error_class : 'modaal-error',
-		ajax_success : function(){},
-
-		//Instagram
-		instagram_id : null
-
-	};
 
 } ( jQuery, window, document ) );

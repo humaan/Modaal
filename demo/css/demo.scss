@@ -15,12 +15,12 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { display: block; }
 body { line-height: 1; }
 ol, ul { list-style: none; }
@@ -70,6 +70,7 @@ h3.highlight {
 a {
 	color: $modaal-main;
 	text-decoration: none;
+	&:focus,
 	&:hover {
 		color: darken($modaal-main, 15%);
 	}
@@ -130,6 +131,7 @@ hr {
 	letter-spacing: 2px;
 	padding: 10px 25px;
 	line-height: 20px;
+	&:focus,
 	&:hover {
 		border-color: $modaal-purple;
 		background: $modaal-purple;
@@ -194,11 +196,12 @@ hr {
 		transition: opacity 0.3s;
 		border-radius: 100%;
 	}
+	&:focus:before,
 	&:hover:before {
 		opacity: 1;
 	}
-	
-	
+
+
 	&.share-fb {
 		background-position: 0 0;
 	}
@@ -274,6 +277,7 @@ hr {
 	margin: 0 0 0 -15px;
 	transition: transform 0.3s;
 	transform: translateY(0);
+	&:focus,
 	&:hover {
 		transform: translateY(15px);
 		.scroll-arrow {
@@ -323,16 +327,16 @@ hr {
 	box-shadow: 0 0 5px rgba(0,0,0, 0);
 	background: $modaal-main;
 	transform: translateY(0);
-	
+
 	-webkit-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 	-moz-transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 	transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-	
+
 	&.reveal {
 		box-shadow: 0 0 5px rgba(0,0,0, 0.2);
 		transform: translateY(70px);
 	}
-	
+
 	.modaal-logo {
 		display: block;
 		float: left;
@@ -349,6 +353,7 @@ hr {
 		padding: 6px 16px;
 		font-size: 11px;
 		color: $modaal-main;
+		&:focus,
 		&:hover {
 			background: transparent;
 			color: #fff;
@@ -369,6 +374,7 @@ hr {
 		font-weight: 800;
 		font-size: 13px;
 		text-transform: uppercase;
+		&:focus,
 		&:hover {
 			background: #fff;
 			color: $modaal-main;
@@ -522,6 +528,7 @@ hr {
 	padding: 2px 0 3px 30px;
 	background: url(../humaan-head.png) no-repeat 0 0;
 	background-size: 20px;
+	&:focus,
 	&:hover {
 		color: $modaal-grey;
 		opacity: 0.7;

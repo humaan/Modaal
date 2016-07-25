@@ -1,8 +1,11 @@
 /*!
-	Modaal - accessible modals - v0.2.9
+	Modaal - accessible modals - v0.3.1
 	by Humaan, for all humans.
 	http://humaan.com
  */
+.modaal-noscroll {
+  overflow: hidden; }
+
 .modaal-accessible-hide {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px);
@@ -34,6 +37,7 @@
   overflow: auto;
   opacity: 1;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
   transition: all 0.3s ease-in-out; }
   .modaal-wrapper * {
     box-sizing: border-box;
@@ -214,9 +218,13 @@
   -webkit-animation: instaReveal 1s linear forwards;
           animation: instaReveal 1s linear forwards; }
 
+.modaal-image .modaal-inner-wrapper {
+  padding-left: 140px;
+  padding-right: 140px; }
+
 .modaal-image .modaal-container {
   width: auto;
-  max-width: 1500px; }
+  max-width: 100%; }
 
 .modaal-gallery-wrap {
   position: relative;
@@ -339,12 +347,13 @@
     width: 100%;
     height: 100%; }
 
-.modaal-iframe .modaal-container {
-  width: auto;
-  max-width: none; }
+.modaal-iframe .modaal-content {
+  width: 100%;
+  height: 100%; }
 
 .modaal-iframe-elem {
   width: 100%;
+  height: 100%;
   display: block; }
 
 @media only screen and (min-width: 1400px) {
@@ -353,8 +362,9 @@
     height: 731px; } }
 
 @media only screen and (max-width: 1140px) {
-  .modaal-gallery-item img {
-    width: 100%; }
+  .modaal-image .modaal-inner-wrapper {
+    padding-left: 25px;
+    padding-right: 25px; }
   .modaal-gallery-control {
     top: auto;
     bottom: 20px;
@@ -396,11 +406,6 @@
 @media only screen and (max-width: 600px) {
   .modaal-instagram iframe {
     width: 280px !important; } }
-
-@media only screen and (max-height: 1024px) {
-  .modaal-gallery-item img {
-    width: auto !important;
-    max-height: 85vh; } }
 
 @media only screen and (max-height: 820px) {
   .modaal-gallery-label {
