@@ -72,7 +72,7 @@ overlay_opacity|`float`|`0.8`||Sets the background overlay transparency
 overlay_close|`boolean`|`true`|`true`<br /> `false`|Controls whether the overlay background can be clicked to close.
 accessible_title|`string`|`Dialog Window`||Set the `aria-label` attribute value used for Accessibility purposes.
 start_open|`boolean`|`false`|`true`<br /> `false`|Set this to `true` if you want the Modaal window to launch immediately on load.
-fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to make the modal fill the entire screen, false will default to own width/height attributes.
+fullscreen|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to make the Modaal fill the entire screen, false will default to own width/height attributes.
 custom_class|`string`|`''`||Fill in this string with a custom class that will be applied to the outer most modal wrapper.
 background_scroll|`boolean`|`false`|`true`<br /> `false`|Set this to` true` to enable the page to scroll behind the open modal
 should_open|`boolean`<br />`function`|`true`||Set to `false` or make the closure return `false` to prevent the modal from opening 
