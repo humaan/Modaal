@@ -34,7 +34,9 @@
 	width (integer)					: Desired width of the modal. Required for iframe type. Defaults to undefined //TODO
 	height (integer)				: Desired height of the modal. Required for iframe type. Defaults to undefined //TODO
 
-	background_scroll (boolean)		: Set this to true to enable the page to scroll behind the open modaal
+	background_scroll (boolean)		: Set this to true to enable the page to scroll behind the open modal.
+
+    should_open (boolean|function)  : Boolean or closure that returns a boolean to determine whether to open the modal or not.
 
 
 	=== Events ===
@@ -54,6 +56,7 @@
 	confirm_title (string)			: Title for confirm modal. Default 'Confirm Title'
 	confirm_content (string)		: HTML content for confirm message
 	confirm_callback (function)		: Callback function for when the confirm button is pressed as opposed to cancel
+	confirm_cancel_callback (function) : Callback function for when the cancel button is pressed
 
 
 	=== Gallery Options & Events ===
@@ -125,6 +128,10 @@
 
 				// Save last active state before modal
 				self.lastFocus = document.activeElement;
+
+				if ( self.options.should_open === false || ( typeof self.options.should_open === 'function' && self.options.should_open() === false ) ) {
+					return;
+				}
 
 				// CB: before_open
 				self.options.before_open.call(self, e);
@@ -250,6 +257,10 @@
 					// if 'OK' button is clicked, run confirm_callback()
 					if ( trigger.is('.modaal-ok') ) {
 						self.options.confirm_callback.call(self, self.lastFocus);
+					}
+
+					if ( trigger.is('.modaal-cancel') ) {
+						self.options.confirm_cancel_callback.call(self, self.lastFocus);
 					}
 					self.modaal_close();
 					return;
@@ -1003,6 +1014,7 @@
 		fullscreen: false,
 		custom_class: '',
 		background_scroll: false,
+		should_open: true,
 
 		width: null,
 		height: null,
@@ -1022,6 +1034,7 @@
 		confirm_title: 'Confirm Title', // title for confirm modal
 		confirm_content: '<p>This is the default confirm dialog content. Replace me through the options</p>', // html for confirm message
 		confirm_callback: function() {},
+		confirm_cancel_callback: function() {},
 
 
 		//Gallery Modal
