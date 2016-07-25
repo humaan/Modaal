@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.0
+	Modaal - accessible modals - v0.3.1
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -218,9 +218,13 @@
   -webkit-animation: instaReveal 1s linear forwards;
           animation: instaReveal 1s linear forwards; }
 
+.modaal-image .modaal-inner-wrapper {
+  padding-left: 140px;
+  padding-right: 140px; }
+
 .modaal-image .modaal-container {
   width: auto;
-  max-width: 1500px; }
+  max-width: 100%; }
 
 .modaal-gallery-wrap {
   position: relative;
@@ -358,8 +362,9 @@
     height: 731px; } }
 
 @media only screen and (max-width: 1140px) {
-  .modaal-gallery-item img {
-    width: 100%; }
+  .modaal-image .modaal-inner-wrapper {
+    padding-left: 25px;
+    padding-right: 25px; }
   .modaal-gallery-control {
     top: auto;
     bottom: 20px;
@@ -401,11 +406,6 @@
 @media only screen and (max-width: 600px) {
   .modaal-instagram iframe {
     width: 280px !important; } }
-
-@media only screen and (max-height: 1024px) {
-  .modaal-gallery-item img {
-    width: auto !important;
-    max-height: 85vh; } }
 
 @media only screen and (max-height: 820px) {
   .modaal-gallery-label {

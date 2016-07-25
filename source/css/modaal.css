@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.0
+	Modaal - accessible modals - v0.3.1
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -406,11 +406,6 @@
 @media only screen and (max-width: 600px) {
   .modaal-instagram iframe {
     width: 280px !important; } }
-
-@media only screen and (max-height: 1024px) {
-  .modaal-gallery-item img {
-    width: auto !important;
-    max-height: 85vh; } }
 
 @media only screen and (max-height: 820px) {
   .modaal-gallery-label {
