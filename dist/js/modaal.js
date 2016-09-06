@@ -536,18 +536,18 @@
 			var prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
 			var next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
 
-			// If has rel attribute
-			if ( self.$elem.is('[rel]') ) {
-				// find gallery rel
-				var gallery_group = self.$elem.attr('rel');
-				var gallery_group_items = $('[rel="' + gallery_group + '"]');
+			// If has group attribute
+			if ( self.$elem.attr('data-group') ) {
+				// find gallery groups
+				var gallery_group = self.$elem.attr('data-group');
+				var gallery_group_items = $('[data-group="' + gallery_group + '"]');
 
 				// remove any previous active attribute to any in the group
 				gallery_group_items.removeAttr('data-gallery-active', 'is_active');
 				// add active attribute to the item clicked
 				self.$elem.attr('data-gallery-active', 'is_active');
 
-				// how many in the rel grouping are there (-1 to connect with each function starting with 0)
+				// how many in the grouping are there (-1 to connect with each function starting with 0)
 				gallery_total = gallery_group_items.length - 1;
 
 				// prepare array for gallery data
