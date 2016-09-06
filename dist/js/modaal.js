@@ -537,10 +537,12 @@
 			var next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
 
 			// If has group attribute
-			if ( self.$elem.attr('data-group') ) {
+			if ( self.$elem.is('[data-group]') || self.$elem.is('[rel]') ) {
+
 				// find gallery groups
-				var gallery_group = self.$elem.attr('data-group');
-				var gallery_group_items = $('[data-group="' + gallery_group + '"]');
+				var use_group = self.$elem.is('[data-group]');
+				var gallery_group = use_group ? self.$elem.attr('data-group') : self.$elem.attr('rel');
+				var gallery_group_items = use_group ? $('[data-group="' + gallery_group + '"]') : $('[rel="' + gallery_group + '"]');
 
 				// remove any previous active attribute to any in the group
 				gallery_group_items.removeAttr('data-gallery-active', 'is_active');
