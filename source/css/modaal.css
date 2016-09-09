@@ -60,7 +60,6 @@
     overflow: hidden; }
 
 .modaal-outer-wrapper {
-  display: table;
   position: relative;
   width: 100%;
   height: 100%; }
@@ -68,13 +67,10 @@
     display: block; }
 
 .modaal-inner-wrapper {
-  display: table-cell;
   width: 100%;
   height: 100%;
   position: relative;
-  vertical-align: middle;
-  text-align: center;
-  padding: 80px 25px; }
+  text-align: center; }
   .modaal-fullscreen .modaal-inner-wrapper {
     padding: 0;
     display: block;
@@ -85,11 +81,14 @@
   display: inline-block;
   width: 100%;
   margin: auto;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   text-align: left;
   color: #000;
   max-width: 1000px;
   border-radius: 0px;
-  background: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   cursor: auto; }
   .modaal-container.is_loading {
@@ -231,14 +230,38 @@
   color: #fff; }
 
 .modaal-gallery-item {
-  display: none; }
+  display: none;
+  max-height: 85vh;
+  max-width: 85vw; }
   .modaal-gallery-item img {
-    display: block; }
-  .modaal-gallery-item.is_active {
-    display: block; }
+    object-fit: contain;
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0 auto; }
+  .modaal-gallery-item.is_active, .modaal-gallery-item.is_next {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
+.modaal-gallery-image {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  min-height: 50vh;
+  min-width: 0;
+  max-height: 100%; }
 
 .modaal-gallery-label {
-  position: absolute;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
   left: 0;
   width: 100%;
   margin: 20px 0 0;
@@ -390,9 +413,6 @@
     width: 700px !important; } }
 
 @media screen and (max-height: 1000px) {
-  .modaal-inner-wrapper {
-    padding-top: 60px;
-    padding-bottom: 60px; }
   .modaal-instagram iframe {
     width: 600px !important; } }
 
@@ -406,10 +426,6 @@
 @media only screen and (max-width: 600px) {
   .modaal-instagram iframe {
     width: 280px !important; } }
-
-@media only screen and (max-height: 820px) {
-  .modaal-gallery-label {
-    display: none; } }
 
 .modaal-loading-spinner {
   background: none;

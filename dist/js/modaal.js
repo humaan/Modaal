@@ -366,15 +366,21 @@
 							}
 
 					// close wrap_class
-					build_markup += '</div>' + self.scope.close_btn;
+					build_markup += '</div>';
 
 					// hide if video
 					if (self.options.type != 'video') {
 						build_markup += '</div>';
 					}
 
+			// close off modaal-inner-wrapper
+			build_markup +=	'</div>';
+
+			// add close button
+			build_markup += self.scope.close_btn;
+
 			// close off modaal-wrapper
-			build_markup +=	'</div></div></div>';
+			build_markup +=	'</div></div>';
 
 			// append ajax modal markup to dom
 			self.dom.append(build_markup);
@@ -614,7 +620,7 @@
 
 					// for each item build up the markup
 					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
-						'<img src="' + gallery[i].url + '" alt=" " style="width:100%">' +
+						'<div class="modaal-gallery-image"><img src="' + gallery[i].url + '" alt=" "></div>' +
 						gallery[i].desc +
 					'</div>';
 				}
@@ -640,7 +646,7 @@
 
 				// build up the html
 				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
-					'<img src="' + this_img_src + '" alt=" " style="width:100%">' +
+					'<div class="modaal-gallery-image"><img src="' + this_img_src + '" alt=" "></div>' +
 					this_img_alt +
 				'</div>';
 			}
@@ -678,9 +684,6 @@
 
 			var duration = 250;
 
-			var new_img_w = 0,
-				new_img_h = 0;
-
 			// CB: Before image change
 			var current_item = this_gallery.find( '.modaal-gallery-item.' + self.private_options.active_class ),
 				incoming_item = ( direction == 'next' ? current_item.next( '.modaal-gallery-item' ) : current_item.prev( '.modaal-gallery-item' ) );
@@ -700,43 +703,11 @@
 			}, duration, function(){
 				// Move to appropriate image
 				incoming_item.addClass('is_next').css({
-					'position': 'absolute',
-					'display': 'block',
 					'opacity': 0
 				});
 
-				// Collect doc width
-				var doc_width = $(document).width();
-				var width_threshold = doc_width > 1140 ? 280 : 50;
-
-				// start toggle to 'is_next'
-				new_img_w = this_gallery.find('.modaal-gallery-item.is_next').width();
-				new_img_h = this_gallery.find('.modaal-gallery-item.is_next').height();
-
-				var new_natural_w = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalWidth');
-				var new_natural_h = this_gallery.find('.modaal-gallery-item.is_next img').prop('naturalHeight');
-
-				// if new image is wider than doc width
-				if ( new_natural_w > (doc_width - width_threshold) ) {
-					// set new width just below doc width
-					new_img_w = doc_width - width_threshold;
-
-					// Set temp widths so we can calulate the correct height;
-					this_gallery.find('.modaal-gallery-item.is_next').css({ 'width': new_img_w });
-					this_gallery.find('.modaal-gallery-item.is_next img').css({ 'width': new_img_w });
-
-					// Set new height variable
-					new_img_h = this_gallery.find('.modaal-gallery-item.is_next').find('img').height();
-				} else {
-					// new img is not wider than screen, so let's set the new dimensions
-					new_img_w = new_natural_w;
-					new_img_h = new_natural_h;
-				}
-
 				// resize gallery region
 				this_gallery.find('.modaal-gallery-item-wrap').stop().animate({
-					'width': new_img_w,
-					'height': new_img_h
 				}, duration, function() {
 					// hide old active image
 					current_item.removeClass(self.private_options.active_class + ' ' + self.options.gallery_active_class).removeAttr('style');
@@ -749,11 +720,6 @@
 					incoming_item.stop().animate({
 						opacity: 1
 					}, duration, function(){
-						$(this).removeAttr('style').css({
-							'width': '100%'
-						});
-						$(this).find('img').css('width', '100%');
-
 						// remove dimension lock
 						this_gallery.find('.modaal-gallery-item-wrap').removeAttr('style');
 
@@ -774,7 +740,6 @@
 						});
 					} else {
 						prev_btn.stop().css({
-							'display': 'block',
 							'opacity': prev_btn.css('opacity')
 						}).animate({
 							opacity: 1
@@ -788,7 +753,6 @@
 						});
 					} else {
 						next_btn.stop().css({
-							'display': 'block',
 							'opacity': prev_btn.css('opacity')
 						}).animate({
 							opacity: 1

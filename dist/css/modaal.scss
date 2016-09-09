@@ -101,7 +101,6 @@ $modaal-grey: #afb7bc;
 	}
 }
 .modaal-outer-wrapper {
-	display: table;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -110,13 +109,10 @@ $modaal-grey: #afb7bc;
 	}
 }
 .modaal-inner-wrapper {
-	display: table-cell;
 	width: 100%;
 	height: 100%;
 	position: relative;
-	vertical-align: middle;
 	text-align: center;
-	padding: 80px 25px;
 
 	// when is fullscreen
 	.modaal-fullscreen & {
@@ -130,11 +126,12 @@ $modaal-grey: #afb7bc;
 	display: inline-block;
 	width: 100%;
 	margin: auto;
+	top: 50%;
+	transform: translateY(-50%);
 	text-align: left;
 	color: $modaal-main-text;
 	max-width: $modaal-max-width;
 	border-radius: $modaal-radius;
-	background: $modaal-main-bg;
 	box-shadow: $modaal-shadow;
 	cursor: auto;
 
@@ -316,16 +313,30 @@ $modaal-grey: #afb7bc;
 }
 .modaal-gallery-item {
 	display: none;
+	max-height: 85vh;
+	max-width: 85vw;
 	img {
+		object-fit: contain;
 		display: block;
-		//width: 100%;
+		max-height: 100%;
+		max-width: 100%;
+		margin: 0 auto;
 	}
-	&.is_active {
-		display: block;
+	&.is_active,
+	&.is_next {
+		display: flex;
+		flex-direction: column;
 	}
 }
+.modaal-gallery-image {
+	display: flex;
+	flex: 0 1 auto;
+	min-height: 50vh;
+	min-width: 0;
+	max-height: 100%;
+}
 .modaal-gallery-label {
-	position: absolute;
+	flex: 1 0 auto;
 	left: 0;
 	width: 100%;
 	margin: 20px 0 0;
@@ -498,10 +509,6 @@ $modaal-grey: #afb7bc;
 	}
 }
 @media screen and (max-height: 1000px) {
-	.modaal-inner-wrapper {
-		padding-top: 60px;
-		padding-bottom: 60px;
-	}
 	.modaal-instagram iframe {
 		width: 600px !important;
 	}
@@ -519,11 +526,6 @@ $modaal-grey: #afb7bc;
 @media only screen and (max-width: 600px) {
 	.modaal-instagram iframe {
 		width: 280px !important;
-	}
-}
-@media only screen and (max-height: 820px) {
-	.modaal-gallery-label {
-		display: none;
 	}
 }
 
