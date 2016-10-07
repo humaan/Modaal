@@ -241,7 +241,7 @@
 				}
 			});
 
-			// Body click
+			// Body click/touch
 			self.dom.on('click.Modaal', function(e) {
 				var trigger = $(e.target);
 
@@ -252,6 +252,8 @@
 						return;
 					}
 				}
+
+				return false;
 
 				//Confirm Controls
 				if ( trigger.is('.modaal-confirm-btn' ) ){
@@ -346,8 +348,15 @@
 				dimensionsStyle = '';
 			}
 
+			// if is touch
+			// this is a bug fix for iOS to allow regular click events on div elements.
+			var touchTrigger = '';
+			if ( self.is_touch() ) {
+				touchTrigger = ' style="cursor:pointer;"'
+			}
+
 			//var build_markup = '<div class="modaal-wrapper modaal-start_fade' + igClass + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
-			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
+			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper" ' + touchTrigger + '>';
 
 					// hide if video
 					if (self.options.type != 'video') {
@@ -971,6 +980,12 @@
 					$(this).remove();
 				});
 			}
+		},
+
+		// Check if is touch
+		// ----------------------------------------------------------------
+		is_touch : function() {
+			return 'ontouchstart' in window || navigator.maxTouchPoints;
 		}
 	};
 
