@@ -969,8 +969,6 @@
 				});
 
 			} else if (action == 'hide') {
-				// remove body overflow lock
-				self.dom.removeClass('modaal-noscroll');
 
 				// now hide the overlay
 				$('#' + self.scope.id + '_overlay').stop().animate({
@@ -978,6 +976,9 @@
 				}, self.options.animation_speed, function(){
 					// remove overlay from dom
 					$(this).remove();
+
+					// remove body overflow lock
+					self.dom.removeClass('modaal-noscroll');
 				});
 			}
 		},
