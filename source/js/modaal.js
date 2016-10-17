@@ -444,11 +444,18 @@
 						var target = $('#' + self.scope.id + ' .modaal-content-container');
 						if ( target.length > 0) {
 							// add HTML into target region
-							target.removeClass( self.options.loading_class );
 							target.html(content);
+							// remove loading class on body
+							target.removeClass( self.options.loading_class );
 
-							// now trigger an instagram refresh
-							window.instgrm.Embeds.process();
+							// Check if it has loaded once before.
+							// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
+							if ( self.private_options.ig_loaded ) {
+								window.instgrm.Embeds.process();
+							} else {
+								// first time it's loaded, let's set a new private option to use next time it's opened.
+								self.private_options.ig_loaded = true;
+							}
 						}
 					},
 					error: function() {
