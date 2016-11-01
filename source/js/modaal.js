@@ -844,7 +844,6 @@
 		// Open Modaal
 		// ----------------------------------------------------------------
 		modaal_open: function() {
-			console.log('modaal open');
 			var self = this;
 			var modal_wrapper = $('#' + self.scope.id);
 			var animation_type = self.options.animation;
@@ -898,7 +897,6 @@
 		// Close Modal
 		// ----------------------------------------------------------------
 		modaal_close: function() {
-			console.log('modaal close');
 			var self = this;
 			var modal_wrapper = $('#' + self.scope.id);
 
@@ -997,8 +995,6 @@
 	$.fn.modaal = function(options) {
 		return this.each(function() {
 			var existing_modaal = $(this).data('modaal');
-
-			console.log(existing_modaal);
 
 			if (existing_modaal) {
 				// Checking for string value, used for methods
