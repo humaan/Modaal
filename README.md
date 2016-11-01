@@ -148,11 +148,22 @@ function myFunction() {
 ## 3. Methods
 
 #### 3.1. Programatically Close
-Currently Modaal only supports a close method which can be called like so.
+You can trigger a `close` on Modaal using the following method:
+
 ```js
 $('.my-link').modaal('close');
 ```
+
 Based on this example, we know we've already established (and opened) the modal associated to the `.my-link` class, so to close we use the same selector with a string of `close` instead of options;
+
+#### 3.1. Programatically Open
+Similary to `close`, you can trigger an `open` on Modaal using this method:
+
+```js
+$('.my-link').modaal('open');
+```
+
+This will close the open Modaal that matches the button we are targeting.
 
 
 
