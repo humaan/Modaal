@@ -156,7 +156,7 @@ $('.my-link').modaal('close');
 
 Based on this example, we know we've already established (and opened) the modal associated to the `.my-link` class, so to close we use the same selector with a string of `close` instead of options;
 
-#### 3.1. Programatically Open
+#### 3.2. Programatically Open
 Similary to `close`, you can trigger an `open` on Modaal using this method:
 
 ```js
