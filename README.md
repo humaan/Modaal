@@ -44,8 +44,12 @@ bower install  modaal
 npm install  modaal
 ```
 
+#### 1.3 Installation with CDN
 
-#### 1.3. The Basics
+Modaal is now setup and ready to be used with CDN [JSDelivr](http://www.jsdelivr.com/projects/modaal)
+
+
+#### 1.4. The Basics
 
 Out of the box Modaal is setup to work using inline content using as little customisation as possible. The first thing you'll require is a link to trigger the modal window. It's recommended that your `href` attribute targets a unique ID for a hidden element on the page containing your modal content. Like so..
 
