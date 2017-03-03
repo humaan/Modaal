@@ -4,6 +4,7 @@
   "version": "0.3.1",
   "repository": "https://github.com/humaan/Modaal",
   "license": "MIT",
+  "main": "dist/js/modaal.js",
   "devDependencies": {
     "del": "^2.0.2",
     "gulp": "^3.9.0",
