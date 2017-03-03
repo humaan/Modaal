@@ -3,6 +3,7 @@
   "description": "An accessible dialog window library for all humans.",
   "version": "0.3.1",
   "repository": "https://github.com/humaan/Modaal",
+  "main": "dist/js/modaal.min.js",
   "license": "MIT",
   "main": "dist/js/modaal.js",
   "devDependencies": {
