@@ -361,7 +361,7 @@
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
