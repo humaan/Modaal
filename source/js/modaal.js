@@ -253,8 +253,6 @@
 					}
 				}
 
-				return false;
-
 				//Confirm Controls
 				if ( trigger.is('.modaal-confirm-btn' ) ){
 					// if 'OK' button is clicked, run confirm_callback()
@@ -355,8 +353,7 @@
 				touchTrigger = ' style="cursor:pointer;"'
 			}
 
-			//var build_markup = '<div class="modaal-wrapper modaal-start_fade' + igClass + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
-			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper" ' + touchTrigger + '>';
+			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper"' + touchTrigger + '>';
 
 					// hide if video
 					if (self.options.type != 'video') {
@@ -1083,6 +1080,7 @@
 	// Ensure this is done after $.fn.modaal and default options are declared
 	// ----------------------------------------------------------------
 	$(function(){
+
 		var single_modaal = $('.modaal');
 
 		if ( single_modaal.length ) {
