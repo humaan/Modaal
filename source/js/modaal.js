@@ -180,6 +180,17 @@
 			if (self.options.start_open === true ){
 				$(elem).click();
 			}
+
+
+			// Define next/prev buttons
+			if (self.options.outer_controls === true) {
+				var mod_class = 'outer';
+			} else {
+				var mod_class = 'inner';
+			}
+			self.scope.prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev modaal-gallery-prev--' + mod_class + '" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
+			self.scope.next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next modaal-gallery-next--' + mod_class + '" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
+
 		},
 
 		// Watching Modal
@@ -379,8 +390,15 @@
 						build_markup += '</div>';
 					}
 
+			// close off modaal-inner-wrapper
+			build_markup +=	'</div>';
+
+			if (self.options.outer_controls === true) {
+				build_markup += self.scope.prev_btn + self.scope.next_btn;
+			}
+
 			// close off modaal-wrapper
-			build_markup +=	'</div></div></div>';
+			build_markup +=	'</div></div>';
 
 			// append ajax modal markup to dom
 			self.dom.append(build_markup);
@@ -546,8 +564,6 @@
 
 			var modaal_image_markup = '';
 			var gallery_total;
-			var prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
-			var next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
 
 			// If has group attribute
 			if ( self.$elem.is('[data-group]') || self.$elem.is('[rel]') ) {
@@ -632,8 +648,12 @@
 					'</div>';
 				}
 
-				// close off the markup for the gallery and add next/previous buttons
-				modaal_image_markup += '</div>' + prev_btn + next_btn;
+				// close off the markup for the gallery
+				modaal_image_markup += '</div>';
+
+				if (self.options.outer_controls != true) {
+					modaal_image_markup += self.scope.prev_btn + self.scope.next_btn;
+				}
 			} else {
 				// This is only a single gallery item so let's grab the necessary values
 

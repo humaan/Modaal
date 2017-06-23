@@ -303,25 +303,34 @@
         -ms-transform: rotate(45deg);
             transform: rotate(45deg); }
 
-.modaal-gallery-next {
+.modaal-gallery-next--inner {
   left: 100%;
   margin-left: 40px; }
 
-.modaal-gallery-prev {
+.modaal-gallery-next--outer {
+  right: 20px; }
+
+.modaal-gallery-prev:before, .modaal-gallery-prev:after {
+  left: 22px; }
+
+.modaal-gallery-prev:before {
+  margin: 5px 0 0;
+  -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotate(-45deg); }
+
+.modaal-gallery-prev:after {
+  margin: -5px 0 0;
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg); }
+
+.modaal-gallery-prev--inner {
   right: 100%;
   margin-right: 40px; }
-  .modaal-gallery-prev:before, .modaal-gallery-prev:after {
-    left: 22px; }
-  .modaal-gallery-prev:before {
-    margin: 5px 0 0;
-    -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg); }
-  .modaal-gallery-prev:after {
-    margin: -5px 0 0;
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg); }
+
+.modaal-gallery-prev--outer {
+  left: 20px; }
 
 .modaal-video-wrap {
   margin: auto 50px;
