@@ -389,14 +389,14 @@ $modaal-grey: #afb7bc;
 		transform: rotate(45deg);
 	}
 }
-.modaal-gallery-next {
+.modaal-gallery-next--inner {
 	left: 100%;
 	margin-left: 40px;
 }
+.modaal-gallery-next--outer { // Next button if outer Modaal wrapper
+	right: 20px;
+}
 .modaal-gallery-prev {
-	right: 100%;
-	margin-right: 40px;
-
 	&:before,
 	&:after { left: 22px; }
 	&:before {
@@ -407,6 +407,13 @@ $modaal-grey: #afb7bc;
 		margin: -5px 0 0;
 		transform: rotate(45deg);
 	}
+}
+.modaal-gallery-prev--inner {
+	right: 100%;
+	margin-right: 40px;
+}
+.modaal-gallery-prev--outer { // Prev button if outside Modaal wrapper
+	left: 20px;
 }
 
 

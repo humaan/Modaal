@@ -80,6 +80,7 @@ after_callback_delay|`integer`|`350`||Specify a delay value for the after open c
 is_locked|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to disable closing the modal via keypress or by clicking the close or background. Beware that if `type` is `confirm` there will be no interface to dismiss the modal. If `is_locked` is `true`, you'd have to programmatically arrange to dismiss the modal. Confirm modals are always locked regardless of this option.
 hide_close|`boolean`|`false`|`true`<br /> `false`|Set this to `true` to hide the close modal button. Key press and overlay click will still close the modal. This method is best used when you want to put a custom close button inside the modal container space.
 background|`string`|`#000`||Sets the background overlay color
+outer_controls|`boolean`|`false`|`true`<br /> `false`|Whether to put the next/prev controls outside the Modaal wrapper, at the edges of the browser window.
 overlay_opacity|`float`|`0.8`||Sets the background overlay transparency
 overlay_close|`boolean`|`true`|`true`<br /> `false`|Controls whether the overlay background can be clicked to close.
 accessible_title|`string`|`Dialog Window`||Set the `aria-label` attribute value used for Accessibility purposes.
