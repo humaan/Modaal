@@ -225,31 +225,32 @@
 
 				<div class="modaal-example">
 					<h2>Single Image Modal</h2>
-					<p>Opens a single image.</p>
+					<p>Opens a single image.<br />
+					Label below opened image, as well as accessible label can be applied by using <span class="inline-code">data-modaal-desc="<span>My Image Description</span>"</span></p>
 
-					<pre><strong>HTML</strong>&lt;a href="path/to/image.jpg" class="image"&gt;Show&lt;/a&gt;</pre>
+					<pre><strong>HTML</strong>&lt;a href="path/to/image.jpg" class="image" data-modaal-desc="My Description"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.image').modaal({
     type: 'image'
 });</pre>
 
-					<a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
+					<a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb" data-modaal-desc="My Description"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
 					<h2>Image Gallery</h2>
-					<p>Opens a series of images linked by a <span class="inline-code">rel="<span>group-name</span>"</span> attribute. Replace <span class="inline-code"><span>group-name</span></span> with what your gallery group identifier.</p>
+					<p>Opens a series of images linked by a <span class="inline-code">data-group="<span>group-name</span>"</span> attribute. Replace <span class="inline-code"><span>group-name</span></span> with what your gallery group identifier.</p>
 
-					<pre><strong>HTML</strong>&lt;a href="path/to/image-1.jpg" rel="gallery" class="gallery"&gt;Show&lt;/a&gt;
-&lt;a href="path/to/image-2.jpg" rel="gallery" class="gallery"&gt;Show&lt;/a&gt;
-&lt;a href="path/to/image-3.jpg" rel="gallery" class="gallery"&gt;Show&lt;/a&gt;</pre>
+					<pre><strong>HTML</strong>&lt;a href="path/to/image-1.jpg" data-group="gallery" class="gallery"&gt;Show&lt;/a&gt;
+&lt;a href="path/to/image-2.jpg" data-group="gallery" class="gallery"&gt;Show&lt;/a&gt;
+&lt;a href="path/to/image-3.jpg" data-group="gallery" class="gallery"&gt;Show&lt;/a&gt;</pre>
 					<pre><strong>JS</strong>$('.gallery').modaal({
     type: 'image'
 });</pre>
 
-					<a href="demo/img/temp/gallery-1.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
-					<a href="demo/img/temp/gallery-4.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 4</span><img src="demo/img/temp/gallery-thumb-4.jpg" alt="Thumbnail for Gallery Image 4"></a>
-					<a href="demo/img/temp/gallery-2.jpg" rel="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
-					<a href="demo/img/temp/gallery-3.jpg" rel="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
+					<a href="demo/img/temp/gallery-1.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
+					<a href="demo/img/temp/gallery-4.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 4</span><img src="demo/img/temp/gallery-thumb-4.jpg" alt="Thumbnail for Gallery Image 4"></a>
+					<a href="demo/img/temp/gallery-2.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
+					<a href="demo/img/temp/gallery-3.jpg" data-group="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
