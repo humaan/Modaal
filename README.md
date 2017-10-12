@@ -46,7 +46,7 @@ npm install  modaal
 
 #### 1.3 Installation with CDN
 
-Modaal is now setup and ready to be used with CDN [JSDelivr](http://www.jsdelivr.com/projects/modaal)
+Modaal is now setup and ready to be used with CDN [JSDelivr](http://www.jsdelivr.com/projects/modaal) [![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/modaal/badge)](https://www.jsdelivr.com/package/npm/modaal)
 
 
 #### 1.4. The Basics
