@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.1
+	Modaal - accessible modals - v0.4.0
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -390,13 +390,15 @@ $modaal-grey: #afb7bc;
 	}
 }
 .modaal-gallery-next {
-	left: 100%;
-	margin-left: 40px;
+	&-inner {
+		left: 100%;
+		margin-left: 40px;
+	}
+	&-outer {
+		right: 45px;
+	}
 }
 .modaal-gallery-prev {
-	right: 100%;
-	margin-right: 40px;
-
 	&:before,
 	&:after { left: 22px; }
 	&:before {
@@ -406,6 +408,14 @@ $modaal-grey: #afb7bc;
 	&:after {
 		margin: -5px 0 0;
 		transform: rotate(45deg);
+	}
+
+	&-inner {
+		right: 100%;
+		margin-right: 40px;
+	}
+	&-outer {
+		left: 45px;
 	}
 }
 
