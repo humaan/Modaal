@@ -35,3 +35,5 @@ node_modules/*
 
 # ides
 .idea
+
+package-lock.json
