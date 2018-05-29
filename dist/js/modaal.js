@@ -471,15 +471,14 @@
 							// remove loading class on body
 							target.removeClass( self.options.loading_class );
 
-							window.instgrm.Embeds.process();
-							/*
 							// Check if it has loaded once before.
 							// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
 							if ( self.private_options.ig_loaded ) {
+								window.instgrm.Embeds.process();
 							} else {
 								// first time it's loaded, let's set a new private option to use next time it's opened.
 								self.private_options.ig_loaded = true;
-							}*/
+							}
 						}
 					},
 					error: function() {
