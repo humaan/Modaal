@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.1
+	Modaal - accessible modals - v0.4.0
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -16,6 +16,7 @@ $modaal-max-width: 1000px;
 $modaal-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 $modaal-padding: 30px;
 $modaal-hover-color: rgba(0,0,0, 0.7);
+$modaal-close-hover-color: #b93d0c;
 
 $modaal-light: #fff;
 $modaal-primary: #555;
@@ -169,7 +170,7 @@ $modaal-grey: #afb7bc;
 		outline: none;
 		background: #fff;
 		&:before,
-		&:after { background: #b93d0c; }
+		&:after { background: $modaal-close-hover-color; }
 	}
 	span {
 		@include modaal-hidetext;
@@ -389,13 +390,15 @@ $modaal-grey: #afb7bc;
 	}
 }
 .modaal-gallery-next {
-	left: 100%;
-	margin-left: 40px;
+	&-inner {
+		left: 100%;
+		margin-left: 40px;
+	}
+	&-outer {
+		right: 45px;
+	}
 }
 .modaal-gallery-prev {
-	right: 100%;
-	margin-right: 40px;
-
 	&:before,
 	&:after { left: 22px; }
 	&:before {
@@ -405,6 +408,14 @@ $modaal-grey: #afb7bc;
 	&:after {
 		margin: -5px 0 0;
 		transform: rotate(45deg);
+	}
+
+	&-inner {
+		right: 100%;
+		margin-right: 40px;
+	}
+	&-outer {
+		left: 45px;
 	}
 }
 

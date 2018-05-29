@@ -2,8 +2,8 @@
 
 ***
 
-- Version 0.3.1
-- Requires jQuery 1.11.2. v2+ not tested
+- Version 0.4.0
+- Requires jQuery 1.11.2 or higher (v2 not tested, v3 works but not extensively stress tested).
 - Built by [Humaan](http://www.humaan.com)
 
 ***
@@ -30,8 +30,7 @@ It's hard to find a plugin with the right mix of quality, flexibility and access
 - Next, you'll need to copy and paste the plugin's css into your project. We include both a SASS file and CSS file for flexibility.
 - Lastly, link to your new `modaal.css` file before the closing `</head>` element.
 
-Note: This plugin requires your website or application already runs a copy of jQuery, version 1.11.2 or higher. Currently versions 2 and above are not tested. If you don't have a copy of this, we include one in the download, found under `js/lib/`.
-
+Note: This plugin requires your website or application already runs a copy of [jQuery](http://jquery.com/), version 1.11.2 or higher. Currently version 2 has not been tested. Version 3 works but has not been stress tested for bugs/issues.
 
 
 #### 1.2. Installation with Package Managers
@@ -96,7 +95,8 @@ close_text|`string`|`Close`||String for close button text. Available for localis
 close_aria_label|`string`|`Close (Press escape to close)`||String for close button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
 width|`integer`|null||Set the desired width of the modal.
 height|`integer`|null||Set the desired height of the modal.
-gallery_active_class|`string`|`gallery_active_item`|| Active class applied to the currently active image or image slide in a gallery
+gallery_active_class|`string`|`gallery_active_item`||Active class applied to the currently active image or image slide in a gallery
+outer_controls|`boolean`|`false`|`true`<br /> `false`|Set to true to put the next/prev controls outside the Modaal wrapper, at the edges of the browser window.
 confirm_button_text|`string`|`Confirm`||Text on the confirm button.
 confirm_cancel_button_text|`string`|`Cancel`||Text on the confirm modal cancel button.
 confirm_title|`string`|`Confirm Title`||Title for confirm modal. Default
@@ -151,7 +151,36 @@ function myFunction() {
 
 ## 3. Methods
 
-#### 3.1. Programatically Close
+
+#### 3.1. Programatically Creating Modaals
+To initialise a programatically created Modaal, but not open, it can been called like any other doc ready instance, with 
+```js
+$('.my-link').modaal();
+```
+
+Or with any options as available:
+```js
+$('.my-link').modaal({
+	type: 'ajax',
+	loading_content: 'Loading content, please wait.'
+});
+```
+
+
+#### 3.2. Programatically Open a Modaal
+For any modaal instance that has already been initialised, it can be triggered to open with
+```js
+$('.my-link').modaal('open');
+```
+
+If the modaal has been programatically created and needs to open straight away, the following approach can be used to initialise _and_ open immediately:
+```js
+$('.my-link').modaal({ start_open: true });
+```
+This approach allows you to define other options that may be required as well as open immediately once it's ready.
+
+
+#### 3.3. Programatically Close a Modaal
 Currently Modaal only supports a close method which can be called like so.
 ```js
 $('.my-link').modaal('close');

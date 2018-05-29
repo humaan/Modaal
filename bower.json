@@ -12,11 +12,13 @@
 		"demo",
 		"source",
 		".editorconfig",
+		".gitattributes",
 		".gitignore",
 		"LICENSE.txt",
 		"gulpfile.js",
 		"README.md",
 		"index.php",
+		"package-lock.json",
 		"package.json"
 	]
 }

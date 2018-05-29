@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.3.1
+	Modaal - accessible modals - v0.4.0
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -63,6 +63,7 @@
 
 	=== Gallery Options & Events ===
 	gallery_active_class (string)	: Active class applied to the currently active image or image slide in a gallery 'gallery_active_item'
+	outer_controls (boolean)		: Set to true to put the next/prev controls outside the Modaal wrapper, at the edges of the browser window.
 	before_image_change (function)	: Callback function executed before the image slide changes in a gallery modal. Default function( current_item, incoming_item )
 	after_image_change (function)	: Callback function executed after the image slide changes in a gallery modal. Default function ( current_item )
 
@@ -81,7 +82,7 @@
 ( function( $ ) {
 
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
-
+	
 	var Modaal = {
 		init : function(options, elem) {
 			var self = this;
@@ -124,62 +125,75 @@
 			// On click to open modal
 			$(elem).on('click.Modaal', function(e) {
 				e.preventDefault();
-
-				var source;
-
-				// Save last active state before modal
-				self.lastFocus = document.activeElement;
-
-				if ( self.options.should_open === false || ( typeof self.options.should_open === 'function' && self.options.should_open() === false ) ) {
-					return;
-				}
-
-				// CB: before_open
-				self.options.before_open.call(self, e);
-
-				switch (self.options.type) {
-					case 'inline':
-						self.create_basic();
-						break;
-
-					case 'ajax':
-						source = self.options.source( self.$elem, self.$elem.attr('href') );
-						self.fetch_ajax( source );
-						break;
-
-					case 'confirm':
-						self.options.is_locked = true;
-						self.create_confirm();
-						break;
-
-					case 'image':
-						self.create_image();
-						break;
-
-					case 'iframe':
-						source = self.options.source( self.$elem, self.$elem.attr('href') );
-						self.create_iframe( source );
-						break;
-
-					case 'video':
-						self.create_video(self.$elem.attr('href'));
-						break;
-
-					case 'instagram':
-						self.create_instagram();
-						break;
-				}
-
-				// call events to be watched (click, tab, keyup, keydown etc.)
-				self.watch_events();
-
+				self.create_modaal(self, e);
 			});
 
+			// Define next/prev buttons
+			if (self.options.outer_controls === true) {
+				var mod_class = 'outer';
+			} else {
+				var mod_class = 'inner';
+			}
+			self.scope.prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev modaal-gallery-prev-' + mod_class + '" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
+			self.scope.next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next modaal-gallery-next-' + mod_class + '" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
 
 			// Check for start_open
 			if (self.options.start_open === true ){
-				$(elem).click();
+				self.create_modaal( self );
 			}
+		},
+
+		// Initial create to determine which content type it requires
+		// ----------------------------------------------------------------
+		create_modaal : function(self, e) {
+			var self = this;
+			var source;
+
+			// Save last active state before modal
+			self.lastFocus = document.activeElement;
+
+			if ( self.options.should_open === false || ( typeof self.options.should_open === 'function' && self.options.should_open() === false ) ) {
+				return;
+			}
+
+			// CB: before_open
+			self.options.before_open.call(self, e);
+
+			switch (self.options.type) {
+				case 'inline':
+					self.create_basic();
+					break;
+
+				case 'ajax':
+					source = self.options.source( self.$elem, self.$elem.attr('href') );
+					self.fetch_ajax( source );
+					break;
+
+				case 'confirm':
+					self.options.is_locked = true;
+					self.create_confirm();
+					break;
+
+				case 'image':
+					self.create_image();
+					break;
+
+				case 'iframe':
+					source = self.options.source( self.$elem, self.$elem.attr('href') );
+					self.create_iframe( source );
+					break;
+
+				case 'video':
+					self.create_video(self.$elem.attr('href'));
+					break;
+
+				case 'instagram':
+					self.create_instagram();
+					break;
+			}
+
+			// call events to be watched (click, tab, keyup, keydown etc.)
+			self.watch_events();
 		},
 
 		// Watching Modal
@@ -241,7 +255,7 @@
 				}
 			});
 
-			// Body click
+			// Body click/touch
 			self.dom.on('click.Modaal', function(e) {
 				var trigger = $(e.target);
 
@@ -346,8 +360,14 @@
 				dimensionsStyle = '';
 			}
 
-			//var build_markup = '<div class="modaal-wrapper modaal-start_fade' + igClass + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
-			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper">';
+			// if is touch
+			// this is a bug fix for iOS to allow regular click events on div elements.
+			var touchTrigger = '';
+			if ( self.is_touch() ) {
+				touchTrigger = ' style="cursor:pointer;"'
+			}
+
+			var build_markup = '<div class="modaal-wrapper modaal-' + self.options.type + animation_class + igClass + fullscreen_class + self.options.custom_class + '" id="' + self.scope.id + '"><div class="modaal-outer-wrapper"><div class="modaal-inner-wrapper"' + touchTrigger + '>';
 
 					// hide if video
 					if (self.options.type != 'video') {
@@ -355,11 +375,11 @@
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' (Press escape to close)" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
-								build_markup += '<div class="modaal-content-container"></div>';
+								build_markup += '<div class="modaal-content-container" role="document"></div>';
 							} else {
 								// Drop in the content if it's not inline
 								build_markup +=	content;
@@ -373,11 +393,21 @@
 						build_markup += '</div>';
 					}
 
+			// close off modaal-inner-wrapper
+			build_markup +=	'</div>';
+			
+			// If type is image AND outer_controls is true: add gallery next and previous controls.
+			if (self.options.type == 'image' && self.options.outer_controls === true) {
+				build_markup += self.scope.prev_btn + self.scope.next_btn;
+			}
+
 			// close off modaal-wrapper
-			build_markup +=	'</div></div></div>';
+			build_markup +=	'</div></div>';
 
 			// append ajax modal markup to dom
-			self.dom.append(build_markup);
+			if ($('#' + self.scope.id + '_overlay').length < 1) {
+				self.dom.append(build_markup);
+			}
 
 			// if inline, clone content into space
 			if (self.options.type == 'inline') {
@@ -397,7 +427,7 @@
 			var content = '';
 
 			if (target.length) {
-				content = target.contents().clone(true,true);
+				content = target.contents().detach();
 				target.empty();
 			} else {
 				content = 'Content could not be loaded. Please check the source and try again.';
@@ -431,15 +461,24 @@
 						// set up the new content
 						content = data.html;
 
+						//return false;
+
 						// now set location for new content
 						var target = $('#' + self.scope.id + ' .modaal-content-container');
 						if ( target.length > 0) {
 							// add HTML into target region
-							target.removeClass( self.options.loading_class );
 							target.html(content);
+							// remove loading class on body
+							target.removeClass( self.options.loading_class );
 
-							// now trigger an instagram refresh
-							window.instgrm.Embeds.process();
+							// Check if it has loaded once before.
+							// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
+							if ( self.private_options.ig_loaded ) {
+								window.instgrm.Embeds.process();
+							} else {
+								// first time it's loaded, let's set a new private option to use next time it's opened.
+								self.private_options.ig_loaded = true;
+							}
 						}
 					},
 					error: function() {
@@ -533,21 +572,21 @@
 
 			var modaal_image_markup = '';
 			var gallery_total;
-			var prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
-			var next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
+			
+			// If has group attribute
+			if ( self.$elem.is('[data-group]') || self.$elem.is('[rel]') ) {
 
-			// If has rel attribute
-			if ( self.$elem.is('[rel]') ) {
-				// find gallery rel
-				var gallery_group = self.$elem.attr('rel');
-				var gallery_group_items = $('[rel="' + gallery_group + '"]');
+				// find gallery groups
+				var use_group = self.$elem.is('[data-group]');
+				var gallery_group = use_group ? self.$elem.attr('data-group') : self.$elem.attr('rel');
+				var gallery_group_items = use_group ? $('[data-group="' + gallery_group + '"]') : $('[rel="' + gallery_group + '"]');
 
 				// remove any previous active attribute to any in the group
 				gallery_group_items.removeAttr('data-gallery-active', 'is_active');
 				// add active attribute to the item clicked
 				self.$elem.attr('data-gallery-active', 'is_active');
 
-				// how many in the rel grouping are there (-1 to connect with each function starting with 0)
+				// how many in the grouping are there (-1 to connect with each function starting with 0)
 				gallery_total = gallery_group_items.length - 1;
 
 				// prepare array for gallery data
@@ -617,8 +656,13 @@
 					'</div>';
 				}
 
-				// close off the markup for the gallery and add next/previous buttons
-				modaal_image_markup += '</div>' + prev_btn + next_btn;
+				// Close off the markup for the gallery
+				modaal_image_markup += '</div>';
+
+				// Add next and previous buttons if outside
+				if (self.options.outer_controls != true) {
+					modaal_image_markup += self.scope.prev_btn + self.scope.next_btn;
+				}
 			} else {
 				// This is only a single gallery item so let's grab the necessary values
 
@@ -912,7 +956,7 @@
 			setTimeout(function() {
 				// clone inline content back to origin place
 				if (self.options.type == 'inline') {
-					$('#' + self.scope.id + ' .modaal-content-container').contents().clone(true,true).appendTo( self.$elem.attr('href') )
+					$('#' + self.scope.id + ' .modaal-content-container').contents().detach().appendTo( self.$elem.attr('href') )
 				}
 				// remove markup from dom
 				modal_wrapper.remove();
@@ -947,7 +991,9 @@
 				}
 
 				// append modaal overlay
-				self.dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
+				if ($('#' + self.scope.id + '_overlay').length < 1) {
+					self.dom.append('<div class="modaal-overlay" id="' + self.scope.id + '_overlay"></div>');
+				}
 
 				// now show
 				$('#' + self.scope.id + '_overlay').css('background', self.options.background).stop().animate({
@@ -958,8 +1004,6 @@
 				});
 
 			} else if (action == 'hide') {
-				// remove body overflow lock
-				self.dom.removeClass('modaal-noscroll');
 
 				// now hide the overlay
 				$('#' + self.scope.id + '_overlay').stop().animate({
@@ -967,21 +1011,37 @@
 				}, self.options.animation_speed, function(){
 					// remove overlay from dom
 					$(this).remove();
+
+					// remove body overflow lock
+					self.dom.removeClass('modaal-noscroll');
 				});
 			}
+		},
+
+		// Check if is touch
+		// ----------------------------------------------------------------
+		is_touch : function() {
+			return 'ontouchstart' in window || navigator.maxTouchPoints;
 		}
 	};
+
+	// Define default object to store
+	var modaal_existing_selectors = [];
 
 	// Declare the modaal jQuery method
 	// ------------------------------------------------------------
 	$.fn.modaal = function(options) {
-		return this.each(function () {
+		return this.each(function (i) {
 			var existing_modaal = $(this).data('modaal');
 
 			if ( existing_modaal ){
 				// Checking for string value, used for methods
 				if (typeof(options) == 'string'){
 					switch (options) {
+						case 'open':
+ 							// create the modal
+ 							existing_modaal.create_modaal(existing_modaal);
+							break;
 						case 'close':
 							existing_modaal.modaal_close();
 							break;
@@ -992,6 +1052,12 @@
 				var modaal = Object.create(Modaal);
 				modaal.init(options, this);
 				$.data(this, "modaal", modaal);
+
+				// push this select into existing selectors array which is referenced during modaal_dom_observer
+				modaal_existing_selectors.push({
+					'element': $(this).attr('class'),
+					'options': options
+				});
 			}
 		});
 	};
@@ -1001,11 +1067,11 @@
 	$.fn.modaal.options = {
 
 		//General
-		type : 'inline',
-		animation : 'fade',
-		animation_speed : 300,
-		after_callback_delay : 350,
-		is_locked : false,
+		type: 'inline',
+		animation: 'fade',
+		animation_speed: 300,
+		after_callback_delay: 350,
+		is_locked: false,
 		hide_close: false,
 		background: '#000',
 		overlay_opacity: '0.8',
@@ -1022,11 +1088,11 @@
 		height: null,
 
 		//Events
-		before_open : function(){},
-		after_open : function(){},
-		before_close : function(){},
-		after_close : function(){},
-		source : function( element, src ){
+		before_open: function(){},
+		after_open: function(){},
+		before_close: function(){},
+		after_close: function(){},
+		source: function( element, src ){
 			return src;
 		},
 
@@ -1041,201 +1107,250 @@
 
 		//Gallery Modal
 		gallery_active_class: 'gallery_active_item',
+		outer_controls:	false,
 		before_image_change: function( current_item, incoming_item ) {},
 		after_image_change: function( current_item ) {},
 
 		//Ajax Modal
-		loading_content : modaal_loading_spinner,
-		loading_class : 'is_loading',
-		ajax_error_class : 'modaal-error',
-		ajax_success : function(){},
+		loading_content: modaal_loading_spinner,
+		loading_class: 'is_loading',
+		ajax_error_class: 'modaal-error',
+		ajax_success: function(){},
 
 		//Instagram
-		instagram_id : null
+		instagram_id: null
+	};
+
+	// Check and Set Inline Options
+	// ------------------------------------------------------------
+	function modaal_inline_options(self) {
+
+		// new empty options
+		var options = {};
+		var inline_options = false;
+
+		// option: type
+		if ( self.attr('data-modaal-type') ) {
+			inline_options = true;
+			options.type = self.attr('data-modaal-type');
+		}
+
+		// option: animation
+		if ( self.attr('data-modaal-animation') ) {
+			inline_options = true;
+			options.animation = self.attr('data-modaal-animation');
+		}
+
+		// option: animation_speed
+		if ( self.attr('data-modaal-animation-speed') ) {
+			inline_options = true;
+			options.animation_speed = self.attr('data-modaal-animation-speed');
+		}
+
+		// option: after_callback_delay
+		if ( self.attr('data-modaal-after-callback-delay') ) {
+			inline_options = true;
+			options.after_callback_delay = self.attr('data-modaal-after-callback-delay');
+		}
+
+		// option: is_locked
+		if ( self.attr('data-modaal-is-locked') ) {
+			inline_options = true;
+			options.is_locked = (self.attr('data-modaal-is-locked') === 'true' ? true : false);
+		}
+
+		// option: hide_close
+		if ( self.attr('data-modaal-hide-close') ) {
+			inline_options = true;
+			options.hide_close = (self.attr('data-modaal-hide-close') === 'true' ? true : false);
+		}
+
+		// option: background
+		if ( self.attr('data-modaal-background') ) {
+			inline_options = true;
+			options.background = self.attr('data-modaal-background');
+		}
+
+		// option: overlay_opacity
+		if ( self.attr('data-modaal-overlay-opacity') ) {
+			inline_options = true;
+			options.overlay_opacity = self.attr('data-modaal-overlay-opacity');
+		}
+
+		// option: overlay_close
+		if ( self.attr('data-modaal-overlay-close') ) {
+			inline_options = true;
+			options.overlay_close = (self.attr('data-modaal-overlay-close') === 'false' ? false : true);
+		}
+
+		// option: accessible_title
+		if ( self.attr('data-modaal-accessible-title') ) {
+			inline_options = true;
+			options.accessible_title = self.attr('data-modaal-accessible-title');
+		}
+
+		// option: start_open
+		if ( self.attr('data-modaal-start-open') ) {
+			inline_options = true;
+			options.start_open = (self.attr('data-modaal-start-open') === 'true' ? true : false);
+		}
+
+		// option: fullscreen
+		if ( self.attr('data-modaal-fullscreen') ) {
+			inline_options = true;
+			options.fullscreen = (self.attr('data-modaal-fullscreen') === 'true' ? true : false);
+		}
+
+		// option: custom_class
+		if ( self.attr('data-modaal-custom-class') ) {
+			inline_options = true;
+			options.custom_class = self.attr('data-modaal-custom-class');
+		}
+
+		// option: close_text
+		if ( self.attr('data-modaal-close-text') ) {
+			inline_options = true;
+			options.close_text = self.attr('data-modaal-close-text');
+		}
+
+		// option: close_aria_label
+		if ( self.attr('data-modaal-close-aria-label') ) {
+			inline_options = true;
+			options.close_aria_label = self.attr('data-modaal-close-aria-label');
+		}
+
+		// option: background_scroll
+		if ( self.attr('data-modaal-background-scroll') ) {
+			inline_options = true;
+			options.background_scroll = (self.attr('data-modaal-background-scroll') === 'true' ? true : false);
+		}
+
+		// option: width
+		if ( self.attr('data-modaal-width') ) {
+			inline_options = true;
+			options.width = parseInt( self.attr('data-modaal-width') );
+		}
+
+		// option: height
+		if ( self.attr('data-modaal-height') ) {
+			inline_options = true;
+			options.height = parseInt( self.attr('data-modaal-height') );
+		}
+
+		// option: confirm_button_text
+		if ( self.attr('data-modaal-confirm-button-text') ) {
+			inline_options = true;
+			options.confirm_button_text = self.attr('data-modaal-confirm-button-text');
+		}
+
+		// option: confirm_cancel_button_text
+		if ( self.attr('data-modaal-confirm-cancel-button-text') ) {
+			inline_options = true;
+			options.confirm_cancel_button_text = self.attr('data-modaal-confirm-cancel-button-text');
+		}
+
+		// option: confirm_title
+		if ( self.attr('data-modaal-confirm-title') ) {
+			inline_options = true;
+			options.confirm_title = self.attr('data-modaal-confirm-title');
+		}
+
+		// option: confirm_content
+		if ( self.attr('data-modaal-confirm-content') ) {
+			inline_options = true;
+			options.confirm_content = self.attr('data-modaal-confirm-content');
+		}
+
+		// option: gallery_active_class
+		if ( self.attr('data-modaal-gallery-active-class') ) {
+			inline_options = true;
+			options.gallery_active_class = self.attr('data-modaal-gallery-active-class');
+		}
+
+		// option: loading_content
+		if ( self.attr('data-modaal-loading-content') ) {
+			inline_options = true;
+			options.loading_content = self.attr('data-modaal-loading-content');
+		}
+
+		// option: loading_class
+		if ( self.attr('data-modaal-loading-class') ) {
+			inline_options = true;
+			options.loading_class = self.attr('data-modaal-loading-class');
+		}
+
+		// option: ajax_error_class
+		if ( self.attr('data-modaal-ajax-error-class') ) {
+			inline_options = true;
+			options.ajax_error_class = self.attr('data-modaal-ajax-error-class');
+		}
+
+		// option: start_open
+		if ( self.attr('data-modaal-instagram-id') ) {
+			inline_options = true;
+			options.instagram_id = self.attr('data-modaal-instagram-id');
+		}
+
+		// now set it up for the trigger, but only if inline_options is true
+		if ( inline_options ) {
+			self.modaal(options);
+		}
 	};
 
 	// On body load (or now, if already loaded), init any modaals defined inline
 	// Ensure this is done after $.fn.modaal and default options are declared
 	// ----------------------------------------------------------------
 	$(function(){
+
 		var single_modaal = $('.modaal');
 
+		// Check for existing modaal elements
 		if ( single_modaal.length ) {
 			single_modaal.each(function() {
 				var self = $(this);
-
-				// new empty options
-				var options = {};
-				var inline_options = false;
-
-				// option: type
-				if ( self.attr('data-modaal-type') ) {
-					inline_options = true;
-					options.type = self.attr('data-modaal-type');
-				}
-
-				// option: animation
-				if ( self.attr('data-modaal-animation') ) {
-					inline_options = true;
-					options.animation = self.attr('data-modaal-animation');
-				}
-
-				// option: animation_speed
-				if ( self.attr('data-modaal-animation-speed') ) {
-					inline_options = true;
-					options.animation_speed = self.attr('data-modaal-animation-speed');
-				}
-
-				// option: after_callback_delay
-				if ( self.attr('data-modaal-after-callback-delay') ) {
-					inline_options = true;
-					options.after_callback_delay = self.attr('data-modaal-after-callback-delay');
-				}
-
-				// option: after_callback_delay
-				if ( self.attr('data-modaal-is-locked') ) {
-					inline_options = true;
-					options.is_locked = (self.attr('data-modaal-is-locked') === 'true' ? true : false);
-				}
-
-				// option: hide_close
-				if ( self.attr('data-modaal-hide-close') ) {
-					inline_options = true;
-					options.hide_close = (self.attr('data-modaal-hide-close') === 'true' ? true : false);
-				}
-
-				// option: background
-				if ( self.attr('data-modaal-background') ) {
-					inline_options = true;
-					options.background = self.attr('data-modaal-background');
-				}
-
-				// option: overlay_opacity
-				if ( self.attr('data-modaal-overlay-opacity') ) {
-					inline_options = true;
-					options.overlay_opacity = self.attr('data-modaal-overlay-opacity');
-				}
-
-				// option: overlay_close
-				if ( self.attr('data-modaal-overlay-close') ) {
-					inline_options = true;
-					options.overlay_close = (self.attr('data-modaal-overlay-close') === 'false' ? false : true);
-				}
-
-				// option: accessible_title
-				if ( self.attr('data-modaal-accessible-title') ) {
-					inline_options = true;
-					options.accessible_title = self.attr('data-modaal-accessible-title');
-				}
-
-				// option: start_open
-				if ( self.attr('data-modaal-start-open') ) {
-					inline_options = true;
-					options.start_open = (self.attr('data-modaal-start-open') === 'true' ? true : false);
-				}
-
-				// option: fullscreen
-				if ( self.attr('data-modaal-fullscreen') ) {
-					inline_options = true;
-					options.fullscreen = (self.attr('data-modaal-fullscreen') === 'true' ? true : false);
-				}
-
-				// option: custom_class
-				if ( self.attr('data-modaal-custom-class') ) {
-					inline_options = true;
-					options.custom_class = self.attr('data-modaal-custom-class');
-				}
-
-				// option: close_text
-				if ( self.attr('data-modaal-close-text') ) {
-					inline_options = true;
-					options.close_text = self.attr('data-modaal-close-text');
-				}
-
-				// option: close_aria_label
-				if ( self.attr('data-modaal-close-aria-label') ) {
-					inline_options = true;
-					options.close_aria_label = self.attr('data-modaal-close-aria-label');
-				}
-
-				// option: background_scroll
-				if ( self.attr('data-modaal-background-scroll') ) {
-					inline_options = true;
-					options.background_scroll = (self.attr('data-modaal-background-scroll') === 'true' ? true : false);
-				}
-
-				// option: width
-				if ( self.attr('data-modaal-width') ) {
-					inline_options = true;
-					options.width = parseInt( self.attr('data-modaal-width') );
-				}
-
-				// option: height
-				if ( self.attr('data-modaal-height') ) {
-					inline_options = true;
-					options.height = parseInt( self.attr('data-modaal-height') );
-				}
-
-				// option: confirm_button_text
-				if ( self.attr('data-modaal-confirm-button-text') ) {
-					inline_options = true;
-					options.confirm_button_text = self.attr('data-modaal-confirm-button-text');
-				}
-
-				// option: confirm_cancel_button_text
-				if ( self.attr('data-modaal-confirm-cancel-button-text') ) {
-					inline_options = true;
-					options.confirm_cancel_button_text = self.attr('data-modaal-confirm-cancel-button-text');
-				}
-
-				// option: confirm_title
-				if ( self.attr('data-modaal-confirm-title') ) {
-					inline_options = true;
-					options.confirm_title = self.attr('data-modaal-confirm-title');
-				}
-
-				// option: confirm_content
-				if ( self.attr('data-modaal-confirm-content') ) {
-					inline_options = true;
-					options.confirm_content = self.attr('data-modaal-confirm-content');
-				}
-
-				// option: gallery_active_class
-				if ( self.attr('data-modaal-gallery-active-class') ) {
-					inline_options = true;
-					options.gallery_active_class = self.attr('data-modaal-gallery-active-class');
-				}
-
-				// option: loading_content
-				if ( self.attr('data-modaal-loading-content') ) {
-					inline_options = true;
-					options.loading_content = self.attr('data-modaal-loading-content');
-				}
-
-				// option: loading_class
-				if ( self.attr('data-modaal-loading-class') ) {
-					inline_options = true;
-					options.loading_class = self.attr('data-modaal-loading-class');
-				}
-
-				// option: ajax_error_class
-				if ( self.attr('data-modaal-ajax-error-class') ) {
-					inline_options = true;
-					options.ajax_error_class = self.attr('data-modaal-ajax-error-class');
-				}
-
-				// option: start_open
-				if ( self.attr('data-modaal-instagram-id') ) {
-					inline_options = true;
-					options.instagram_id = self.attr('data-modaal-instagram-id');
-				}
-
-				// now set it up for the trigger, but only if inline_options is true
-				if ( inline_options ) {
-					self.modaal(options);
-				}
+				modaal_inline_options(self);
 			});
 		}
+
+		// Obvserve DOM mutations for newly added triggers
+		var modaal_dom_observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+					// element added to DOM
+					var findElement = [].some.call(mutation.addedNodes, function(el) {
+						var elm = $(el);
+						if ( elm.is('a') || elm.is('button') ) {
+							
+							if ( elm.hasClass('modaal') ) {
+								// is inline Modaal, initialise options
+								modaal_inline_options(elm);
+							} else {
+								// is not inline modaal. Check for existing selector
+								modaal_existing_selectors.forEach(function(modaalSelector) {
+									if ( modaalSelector.element == elm.attr('class') ) {
+										$(elm).modaal( modaalSelector.options );
+										return false;
+									}
+								});
+							}
+
+						}
+					});
+				}
+			});
+		});
+		var observer_config = {
+			subtree: true,
+			attributes: true,
+			childList: true,
+			characterData: true
+		};
+
+		// pass in the target node, as well as the observer options
+		setTimeout(function() {
+			modaal_dom_observer.observe(document.body, observer_config);
+		}, 500);
+
 	});
 
 } ( jQuery, window, document ) );

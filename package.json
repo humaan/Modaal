@@ -1,20 +1,22 @@
 {
   "name": "modaal",
   "description": "An accessible dialog window library for all humans.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "repository": "https://github.com/humaan/Modaal",
   "license": "MIT",
   "main": "dist/js/modaal.js",
   "devDependencies": {
+    "jquery": "1.12.4",
     "del": "^2.0.2",
-    "gulp": "^3.9.0",
-    "gulp-cache": "^0.4.0",
-    "gulp-cssnano": "^2.1.0",
-    "gulp-csso": "^1.0.1",
-    "gulp-autoprefixer": "^2.1.0",
+    "gulp": "^3.9.1",
+    "gulp-cache": "^0.4.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-merge-media-queries": "^0.2.1",
+    "gulp-autoprefixer": "^3.1.1",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.1.0",
-    "gulp-uglify": "^1.4.2"
+    "gulp-sass": "^3.2.1",
+    "gulp-uglify": "^2.1.2",
+    "gulp-clean-css": "^3.7.0"
   }
 }

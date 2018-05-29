@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	notify = require('gulp-notify'),
 	del = require('del'),
-	csso = require('gulp-csso');
+	mmq = require('gulp-merge-media-queries'),
+	cleanCSS = require('gulp-clean-css');
 
 
 // Development tasks
@@ -19,8 +20,11 @@ gulp.task('styles', function() {
 		})
 			.on('error', sass.logError))
 		.pipe(autoprefixer({
-			browsers: ['last 2 version', 'ie 8', 'ie 9']
-		}))
+	        browsers: 'last 3 versions, Explorer > 8, android 4'
+        }))
+        .pipe(mmq({
+            log: true
+        }))
 		.pipe(gulp.dest('source/css'))
 		.pipe(notify({
 			message: 'Modaal styles task complete'
@@ -51,7 +55,6 @@ gulp.task('watch', function() {
 
 
 
-
 // Distribute tasks
 // ----------------------------------------------------------------------
 
@@ -69,13 +72,13 @@ gulp.task('min-modaal', function() {
 			message: 'Successfully uglified Modaal.'
 		}));
 
-	gulp.src('source/css/modaal.css')
-		.pipe(csso())
-		.pipe(rename('modaal.min.css'))
+	gulp.src(['source/css/*.css'])
+		.pipe(cleanCSS({compatibility: 'ie9'}))
+		.pipe(rename({
+			extname : '.min.css'
+		}))
 		.pipe(gulp.dest('dist/css/'))
-		.pipe(notify({
-			message: 'Min copy created.'
-		}));
+		.pipe(notify({ message: 'Min copy created.' }));
 });
 
 gulp.task('copy-to-dist', function() {
