@@ -8,6 +8,8 @@
 
 	==== General Options ===
 	type (string) 					: ajax, inline, image, iframe, confirm. Defaults to 'inline'
+	content_source (stribg)			: Accepts a string value for your target element, such as '#my-content'. This allows for when trigger element is
+										an `<a href="#">` link. Not to be confused with the already existing `source` event.
 	animation (string) 				: Fade, expand, down, up. Defaults to 'fade'
 	after_callback_delay (integer)	: Specify a delay value for the after open callbacks. This is necessary because with the bundled animations
 										have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so
@@ -96,7 +98,8 @@
 			// set up the scope
 			self.scope = {
 				is_open: false,
-				id: 'modaal_' + ( new Date().getTime() ) + ( Math.random().toString(16).substring(2) )
+				id: 'modaal_' + ( new Date().getTime() ) + ( Math.random().toString(16).substring(2) ),
+				source: self.options.content_source ? self.options.content_source : self.$elem.attr('href')
 			};
 
 			// add scope attribute to trigger element
@@ -165,7 +168,7 @@
 					break;
 
 				case 'ajax':
-					source = self.options.source( self.$elem, self.$elem.attr('href') );
+					source = self.options.source( self.$elem, self.scope.source );
 					self.fetch_ajax( source );
 					break;
 
@@ -179,12 +182,12 @@
 					break;
 
 				case 'iframe':
-					source = self.options.source( self.$elem, self.$elem.attr('href') );
+					source = self.options.source( self.$elem, self.scope.source );
 					self.create_iframe( source );
 					break;
 
 				case 'video':
-					self.create_video(self.$elem.attr('href'));
+					self.create_video(self.scope.source);
 					break;
 
 				case 'instagram':
@@ -422,8 +425,7 @@
 		// ----------------------------------------------------------------
 		create_basic : function() {
 			var self = this;
-			// if $elem is a link, then href points to the target, otherwise assume target was passed in initially
-			var target = (self.$elem.is('[href]')) ? $(self.$elem.attr('href')) : self.$elem;
+			var target = $(self.scope.source);
 			var content = '';
 
 			if (target.length) {
@@ -610,7 +612,7 @@
 
 					// is it an img SRC or link HREF value
 					if ( item.href !== '' || item.href !== undefined ) {
-						img_src = item.href;
+						img_src = $(item).attr('data-modaal-content-source');
 					} else if ( item.src !== '' || item.src !== undefined ) {
 						img_src = item.src;
 					}
@@ -669,7 +671,9 @@
 				// This is only a single gallery item so let's grab the necessary values
 
 				// Setup selected image
-				var this_img_src = self.$elem.attr('href');
+				console.log(self.scope);
+
+				var this_img_src = self.$elem.attr('data-modaal-content-source') ? self.$elem.attr('data-modaal-content-source') : 'trigger requires data-modaal-content-source attribute';
 				var this_img_alt_txt = '';
 				var this_img_alt = '';
 				var aria_label = '';
@@ -958,7 +962,7 @@
 			setTimeout(function() {
 				// clone inline content back to origin place
 				if (self.options.type == 'inline') {
-					$('#' + self.scope.id + ' .modaal-content-container').contents().detach().appendTo( self.$elem.attr('href') )
+					$('#' + self.scope.id + ' .modaal-content-container').contents().detach().appendTo( self.scope.source )
 				}
 				// remove markup from dom
 				modal_wrapper.remove();
@@ -1070,6 +1074,7 @@
 
 		//General
 		type: 'inline',
+		content_source: null,
 		animation: 'fade',
 		animation_speed: 300,
 		after_callback_delay: 350,
@@ -1135,6 +1140,12 @@
 		if ( self.attr('data-modaal-type') ) {
 			inline_options = true;
 			options.type = self.attr('data-modaal-type');
+		}
+
+		// option: type
+		if ( self.attr('data-modaal-content-source') ) {
+			inline_options = true;
+			options.content_source = self.attr('data-modaal-content-source');
 		}
 
 		// option: animation
