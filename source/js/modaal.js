@@ -453,7 +453,7 @@
 			// ID exists, is not empty null or undefined.
 			if ( id != '' && id !== null && id !== undefined ) {
 				// set up oembed url
-				var ig_url = 'https://api.instagram.com/oembed?url=http://instagr.am/p/' + id + '/?size=t';
+				var ig_url = 'https://api.instagram.com/oembed?url=http://instagr.am/p/' + id + '/';
 
 				$.ajax({
 					url: ig_url,
