@@ -4,6 +4,7 @@
   "version": "0.4.1",
   "repository": "https://github.com/humaan/Modaal",
   "license": "MIT",
+  "main": "dist/js/modaal.js",
   "devDependencies": {
     "jquery": "1.12.4",
     "del": "^2.0.2",
