@@ -451,35 +451,37 @@
 			// ID exists, is not empty null or undefined.
 			if ( id != '' && id !== null && id !== undefined ) {
 				// set up oembed url
-				var ig_url = 'https://api.instagram.com/oembed?url=http://instagr.am/p/' + id + '/';
+				var ig_url = 'https://api.instagram.com/oembed?url=http://instagr.am/p/' + id + '/?size=t';
 
 				$.ajax({
 					url: ig_url,
 					dataType: "jsonp",
 					cache: false,
 					success: function (data) {
-						// set up the new content
-						content = data.html;
-
-						//return false;
+						
+						// Create temp dom element from which we'll clone into the modaal instance. This is required to bypass the unusual small thumb issue instagram oembed was serving up
+						self.dom.append('<div id="temp-ig">' + data.html + '</div>');
+						
+						// Check if it has loaded once before.
+						// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
+						// private_options are individual to a modaal_scope so will not work across multiple scopes when checking if true, only that one item.
+						if ( self.dom.attr('data-igloaded') ) {
+							window.instgrm.Embeds.process();
+						} else {
+							// first time it's loaded, let's set a new private option to use next time it's opened.
+							self.dom.attr('data-igloaded', 'true');
+						}
 
 						// now set location for new content
-						var target = $('#' + self.scope.id + ' .modaal-content-container');
-						if ( target.length > 0) {
-							// add HTML into target region
-							target.html(content);
-							// remove loading class on body
-							target.removeClass( self.options.loading_class );
-
-							// Check if it has loaded once before.
-							// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
-							if ( self.private_options.ig_loaded ) {
-								window.instgrm.Embeds.process();
-							} else {
-								// first time it's loaded, let's set a new private option to use next time it's opened.
-								self.private_options.ig_loaded = true;
-							}
+						// timeout is required as well to bypass the unusual small thumb issue instagram oembed was serving up
+						var target = '#' + self.scope.id + ' .modaal-content-container';
+						if ( $(target).length > 0) {
+							setTimeout(function() {
+								$('#temp-ig').contents().clone().appendTo( target );
+								$('#temp-ig').remove();
+							}, 1000);
 						}
+						
 					},
 					error: function() {
 						content = error_msg;

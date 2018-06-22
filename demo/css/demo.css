@@ -157,6 +157,8 @@ hr {
       .btn.btn-download span strong {
         position: relative;
         z-index: 1; }
+  .btn + .btn {
+    margin-left: 20px; }
 
 .share {
   margin: 60px 0 0; }
@@ -176,9 +178,8 @@ hr {
     width: 50px;
     height: 50px;
     border: 2px solid #eee;
-    -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -249,15 +250,12 @@ hr {
   width: 30px;
   height: 60px;
   margin: 0 0 0 -15px;
-  transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
-  -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-          transform: translateY(0); }
+  -ms-transform: translateY(0);
+      transform: translateY(0); }
   .scroll-trigger:focus, .scroll-trigger:hover {
-    -webkit-transform: translateY(15px);
-        -ms-transform: translateY(15px);
-            transform: translateY(15px); }
+    -ms-transform: translateY(15px);
+        transform: translateY(15px); }
     .scroll-trigger:focus .scroll-arrow, .scroll-trigger:hover .scroll-arrow {
       background: #6d4d9a; }
       .scroll-trigger:focus .scroll-arrow:before, .scroll-trigger:focus .scroll-arrow:after, .scroll-trigger:hover .scroll-arrow:before, .scroll-trigger:hover .scroll-arrow:after {
@@ -283,14 +281,12 @@ hr {
     bottom: 3px;
     transition: background-color 0.3s; }
   .scroll-arrow:before {
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     margin: 0 0 0 -14px; }
   .scroll-arrow:after {
-    -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
     margin: 0 0 0 -1px; }
 
 .modaal-fixed-header {
@@ -299,17 +295,15 @@ hr {
   left: 0;
   width: 100%;
   height: 70px;
-  box-shadow: 0 0 5px transparent;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
   background: #6d4d9a;
-  -webkit-transform: translateY(0);
-      -ms-transform: translateY(0);
-          transform: translateY(0);
+  -ms-transform: translateY(0);
+      transform: translateY(0);
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
   .modaal-fixed-header.reveal {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    -webkit-transform: translateY(70px);
-        -ms-transform: translateY(70px);
-            transform: translateY(70px); }
+    -ms-transform: translateY(70px);
+        transform: translateY(70px); }
   .modaal-fixed-header .modaal-logo {
     display: block;
     float: left;
