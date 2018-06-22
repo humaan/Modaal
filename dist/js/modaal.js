@@ -460,7 +460,7 @@
 					success: function (data) {
 						
 						// Create temp dom element from which we'll clone into the modaal instance. This is required to bypass the unusual small thumb issue instagram oembed was serving up
-						self.dom.append('<div id="temp-ig">' + data.html + '</div>');
+						self.dom.append('<div id="temp-ig" style="width:0;height:0;overflow:hidden;">' + data.html + '</div>');
 						
 						// Check if it has loaded once before.
 						// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
