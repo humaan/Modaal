@@ -94,7 +94,7 @@
 		<p>An accessible dialog window plugin for all humans.</p>
 		<a href="https://github.com/humaan/Modaal" target="_blank" class="btn btn-download">Download from Github</a>
 		<a href="#inline-content" class="btn modaal main-example" data-modaal-type="inline">View Example</a>
-		<div class="version" aria-label="Version 0.4.0">v0.4.0</div>
+		<div class="version" aria-label="Version 0.4.1">v0.4.1</div>
 		<a href="http://www.humaan.com" target="_blank" class="humaan-project">A Humaan project</a>
 
 		<div class="share">
@@ -144,7 +144,7 @@
 					<li>Customisable CSS with SASS options</li>
 					<li>Inline attribute configuration support</li>
 					<li>Full-screen/viewport mode</li>
-					<li>Flexible close options and methods</li>
+					<li>Flexible opan and close options and methods</li>
 					<li>Callback events for before and after open and close</li>
 					<li>Callback events for before and after image change in gallery.</li>
 				</ul>
@@ -178,9 +178,19 @@
 
 					<pre><strong>HTML</strong>&lt;a href="#inline" class="inline"&gt;Show&lt;/a&gt;
 &lt;div id="inline"&gt;
-	Inline content goes here...
+    Inline content goes here...
 &lt;/div&gt;</pre>
 					<pre><strong>JS</strong>$(".inline").modaal();</pre>
+
+					<p>If you would prefer your trigger element is not an <span class="inline-code">&lt;a href="#"&gt;</span>, you can define a `content_source` value like so:</p>
+
+					<pre><strong>HTML</strong>&lt;button class="inline"&gt;Show&lt;/button&gt;
+&lt;div id="inline" style="display:none;"&gt;
+	Inline content goes here...
+&lt;/div&gt;</pre>
+					<pre><strong>JS</strong>$(".inline").modaal(
+    content_source: '#inline'
+});</pre>
 
 					<a href="#inline-content" class="btn modaal-inline-content">Show <span class="ui-hidden">Inline</span> Modaal</a>
 					<div id="inline-content" class="hidden">
@@ -219,6 +229,12 @@
 					<pre><strong>JS</strong>$('.modaal-ajax').modaal({
     type: 'ajax'
 });</pre>
+					<p>If you would prefer your ajax trigger element is not an <span class="inline-code">&lt;a href="#"&gt;</span>, you can define an ajax supported `content_source` value like so:</p>
+
+					<pre><strong>HTML</strong>&lt;button class="inline"&gt;Show&lt;/button&gt;</pre>
+					<pre><strong>JS</strong>$(".inline").modaal(
+    content_source: '/path/to/file.html'
+});</pre>
 
 					<a href="demo/ajax-content.html" class="btn modaal-ajax">Show <span class="ui-hidden">Ajax</span> Modaal</a>
 				</div><!-- .modaal-example -->
@@ -233,7 +249,11 @@
     type: 'image'
 });</pre>
 
-					<a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb" data-modaal-desc="My Description"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a>
+					<p><a href="demo/img/temp/gallery-1.jpg" class="modaal-image gallery-thumb" data-modaal-desc="My Description"><span class="ui-hidden">Show Single Image</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for single image"></a></p>
+
+					<p>For image (and gallery) instances where a non <span class="inline-code">&lt;a href="#"&gt;</span> is desired, a <span>data-modaal-content-source</span> attribute <strong>is</strong> required, instead of it being declared as a javascript option. For example:</p>
+
+					<pre><strong>HTML</strong>&lt;button data-modaal-content-source="path/to/image.jpg" class="image"&gt;Show&lt;/button&gt;</pre>
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
@@ -247,10 +267,17 @@
     type: 'image'
 });</pre>
 
-					<a href="demo/img/temp/gallery-1.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
-					<a href="demo/img/temp/gallery-4.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 4</span><img src="demo/img/temp/gallery-thumb-4.jpg" alt="Thumbnail for Gallery Image 4"></a>
-					<a href="demo/img/temp/gallery-2.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
-					<a href="demo/img/temp/gallery-3.jpg" data-group="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
+					<p>
+						<a href="demo/img/temp/gallery-1.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Test image for modal gallery"><span class="ui-hidden">Show Gallery Image 1</span><img src="demo/img/temp/gallery-thumb-1.jpg" alt="Thumbnail for Gallery Image 1"></a>
+						<a href="demo/img/temp/gallery-4.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 4</span><img src="demo/img/temp/gallery-thumb-4.jpg" alt="Thumbnail for Gallery Image 4"></a>
+						<a href="demo/img/temp/gallery-2.jpg" data-group="gallery" class="modaal-image gallery-thumb" data-modaal-desc="Another description"><span class="ui-hidden">Show Gallery Image 2</span><img src="demo/img/temp/gallery-thumb-2.jpg" alt="Thumbnail for Gallery Image 2"></a>
+						<a href="demo/img/temp/gallery-3.jpg" data-group="gallery" class="modaal-image gallery-thumb"><span class="ui-hidden">Show Gallery Image 3</span><img src="demo/img/temp/gallery-thumb-3.jpg" alt="Thumbnail for Gallery Image 3"></a>
+					</p>
+
+					<p>For image gallery instances where a non <span class="inline-code">&lt;a href="#"&gt;</span> is desired, a <span>data-modaal-content-source</span> attribute <strong>is</strong> required, instead of it being declared as a javascript option. For example:</p>
+
+					<pre><strong>HTML</strong>&lt;button data-group="gallery" data-modaal-content-source="path/to/image-1.jpg" class="image"&gt;Show&lt;/button&gt;
+&lt;button data-group="gallery" data-modaal-content-source="path/to/image-2.jpg" class="image"&gt;Show&lt;/button&gt;</pre>
 				</div><!-- .modaal-example -->
 
 				<div class="modaal-example">
@@ -311,7 +338,9 @@
 
 					<pre><strong>HTML</strong>&lt;a href="#ig" class="modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6"&gt;Show&lt;/a&gt;</pre>
 
-					<a href="javascript:void 0" class="btn modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6">Show <span class="ui-hidden">Instagram</span> Modaal</a>
+					<a href="javascript:void 0" class="btn modaal" data-modaal-type="instagram" data-modaal-instagram-id="BAGj2JqHFV6">Show <span class="ui-hidden">Instagram</span> IG Image #1</a>
+					<a href="javascript:void 0" class="btn modaal" data-modaal-type="instagram" data-modaal-instagram-id="Bj8oY8sDG-1">Show <span class="ui-hidden">Instagram</span> IG Image #2</a>
+
 				</div><!-- .modaal-example -->
 
 				<div class="clearboth"></div>
@@ -396,6 +425,11 @@
 				//console.log('just checking to see if we should open');
 				return true;
 			}
+		});
+		
+		// Standard Modal
+		$('.modaal-inline-content-source').modaal({
+			content_source: '#inline-content'
 		});
 
 		// Ajax Modal

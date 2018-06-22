@@ -2,7 +2,7 @@
 
 ***
 
-- Version 0.4.0
+- Version 0.4.1
 - Requires jQuery 1.11.2 or higher (v2 not tested, v3 works but not extensively stress tested).
 - Built by [Humaan](http://www.humaan.com)
 
@@ -50,7 +50,7 @@ Modaal is now setup and ready to be used with CDN [JSDelivr](http://www.jsdelivr
 
 #### 1.4. The Basics
 
-Out of the box Modaal is setup to work using inline content using as little customisation as possible. The first thing you'll require is a link to trigger the modal window. It's recommended that your `href` attribute targets a unique ID for a hidden element on the page containing your modal content. Like so..
+Out of the box Modaal is setup to work using inline content using as little customisation as possible. The first thing you'll require is a link to trigger the modal window. It's recommended that your `href` attribute targets a unique ID for a hidden element on the page containing your modal content. Like so:
 
 ```html
 <a href="#inline" class="inline">Show</a>
@@ -60,6 +60,20 @@ Out of the box Modaal is setup to work using inline content using as little cust
 ```
 ```js
 $('.inline').modaal();
+```
+
+If you would prefer your trigger element is _not_ an `<a href="#">`, you can define a `content_source` value like so:
+
+```html
+<button class="inline">Show</button>
+<div id="inline" style="display:none;">
+	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+</div>
+```
+```js
+$('.inline').modaal({
+	content_source: '#inline'
+});
 ```
 
 
@@ -77,6 +91,7 @@ $('.my-link').modaal({
 key | type | default | values | notes
 ----|------|---------|--------|-------
 type|`string`|`inline`|`ajax`<br /> `inline`<br /> `image`<br /> `iframe`<br /> `confirm`<br /> `video`<br /> `instagram`|
+content_source|`string`|null||Accepts a string value for your target element, such as '#my-content'. This allows for when trigger element is an `<a href="#">` link. Not to be confused with the already existing `source` event.
 animation|`string`|`fade`|`fade`, `none`|
 animation_speed|`integer`|`300`||Animation speed is the duration it takes to reveal the Modaal window once triggered. It's important to note, that if you change this, you must also change the `after_callback_delay` below so that callback events sync up. This will be overwritten and set to `0` if `type` is `none`.
 after_callback_delay|`integer`|`350`||Specify a delay value for the after open callbacks. This is necessary because with the bundled animations have a set duration in the bundled CSS. Specify a delay of the same amount as the animation duration in so more accurately fire the after open/close callbacks. Defaults 350, does not apply if animation is 'none', after open callbacks are dispatched immediately
@@ -113,6 +128,12 @@ To enable this, the Modaal trigger link must have a class of `modaal`, then you 
 
 ```html
 <a href="#inline" data-modaal-type="inline" data-modaal-animation="fade" class="modaal">Show</a>
+```
+
+Or for non `<a href="#">` elements:
+
+```html
+<button data-modaal-content-source="#inline" data-modaal-type="inline" data-modaal-animation="fade" class="modaal">Show</button>
 ```
 
 It's important to note, that configuration options that contain an underscore (`_`) in them need to be replaced with a hyphen (`-`) in it's respective html attribute. For example, `overlay_opacity` configuration would read `data-overlay-opacity="0.8"`.
