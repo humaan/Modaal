@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.4.1
+	Modaal - accessible modals - v0.4.2
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -111,7 +111,7 @@
 			};
 
 			self.lastFocus = null;
-
+			
 			// if is_locked
 			if ( self.options.is_locked || self.options.type == 'confirm' || self.options.hide_close ) {
 				self.scope.close_btn = '';
@@ -153,7 +153,7 @@
 			var source;
 
 			// Save last active state before modal
-			self.lastFocus = document.activeElement;
+			self.lastFocus = self.$elem;
 
 			if ( self.options.should_open === false || ( typeof self.options.should_open === 'function' && self.options.should_open() === false ) ) {
 				return;
@@ -669,9 +669,6 @@
 				}
 			} else {
 				// This is only a single gallery item so let's grab the necessary values
-
-				// Setup selected image
-				console.log(self.scope);
 
 				var this_img_src = self.$elem.attr('data-modaal-content-source') ? self.$elem.attr('data-modaal-content-source') : 'trigger requires data-modaal-content-source attribute';
 				var this_img_alt_txt = '';
