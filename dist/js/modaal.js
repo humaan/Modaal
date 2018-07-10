@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.4.2
+	Modaal - accessible modals - v0.4.3
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -606,15 +606,21 @@
 					var img_alt = '';
 					var img_description = '';
 					var img_active = false;
+					var img_src_error = false;
 
 					var data_modaal_desc = item.getAttribute('data-modaal-desc');
 					var data_item_active = item.getAttribute('data-gallery-active');
 
-					// is it an img SRC or link HREF value
-					if ( item.href !== '' || item.href !== undefined ) {
+					// if item has inline custom source, use that instead of href. Fall back to href if available.
+					if ( $(item).attr('data-modaal-content-source') ) {
 						img_src = $(item).attr('data-modaal-content-source');
-					} else if ( item.src !== '' || item.src !== undefined ) {
-						img_src = item.src;
+					} else if ( $(item).attr('href') ) {
+						img_src = $(item).attr('href');
+					} else if ( $(item).attr('src') ) {
+						img_src = $(item).attr('src');
+					} else {
+						img_src = 'trigger requires href or data-modaal-content-source attribute';
+						img_src_error = true;
 					}
 
 					// Does it have a modaal description
@@ -636,7 +642,8 @@
 						'alt': img_alt,
 						'rawdesc': data_modaal_desc,
 						'desc': img_description,
-						'active': img_active
+						'active': img_active,
+						'src_error': img_src_error
 					};
 
 					// push object into gallery array
@@ -653,10 +660,12 @@
 						is_active = ' ' + self.private_options.active_class;
 					}
 
+					// if gallery item has source error, output message rather than undefined image
+					var image_output = gallery[i].src_error ? gallery[i].url : '<img src="' + gallery[i].url + '" alt=" " style="width:100%">';
+
 					// for each item build up the markup
 					modaal_image_markup += '<div class="modaal-gallery-item gallery-item-' + i + is_active + '" aria-label="' + aria_label + '">' +
-						'<img src="' + gallery[i].url + '" alt=" " style="width:100%">' +
-						gallery[i].desc +
+						image_output + gallery[i].desc +
 					'</div>';
 				}
 
@@ -670,7 +679,20 @@
 			} else {
 				// This is only a single gallery item so let's grab the necessary values
 
-				var this_img_src = self.$elem.attr('data-modaal-content-source') ? self.$elem.attr('data-modaal-content-source') : 'trigger requires data-modaal-content-source attribute';
+				// define the source, check if content_source option exists, and use that or fall back to href.
+				var this_img_src;
+				var img_src_error = false;
+				if ( self.$elem.attr('data-modaal-content-source') ) {
+					this_img_src = self.$elem.attr('data-modaal-content-source');
+				} else if ( self.$elem.attr('href') ) {
+					this_img_src = self.$elem.attr('href');
+				} else if ( self.$elem.attr('src') ) {
+					this_img_src = self.$elem.attr('src');
+				} else {
+					this_img_src = 'trigger requires href or data-modaal-content-source attribute';
+					img_src_error = true;
+				}
+
 				var this_img_alt_txt = '';
 				var this_img_alt = '';
 				var aria_label = '';
@@ -683,10 +705,12 @@
 					aria_label = "Image with no description";
 				}
 
+				// if image item has source error, output message rather than undefined image
+				var image_output = img_src_error ? this_img_src : '<img src="' + this_img_src + '" alt=" " style="width:100%">';
+
 				// build up the html
 				modaal_image_markup = '<div class="modaal-gallery-item is_active" aria-label="' + aria_label + '">' +
-					'<img src="' + this_img_src + '" alt=" " style="width:100%">' +
-					this_img_alt +
+					image_output + this_img_alt +
 				'</div>';
 			}
 
