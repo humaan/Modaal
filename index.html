@@ -188,7 +188,7 @@
 &lt;div id="inline" style="display:none;"&gt;
 	Inline content goes here...
 &lt;/div&gt;</pre>
-					<pre><strong>JS</strong>$(".inline").modaal(
+					<pre><strong>JS</strong>$(".inline").modaal({
     content_source: '#inline'
 });</pre>
 
@@ -232,7 +232,7 @@
 					<p>If you would prefer your ajax trigger element is not an <span class="inline-code">&lt;a href="#"&gt;</span>, you can define an ajax supported `content_source` value like so:</p>
 
 					<pre><strong>HTML</strong>&lt;button class="inline"&gt;Show&lt;/button&gt;</pre>
-					<pre><strong>JS</strong>$(".inline").modaal(
+					<pre><strong>JS</strong>$(".inline").modaal({
     content_source: '/path/to/file.html'
 });</pre>
 
