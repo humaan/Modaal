@@ -225,7 +225,7 @@ Provided in the distribution files are both un-minified css and SASS files to be
 It's our recommendation, should you wish to change any styling, that you minify your final output so as to save on overall page weight. The primary recommendation would be to run the `gulp dist` task which will minify the CSS (and JS if changes have been made), with another alternative to be found at [cssminifier.com](http://cssminifier.com/).
 
 #### 4.3. Video file URLs
-The Modaal video type has been tested thoroughly using both Vimeo and Youtube. For best outcome, please ensure the url format looks like the one of the following below. We transplant this URL into an iframe which then each service provider controls all the necessary play back from there.
+The Modaal video type has been tested thoroughly using both Vimeo and Youtube. For best outcome, please ensure the url format looks like the one of the following below. We transplant this URL into an iframe which then each service provider controls all the necessary playback from there.
 
 ###### 4.3.1. Youtube
 `https://www.youtube.com/embed/cBJyo0tgLnw` where the ID at the end is your unique video id. This can be found by selecting 'Share' on a youtube video, then clicking on 'Embed'. You'll find this URL within the content presented.
@@ -260,7 +260,7 @@ Thanks for your contribution! Please refer to the guidelines below.
 2. Install Gulp by running `npm install --global gulp`. More details are available through the [Gulp documentation](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
 3. Install the NPM dependencies by running `npm install`. (if this throws an error, try `sudo` the command).
 4. The build can now be called by running `gulp watch` to watch for SASS updates.
-5. When you're happy with the final output, please also fun `gulp dist` to minify and compress changes.
+5. When you're happy with the final output, please also run `gulp dist` to minify and compress changes.
 
 
 ## License
