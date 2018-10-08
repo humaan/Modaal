@@ -2,7 +2,7 @@
 
 ***
 
-- Version 0.4.3
+- Version 0.4.4
 - Requires jQuery 1.11.2 or higher (v2 not tested, v3 works but not extensively stress tested).
 - Built by [Humaan](http://www.humaan.com)
 
