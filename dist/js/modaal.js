@@ -1,5 +1,5 @@
 /*!
-	Modaal - accessible modals - v0.4.3
+	Modaal - accessible modals - v0.4.4
 	by Humaan, for all humans.
 	http://humaan.com
  */
@@ -626,7 +626,7 @@
 					// Does it have a modaal description
 					if ( data_modaal_desc != '' && data_modaal_desc !== null && data_modaal_desc !== undefined ) {
 						img_alt = data_modaal_desc;
-						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image ' + (i+1) + ' - </span>' + data_modaal_desc + '</div>'
+						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image ' + (i+1) + ' - </span>' + data_modaal_desc.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>'
 					} else {
 						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image ' + (i+1) + '</span></div>';
 					}
@@ -700,7 +700,7 @@
 				if ( self.$elem.attr('data-modaal-desc') ) {
 					aria_label = self.$elem.attr('data-modaal-desc');
 					this_img_alt_txt = self.$elem.attr('data-modaal-desc');
-					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image - </span>' + this_img_alt_txt + '</div>';
+					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image - </span>' + this_img_alt_txt.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>';
 				} else {
 					aria_label = "Image with no description";
 				}
