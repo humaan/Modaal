@@ -378,7 +378,7 @@
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-selected="true" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
@@ -940,6 +940,15 @@
 
 			// now set the focus
 			focusTarget.attr('tabindex', '0').focus();
+			
+			// iOS Fix for VoiceOver.
+			// Unfortunately this timeout appears to be the only consistent workaround for shifting focus in VoiceOver for conten that shows and hides.
+			// Wrapped in User Agent check to restrict it's application to only iphone, ipad and ipod
+			if ( self.is_ios() ) {
+				setTimeout(function() {
+					focusTarget.find('[role="document"] >:first-child').focus();
+				}, 1000);
+			}
 
 			// Run after_open
 			if (animation_type !== 'none') {
@@ -1001,6 +1010,17 @@
 			if (self.lastFocus != null) {
 				self.lastFocus.focus();
 			}
+
+			// iOS Fix for VoiceOver.
+			// Unfortunately this timeout appears to be the only consistent workaround for shifting focus in VoiceOver for conten that shows and hides.
+			// Wrapped in User Agent check to restrict it's application to only iphone, ipad and ipod
+			if ( self.is_ios() ) {
+				setTimeout(function() {
+					if (self.lastFocus != null) {
+						self.lastFocus.focus();
+					}
+				}, 1000);
+			}
 		},
 
 		// Overlay control (accepts action for show or hide)
@@ -1049,6 +1069,17 @@
 		// ----------------------------------------------------------------
 		is_touch : function() {
 			return 'ontouchstart' in window || navigator.maxTouchPoints;
+		},
+
+		// Check if is iOS - this is necessary for focus handling on iOS VoiceOver where a delay is required to shift focus successfully.
+		// ----------------------------------------------------------------
+		is_ios : function() {
+			var ua = navigator.userAgent;
+			if ( ua.match(/iPhone/i) || ua.match(/iPad/i) || ua.match(/iPod/i) ) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	};
 
