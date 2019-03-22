@@ -111,6 +111,7 @@ close_aria_label|`string`|`Close (Press escape to close)`||String for close butt
 width|`integer`|null||Set the desired width of the modal.
 height|`integer`|null||Set the desired height of the modal.
 gallery_active_class|`string`|`gallery_active_item`||Active class applied to the currently active image or image slide in a gallery
+loop_gallery|`boolean`|`false`|`true`<br /> `false`|Set to true to allow the gallery to loop between the last and first image slides.
 outer_controls|`boolean`|`false`|`true`<br /> `false`|Set to true to put the next/prev controls outside the Modaal wrapper, at the edges of the browser window.
 confirm_button_text|`string`|`Confirm`||Text on the confirm button.
 confirm_cancel_button_text|`string`|`Cancel`||Text on the confirm modal cancel button.

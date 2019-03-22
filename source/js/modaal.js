@@ -65,6 +65,7 @@
 
 	=== Gallery Options & Events ===
 	gallery_active_class (string)	: Active class applied to the currently active image or image slide in a gallery 'gallery_active_item'
+	loop_gallery (boolean)			: Set to true to allow the gallery to loop between the last and first image slides.
 	outer_controls (boolean)		: Set to true to put the next/prev controls outside the Modaal wrapper, at the edges of the browser window.
 	before_image_change (function)	: Callback function executed before the image slide changes in a gallery modal. Default function( current_item, incoming_item )
 	after_image_change (function)	: Callback function executed after the image slide changes in a gallery modal. Default function ( current_item )
@@ -573,6 +574,7 @@
 		create_image : function() {
 			var self = this;
 			var content;
+			var loop_gallery = self.options.loop_gallery;
 
 			var modaal_image_markup = '';
 			var gallery_total;
@@ -721,10 +723,10 @@
 			self.build_modal(content);
 
 			// setup next & prev buttons
-			if ( $('.modaal-gallery-item.is_active').is('.gallery-item-0') ) {
+			if ( !loop_gallery && $('.modaal-gallery-item.is_active').is('.gallery-item-0') ) {
 				$('.modaal-gallery-prev').hide();
 			}
-			if ( $('.modaal-gallery-item.is_active').is('.gallery-item-' + gallery_total) ) {
+			if ( !loop_gallery && $('.modaal-gallery-item.is_active').is('.gallery-item-' + gallery_total) ) {
 				$('.modaal-gallery-next').hide();
 			}
 		},
@@ -736,6 +738,7 @@
 			var this_gallery = $('#' + self.scope.id);
 			var this_gallery_item = this_gallery.find('.modaal-gallery-item');
 			var this_gallery_total = this_gallery_item.length - 1;
+			var loop_gallery = self.options.loop_gallery;
 
 			// if single item, don't proceed
 			if ( this_gallery_total == 0 ) {
@@ -752,15 +755,35 @@
 
 			// CB: Before image change
 			var current_item = this_gallery.find( '.modaal-gallery-item.' + self.private_options.active_class ),
-				incoming_item = ( direction == 'next' ? current_item.next( '.modaal-gallery-item' ) : current_item.prev( '.modaal-gallery-item' ) );
-			self.options.before_image_change.call(self, current_item, incoming_item);
+				incoming_item;
 
-			// stop change if at start of end
-			if ( direction == 'prev' && this_gallery.find('.gallery-item-0').hasClass('is_active') ) {
-				return false;
-			} else if ( direction == 'next' && this_gallery.find('.gallery-item-' + this_gallery_total).hasClass('is_active') ) {
-				return false;
+			if ( direction == 'prev') {
+				// If it's the first item
+				if (this_gallery.find('.gallery-item-0').hasClass('is_active')) {
+					// If looping is set then move to the last slide
+					if (loop_gallery) {
+						incoming_item = current_item.parent().find('> div:last-child');
+					} else {
+						return false;
+					}
+				} else {
+					incoming_item = current_item.prev( '.modaal-gallery-item' );
+				}
+			} else if ( direction == 'next') {
+				// If it's the last item
+				if (this_gallery.find('.gallery-item-' + this_gallery_total).hasClass('is_active')) {
+					// If looping is set then move to the first slide
+					if (loop_gallery) {
+						incoming_item = current_item.parent().find('> div:first-child');
+					} else {
+						return false;
+					}
+				} else {
+					incoming_item = current_item.next( '.modaal-gallery-item' );
+				}
 			}
+
+			self.options.before_image_change.call(self, current_item, incoming_item);
 
 
 			// lock dimensions
@@ -835,7 +858,7 @@
 					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + '').attr('tabindex', '0').focus();
 
 					// hide/show next/prev
-					if ( this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-0') ) {
+					if ( !loop_gallery && this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-0') ) {
 						prev_btn.stop().animate({
 							opacity: 0
 						}, 150, function(){
@@ -849,7 +872,7 @@
 							opacity: 1
 						}, 150);
 					}
-					if ( this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-' + this_gallery_total) ) {
+					if ( !loop_gallery && this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-' + this_gallery_total) ) {
 						next_btn.stop().animate({
 							opacity: 0
 						}, 150, function(){
@@ -1166,6 +1189,7 @@
 
 		//Gallery Modal
 		gallery_active_class: 'gallery_active_item',
+		loop_gallery: false,
 		outer_controls:	false,
 		before_image_change: function( current_item, incoming_item ) {},
 		after_image_change: function( current_item ) {},
@@ -1330,6 +1354,12 @@
 		if ( self.attr('data-modaal-gallery-active-class') ) {
 			inline_options = true;
 			options.gallery_active_class = self.attr('data-modaal-gallery-active-class');
+		}
+
+		// option: loop_gallery
+		if ( self.attr('data-modaal-loop-gallery') ) {
+			inline_options = true;
+			options.loop_gallery = self.attr('data-modaal-loop-gallery');
 		}
 
 		// option: loading_content
