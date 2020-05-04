@@ -126,7 +126,7 @@
 			}
 
 			// On click to open modal
-			$(elem).on('click.Modaal', function(e) {
+			$(elem).on('click.Modaal.' + self.scope.id, function(e) {
 				e.preventDefault();
 				self.create_modaal(self, e);
 			});
@@ -204,10 +204,10 @@
 		watch_events : function() {
 			var self = this;
 
-			self.dom.off('click.Modaal keyup.Modaal keydown.Modaal');
+			self.dom.off( '.Modaal.' + self.scope.id );
 
 			// Body keydown
-			self.dom.on('keydown.Modaal', function(e) {
+			self.dom.on('keydown.Modaal.' + self.scope.id, function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -221,7 +221,7 @@
 			});
 
 			// Body keyup
-			self.dom.on('keyup.Modaal', function(e) {
+			self.dom.on('keyup.Modaal.' + self.scope.id, function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -259,7 +259,7 @@
 			});
 
 			// Body click/touch
-			self.dom.on('click.Modaal', function(e) {
+			self.dom.on('click.Modaal.' + self.scope.id, function(e) {
 				var trigger = $(e.target);
 
 				// General Controls: If it's not locked allow greedy close
@@ -378,7 +378,7 @@
 					}
 
 					// add the guts of the content
-					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
+					build_markup +=	'<div class="' + wrap_class + ' modaal-focus" aria-hidden="false" aria-selected="true" aria-label="' + self.options.accessible_title + ' - ' + self.options.close_aria_label + '" role="dialog">';
 
 							// If it's inline type, we want to clone content instead of dropping it straight in
 							if (self.options.type == 'inline') {
@@ -940,6 +940,15 @@
 
 			// now set the focus
 			focusTarget.attr('tabindex', '0').focus();
+			
+			// iOS Fix for VoiceOver.
+			// Unfortunately this timeout appears to be the only consistent workaround for shifting focus in VoiceOver for conten that shows and hides.
+			// Wrapped in User Agent check to restrict it's application to only iphone, ipad and ipod
+			if ( self.is_ios() ) {
+				setTimeout(function() {
+					focusTarget.find('[role="document"] >:first-child').focus();
+				}, 1000);
+			}
 
 			// Run after_open
 			if (animation_type !== 'none') {
@@ -963,6 +972,9 @@
 				self.xhr.abort();
 				self.xhr = null;
 			}
+
+			// Remove events
+			self.dom.off( '.Modaal.' + self.scope.id );
 
 			// Now we close the modal
 			if (self.options.animation === 'none' ){
@@ -1000,6 +1012,27 @@
 			// Roll back to last focus state before modal open. If was closed programmatically, this might not be set
 			if (self.lastFocus != null) {
 				self.lastFocus.focus();
+			}
+
+			// iOS Fix for VoiceOver.
+			// Unfortunately this timeout appears to be the only consistent workaround for shifting focus in VoiceOver for conten that shows and hides.
+			// Wrapped in User Agent check to restrict it's application to only iphone, ipad and ipod
+			if ( self.is_ios() ) {
+				setTimeout(function() {
+					if (self.lastFocus != null) {
+						self.lastFocus.focus();
+					}
+				}, 1000);
+			}
+		},
+
+		// Destroy Modaal
+		// ----------------------------------------------------------------
+		modaal_destroy : function() {
+			var self = this;
+			self.$elem.off('.Modaal.' + self.scope.id);
+			if ( self.scope.is_open ) {
+				self.modaal_close();
 			}
 		},
 
@@ -1049,6 +1082,17 @@
 		// ----------------------------------------------------------------
 		is_touch : function() {
 			return 'ontouchstart' in window || navigator.maxTouchPoints;
+		},
+
+		// Check if is iOS - this is necessary for focus handling on iOS VoiceOver where a delay is required to shift focus successfully.
+		// ----------------------------------------------------------------
+		is_ios : function() {
+			var ua = navigator.userAgent;
+			if ( ua.match(/iPhone/i) || ua.match(/iPad/i) || ua.match(/iPod/i) ) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	};
 
@@ -1071,6 +1115,9 @@
 							break;
 						case 'close':
 							existing_modaal.modaal_close();
+							break;
+						case 'destroy':
+							existing_modaal.modaal_destroy();
 							break;
 					}
 				}

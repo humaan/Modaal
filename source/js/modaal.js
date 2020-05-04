@@ -126,7 +126,7 @@
 			}
 
 			// On click to open modal
-			$(elem).on('click.Modaal', function(e) {
+			$(elem).on('click.Modaal.' + self.scope.id, function(e) {
 				e.preventDefault();
 				self.create_modaal(self, e);
 			});
@@ -204,10 +204,10 @@
 		watch_events : function() {
 			var self = this;
 
-			self.dom.off('click.Modaal keyup.Modaal keydown.Modaal');
+			self.dom.off( '.Modaal.' + self.scope.id );
 
 			// Body keydown
-			self.dom.on('keydown.Modaal', function(e) {
+			self.dom.on('keydown.Modaal.' + self.scope.id, function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -221,7 +221,7 @@
 			});
 
 			// Body keyup
-			self.dom.on('keyup.Modaal', function(e) {
+			self.dom.on('keyup.Modaal.' + self.scope.id, function(e) {
 				var key = e.keyCode;
 				var target = e.target;
 
@@ -259,7 +259,7 @@
 			});
 
 			// Body click/touch
-			self.dom.on('click.Modaal', function(e) {
+			self.dom.on('click.Modaal.' + self.scope.id, function(e) {
 				var trigger = $(e.target);
 
 				// General Controls: If it's not locked allow greedy close
@@ -973,6 +973,9 @@
 				self.xhr = null;
 			}
 
+			// Remove events
+			self.dom.off( '.Modaal.' + self.scope.id );
+
 			// Now we close the modal
 			if (self.options.animation === 'none' ){
 				modal_wrapper.addClass('modaal-start_none');
@@ -1020,6 +1023,16 @@
 						self.lastFocus.focus();
 					}
 				}, 1000);
+			}
+		},
+
+		// Destroy Modaal
+		// ----------------------------------------------------------------
+		modaal_destroy : function() {
+			var self = this;
+			self.$elem.off('.Modaal.' + self.scope.id);
+			if ( self.scope.is_open ) {
+				self.modaal_close();
 			}
 		},
 
@@ -1102,6 +1115,9 @@
 							break;
 						case 'close':
 							existing_modaal.modaal_close();
+							break;
+						case 'destroy':
+							existing_modaal.modaal_destroy();
 							break;
 					}
 				}

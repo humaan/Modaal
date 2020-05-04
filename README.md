@@ -209,6 +209,13 @@ $('.my-link').modaal('close');
 Based on this example, we know we've already established (and opened) the modal associated to the `.my-link` class, so to close we use the same selector with a string of `close` instead of options;
 
 
+#### 3.4. Destroying a Modaal
+Initialised modaal instances can be destroyed with
+```js
+$('.my-link').modaal('destroy');
+```
+If the modaal is currently open it will be closed and the trigger element will revert into being a regular DOM element.
+
 
 ## 4. Tips & Tricks
 
