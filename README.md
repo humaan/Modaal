@@ -260,7 +260,7 @@ Thanks for your contribution! Please refer to the guidelines below.
 2. Install Gulp by running `npm install --global gulp`. More details are available through the [Gulp documentation](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md).
 3. Install the NPM dependencies by running `npm install`. (if this throws an error, try `sudo` the command).
 4. The build can now be called by running `gulp watch` to watch for SASS updates.
-5. When you're happy with the final output, please also fun `gulp dist` to minify and compress changes.
+5. When you're happy with the final output, please also run `gulp dist` to minify and compress changes.
 
 
 ## License
