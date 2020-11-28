@@ -43,6 +43,17 @@
 	close_text						: String for close button text. Available for localisation and alternative languages to be used.
 	close_aria_label				: String for close button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
 
+	label_image						: String for image label. Available for localisation and alternative languages to be used.
+	label_image_no_description		: String for image with no descrption label. Available for localisation and alternative languages to be used.
+	label_no_description			: String for no description label. Available for localisation and alternative languages to be used.	
+	
+	
+	=== Next / Prev Buttons ===
+	prev_text						: String for previous button text. Available for localisation and alternative languages to be used.
+	prev_aria_label					: String for previous button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
+	next_text						: String for next button text. Available for localisation and alternative languages to be used.
+	next_aria_label					: String for next button aria-label attribute (value that screen readers will read out). Available for localisation and alternative languages to be used.
+
 	=== Events ===
 	before_open (function) 			: Callback function executed before modal is opened
 	after_open (function)			: Callback function executed after modal is opened
@@ -137,8 +148,8 @@
 			} else {
 				var mod_class = 'inner';
 			}
-			self.scope.prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev modaal-gallery-prev-' + mod_class + '" id="modaal-gallery-prev" aria-label="Previous image (use left arrow to change)"><span>Previous Image</span></button>';
-			self.scope.next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next modaal-gallery-next-' + mod_class + '" id="modaal-gallery-next" aria-label="Next image (use right arrow to change)"><span>Next Image</span></button>';
+			self.scope.prev_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-prev modaal-gallery-prev-' + mod_class + '" id="modaal-gallery-prev" aria-label="' + self.options.prev_aria_label + '"><span>' + self.options.prev_text + '</span></button>';
+			self.scope.next_btn = '<button type="button" class="modaal-gallery-control modaal-gallery-next modaal-gallery-next-' + mod_class + '" id="modaal-gallery-next" aria-label="' + self.options.next_aria_label + '"><span>' + self.options.next_text + '</span></button>';
 
 			// Check for start_open
 			if (self.options.start_open === true ){
@@ -626,9 +637,9 @@
 					// Does it have a modaal description
 					if ( data_modaal_desc != '' && data_modaal_desc !== null && data_modaal_desc !== undefined ) {
 						img_alt = data_modaal_desc;
-						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image ' + (i+1) + ' - </span>' + data_modaal_desc.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>'
+						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">' + self.options.label_image + ' ' + (i+1) + ' - </span>' + data_modaal_desc.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>'
 					} else {
-						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image ' + (i+1) + '</span></div>';
+						img_description = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">' + self.options.label_image + ' ' + (i+1) + '</span></div>';
 					}
 
 					// is it the active item
@@ -654,7 +665,7 @@
 				for (var i = 0; i < gallery.length; i++) {
 					// Set default active class, then check if array item active is true and update string for class
 					var is_active = '';
-					var aria_label = gallery[i].rawdesc ? 'Image: ' + gallery[i].rawdesc : 'Image ' + i + ' no description';
+					var aria_label = gallery[i].rawdesc ? self.options.label_image + ': ' + gallery[i].rawdesc : self.options.label_image + ' ' + (i+1) + ': ' + self.options.label_no_description;
 
 					if ( gallery[i].active ) {
 						is_active = ' ' + self.private_options.active_class;
@@ -700,9 +711,9 @@
 				if ( self.$elem.attr('data-modaal-desc') ) {
 					aria_label = self.$elem.attr('data-modaal-desc');
 					this_img_alt_txt = self.$elem.attr('data-modaal-desc');
-					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">Image - </span>' + this_img_alt_txt.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>';
+					this_img_alt = '<div class="modaal-gallery-label"><span class="modaal-accessible-hide">' + self.options.label_image + ' - </span>' + this_img_alt_txt.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div>';
 				} else {
-					aria_label = "Image with no description";
+					aria_label = self.options.label_image_no_description;
 				}
 
 				// if image item has source error, output message rather than undefined image
@@ -1093,6 +1104,7 @@
 	// ------------------------------------------------------------
 	$.fn.modaal.options = {
 
+		
 		//General
 		type: 'inline',
 		content_source: null,
@@ -1114,6 +1126,15 @@
 		close_aria_label: 'Close (Press escape to close)',
 		width: null,
 		height: null,
+		label_image: 'Image',
+		label_image_no_description: 'no description',
+		label_no_description: 'Image with no description',
+		
+		// Next / Prev Buttons
+		prev_text: 'Previous Image',
+		prev_aria_label: 'Previous image (use left arrow to change)',
+		next_text: 'Next Image',
+		next_aria_label: 'Next image (use right arrow to change)',
 
 		//Events
 		before_open: function(){},
@@ -1163,7 +1184,7 @@
 			options.type = self.attr('data-modaal-type');
 		}
 
-		// option: type
+		// option: content-source
 		if ( self.attr('data-modaal-content-source') ) {
 			inline_options = true;
 			options.content_source = self.attr('data-modaal-content-source');
@@ -1252,6 +1273,30 @@
 			inline_options = true;
 			options.close_aria_label = self.attr('data-modaal-close-aria-label');
 		}
+		
+		// option: prev_text
+		if ( self.attr('data-modaal-prev-text') ) {
+			inline_options = true;
+			options.prev_text = self.attr('data-modaal-prev-text');
+		}
+
+		// option: prev_aria_label
+		if ( self.attr('data-modaal-prev-aria-label') ) {
+			inline_options = true;
+			options.prev_aria_label = self.attr('data-modaal-prev-aria-label');
+		}
+
+		// option: next_text
+		if ( self.attr('data-modaal-next-text') ) {
+			inline_options = true;
+			options.next_text = self.attr('data-modaal-next-text');
+		}
+
+		// option: next_aria_label
+		if ( self.attr('data-modaal-next-aria-label') ) {
+			inline_options = true;
+			options.next_aria_label = self.attr('data-modaal-next-aria-label');
+		}		
 
 		// option: background_scroll
 		if ( self.attr('data-modaal-background-scroll') ) {
