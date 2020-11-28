@@ -84,7 +84,7 @@
 ( function( $ ) {
 
 	var modaal_loading_spinner = '<div class="modaal-loading-spinner"><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>'
-	
+
 	var Modaal = {
 		init : function(options, elem) {
 			var self = this;
@@ -111,7 +111,7 @@
 			};
 
 			self.lastFocus = null;
-			
+
 			// if is_locked
 			if ( self.options.is_locked || self.options.type == 'confirm' || self.options.hide_close ) {
 				self.scope.close_btn = '';
@@ -215,7 +215,7 @@
 				// done in keydown so the check fires repeatedly when you hold the tab key down
 				if (key == 9 && self.scope.is_open) {
 					if (!$.contains(document.getElementById(self.scope.id), target) ) {
-						$('#' + self.scope.id).find('*[tabindex="0"]').focus();
+						$('#' + self.scope.id).find('*[tabindex="0"]').trigger("focus");
 					}
 				}
 			});
@@ -228,7 +228,7 @@
 				if ( (e.shiftKey && e.keyCode == 9) && self.scope.is_open) {
 					// Watch for shift + tab key press. if open shift focus to close button.
 					if (!$.contains(document.getElementById(self.scope.id), target) ) {
-						$('#' + self.scope.id).find('.modaal-close').focus();
+						$('#' + self.scope.id).find('.modaal-close').trigger("focus");
 					}
 				}
 
@@ -398,7 +398,7 @@
 
 			// close off modaal-inner-wrapper
 			build_markup +=	'</div>';
-			
+
 			// If type is image AND outer_controls is true: add gallery next and previous controls.
 			if (self.options.type == 'image' && self.options.outer_controls === true) {
 				build_markup += self.scope.prev_btn + self.scope.next_btn;
@@ -460,10 +460,10 @@
 					dataType: "jsonp",
 					cache: false,
 					success: function (data) {
-						
+
 						// Create temp dom element from which we'll clone into the modaal instance. This is required to bypass the unusual small thumb issue instagram oembed was serving up
 						self.dom.append('<div id="temp-ig" style="width:0;height:0;overflow:hidden;">' + data.html + '</div>');
-						
+
 						// Check if it has loaded once before.
 						// This is to stop the Embeds.process from throwing and error the first time it's being loaded.
 						// private_options are individual to a modaal_scope so will not work across multiple scopes when checking if true, only that one item.
@@ -483,7 +483,7 @@
 								$('#temp-ig').remove();
 							}, 1000);
 						}
-						
+
 					},
 					error: function() {
 						content = error_msg;
@@ -576,7 +576,7 @@
 
 			var modaal_image_markup = '';
 			var gallery_total;
-			
+
 			// If has group attribute
 			if ( self.$elem.is('[data-group]') || self.$elem.is('[rel]') ) {
 
@@ -832,7 +832,7 @@
 
 					// Focus on the new gallery item
 					this_gallery.find('.modaal-gallery-item').removeAttr('tabindex');
-					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + '').attr('tabindex', '0').focus();
+					this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class + '').attr('tabindex', '0').trigger("focus");
 
 					// hide/show next/prev
 					if ( this_gallery.find('.modaal-gallery-item.' + self.private_options.active_class).is('.gallery-item-0') ) {
@@ -939,7 +939,7 @@
 			}
 
 			// now set the focus
-			focusTarget.attr('tabindex', '0').focus();
+			focusTarget.attr('tabindex', '0').trigger("focus");
 
 			// Run after_open
 			if (animation_type !== 'none') {
@@ -999,7 +999,7 @@
 
 			// Roll back to last focus state before modal open. If was closed programmatically, this might not be set
 			if (self.lastFocus != null) {
-				self.lastFocus.focus();
+				self.lastFocus.trigger("focus");
 			}
 		},
 
@@ -1354,7 +1354,7 @@
 					var findElement = [].some.call(mutation.addedNodes, function(el) {
 						var elm = $(el);
 						if ( elm.is('a') || elm.is('button') ) {
-							
+
 							if ( elm.hasClass('modaal') ) {
 								// is inline Modaal, initialise options
 								modaal_inline_options(elm);
